@@ -1,0 +1,43 @@
+- alias: 'WashingMachineFinished'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.washmachine_state
+    to: 'off'
+  action:
+    - service: notify.all_mobiles
+      data:
+        message: "Washing machine finished..."
+    - condition: state
+      entity_id: 'switch.preference_noisy_automations'
+      state: 'on'
+    - service: notify.alexa_media
+      data:
+        target:
+          - media_player.everywhere
+        message: "Hello.  Washing machine has just finished."
+        data:
+          type: announce
+          method: all
+
+
+- alias: 'DryingMachineFinished'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.drymachine_state
+    to: 'off'
+  action:
+    - service: notify.all_mobiles
+      data:
+        message: "Drying machine finished..."
+    - condition: state
+      entity_id: 'switch.preference_noisy_automations'
+      state: 'on'
+    - service: notify.alexa_media
+      data:
+        target:
+          - media_player.everywhere
+        message: "Hello.  Drying machine has just finished."
+        data:
+          type: announce
+          method: all
+

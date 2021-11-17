@@ -1,0 +1,45 @@
+- platform: mqtt
+  name: Washing machine power
+  state_topic: "shellies/shelly1pm-8CAAB5060859/relay/0/power"
+  availability_topic: "shellies/shelly1pm-8CAAB5060859/online"
+  payload_available: "true"
+  payload_not_available: "false"
+  unit_of_measurement: "W"
+  force_update: "true"
+
+- platform: mqtt
+  name: Drying machine power
+  state_topic: "shellies/shelly1pm-C4AA7A/relay/0/power"
+  availability_topic: "shellies/shelly1pm-C4AA7A/online"
+  unit_of_measurement: "W"
+  payload_available: "true"
+  payload_not_available: "false"
+  force_update: "true"
+
+- platform: mqtt
+  name: Refrigerator power
+  state_topic: "shellies/shellyplug-s-C18ED0/relay/0/power"
+  availability_topic: "shellies/shellyplug-s-C18ED0/online"
+  unit_of_measurement: "W"
+  payload_available: "true"
+  payload_not_available: "false"
+  force_update: "true"
+
+- platform: mqtt
+  name: Freezer power
+  state_topic: "shellies/shellyplug-s-A32F96/relay/0/power"
+  availability_topic: "shellies/shellyplug-s-A32F96/online"
+  unit_of_measurement: "W"
+  payload_available: "true"
+  payload_not_available: "false"
+  force_update: "true"
+
+- platform: mqtt
+  name: Dishwasher power
+  state_topic: "shellies/shelly1pm-8CAAB50609DC/relay/0/power"
+  availability_topic: "shellies/shelly1pm-8CAAB50609DC/online"
+  unit_of_measurement: "W"
+  payload_available: "true"
+  payload_not_available: "false"
+  force_update: "true"
+

@@ -1,0 +1,86 @@
+- alias: 'Status/FamilyAsleep/On'
+  trigger:
+    - platform: state
+      entity_id: group.lights_downstairs
+      to: "off"
+      for:
+        minutes: 15
+    - platform: state
+      entity_id: group.motion_downstairs
+      to: "off"
+      for:
+        minutes: 15
+
+  condition:
+    - condition: or
+      conditions:
+        - condition: sun
+          after: sunset
+          after_offset: "01:00:00"
+        - condition: sun
+          before: sunrise
+          after_offset: "-03:00:00"
+    - condition: state
+      entity_id: group.family
+      state: "home"
+    - condition: state
+      entity_id: switch.status_family_sleeping
+      state: "off"
+    - condition: state
+      entity_id: group.lights_downstairs
+      state: "off"
+    - condition: state
+      entity_id: group.motion_downstairs
+      state: "off"
+  action:
+    - service: switch.turn_on
+      entity_id: switch.status_family_sleeping
+
+
+- alias: 'Status/FamilyAsleep/Off'
+  trigger:
+    - platform: state
+      entity_id: 'cover.mary_s_room_shutter'
+      from: 'closed'
+      to: 'open'
+    - platform: state
+      entity_id: 'cover.maggie_s_room_shutter'
+      from: 'closed'
+      to: 'open'
+    - platform: state
+      entity_id: 'cover.main_room_shutter'
+      from: 'closed'
+      to: 'open'
+    - platform: state
+      entity_id: group.motion_downstairs
+      to: "on"
+      for:
+        minutes: 15
+  condition:
+    - condition: sun
+      after: sunrise
+      after_offset: "-02:00:00"
+    - condition: state
+      entity_id: switch.status_family_sleeping
+      state: "on"
+    - condition: state
+      entity_id: switch.status_family_wakeup_hasruntoday
+      state: "off"
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: group.lights_downstairs
+          state: "on"
+        - condition: state
+          entity_id: group.motion_downstairs
+          state: "on"
+  action:
+    - service: switch.turn_off
+      entity_id: switch.status_family_sleeping
+    - service: switch.turn_on
+      entity_id:  switch.status_family_wakeup_hasruntoday
+    - service: switch.turn_off
+      entity_id: switch.status_family_asleep_hasruntoday
+
+
+

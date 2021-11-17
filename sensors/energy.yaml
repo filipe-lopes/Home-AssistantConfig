@@ -1,0 +1,216 @@
+###############
+# Shelly Plug S
+
+- platform: mqtt
+  name: "Energy - Fly Fryer"
+  state_topic: "shellies/shellyplug-s-9D8E59/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-9D8E59/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  force_update: "true"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Well Pump"
+  state_topic: "shellies/shellyplug-s-57717B/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-57717B/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Towel Heater Girls WC"
+  state_topic: "shellies/shellyplug-s-9D9280/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-9D9280/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Media Room Front"
+  state_topic: "shellies/shellyplug-s-79D245/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-79D245/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Media Room Back"
+  state_topic: "shellies/shellyplug-s-04122F/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-04122F/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Gas Heater"
+  state_topic: "shellies/shellyplug-s-7AE77A/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-7AE77A/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Upstairs dehumidifier"
+  state_topic: "shellies/shellyplug-s-021895/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-021895/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Downstairs dehumidifier"
+  state_topic: "shellies/shellyplug-s-15F511/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-15F511/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Living Room Media - Smart"
+  state_topic: "shellies/shellyplug-s-A415BD/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-A415BD/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Refrigerator"
+  state_topic: "shellies/shellyplug-s-C18ED0/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-C18ED0/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Freezer"
+  state_topic: "shellies/shellyplug-s-A32F96/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-A32F96/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+###############
+# Shelly RGBW2
+
+- platform: mqtt
+  name: "Energy - Living Room LEDs"
+  state_topic: "shellies/shellyrgbw2-FC9676/color/0/energy"
+  availability_topic: "shellies/shellyrgbw2-FC9676/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  force_update: "true"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+###############
+# Shelly 1PM
+
+- platform: mqtt
+  name: "Energy - Solar heater backup"
+  state_topic: "shellies/shelly1pm-F306C1/relay/0/energy"
+  availability_topic: "shellies/shelly1pm-F306C1/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  #force_update: "true"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Washing machine"
+  state_topic: "shellies/shelly1pm-8CAAB5060859/relay/0/energy"
+  availability_topic: "shellies/shelly1pm-8CAAB5060859/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Drying machine"
+  state_topic: "shellies/shelly1pm-C4AA7A/relay/0/energy"
+  availability_topic: "shellies/shelly1pm-C4AA7A/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Dishwasher"
+  state_topic: "shellies/shelly1pm-8CAAB50609DC/relay/0/energy"
+  availability_topic: "shellies/shelly1pm-8CAAB50609DC/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+
+###############
+# Shelly 2.5
+
+- platform: mqtt
+  name: "Energy - Kitchen spots"
+  state_topic: "shellies/shellyswitch25-B95005/relay/0/energy"
+  availability_topic: "shellies/shellyswitch25-B95005/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Kitchen table"
+  state_topic: "shellies/shellyswitch25-B95005/relay/1/energy"
+  availability_topic: "shellies/shellyswitch25-B95005/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+
+

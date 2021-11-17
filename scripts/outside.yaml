@@ -1,0 +1,24 @@
+  sliding_gate_person:
+    alias: Sliding gate pedestrian opening  
+    mode: single
+    sequence:
+      choose:
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.sliding_gate_contact_sensor
+              state: 'off'
+          sequence:
+            - service: switch.turn_on
+              entity_id: switch.sliding_gate_control
+            - delay: 6
+            - service: switch.turn_on
+              entity_id:  switch.sliding_gate_control
+        - conditions:
+            - condition: state
+              entity_id: binary_sensor.sliding_gate_contact_sensor
+              state: 'on'
+          sequence:
+            - service: switch.turn_on
+              entity_id: switch.sliding_gate_control
+
+

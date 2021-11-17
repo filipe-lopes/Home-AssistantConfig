@@ -1,0 +1,59 @@
+- platform: ping
+  name: Device_Router_MEO
+  host: 192.168.1.254
+  count: 2
+  scan_interval: 30
+
+- platform: ping
+  name: Device_HA_Rega
+  host: 172.20.1.6
+  count: 2
+  scan_interval: 120
+
+- platform: ping
+  name: Device_Router_UAG
+  host: 172.17.250.254
+  count: 2
+  scan_interval: 10
+
+- platform: ping
+  name: Device_MainSwitch
+  host: 172.17.10.254
+  count: 2
+  scan_interval: 10
+
+- platform: ping
+  name: Device_RS485GW1stFloor
+  host: 172.20.1.2
+
+- platform: ping
+  name: Device_KitchenAP
+  host: 172.17.1.128
+
+- platform: ping
+  name: Device_LRoomAP
+  host: 172.17.1.129
+
+- platform: ping
+  name: Device_UpstairsAP
+  host: 172.17.1.130
+
+- platform: ping
+  name: Device_RoutingTest_Gateway
+  host: 85.243.120.1
+  count: 2
+  scan_interval: 10
+
+- platform: ping
+  name: Device_RoutingTest_MEODNS
+  host: 212.55.154.174
+  count: 2
+  scan_interval: 10
+
+- platform: ping
+  name: Device_RoutingTest_GoogleDNS
+  host: 8.8.8.8
+  count: 2
+  scan_interval: 10
+
+

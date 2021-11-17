@@ -1,0 +1,18 @@
+- alias: "Shelly Button 4A46"
+  trigger:
+  -  platform: mqtt
+     topic: "shellies/shellybutton1-A4CF12F44A26/input_event/0"
+  condition: []
+  action:
+  - service: script.turn_on
+    data_template:
+      entity_id: >
+        {% if trigger.payload_json.event == "S" %}
+          script.button4a26_s
+        {% elif trigger.payload_json.event == "SS" %}
+          script.button4a26_2s
+        {% elif trigger.payload_json.event == "SSS" %}
+          script.button4a26_3s
+        {% elif trigger.payload_json.event == "L" %}
+          script.button4A26_long
+        {% endif %}

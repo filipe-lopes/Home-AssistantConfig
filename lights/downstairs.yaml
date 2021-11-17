@@ -1,0 +1,126 @@
+- platform: mqtt
+  name: "Living Room LEDs"
+  schema: template
+  state_topic: "shellies/shellyrgbw2-FC9676/color/0/status"
+  state_template: "{% if value_json.ison %}on{% else %}off{% endif %}"
+  brightness_template: "{{ value_json.gain | float | multiply(2.55) | round(0) }}"
+  command_topic: "shellies/shellyrgbw2-FC9676/color/0/set"  
+  command_on_template: '{"turn":"on"{%- if brightness is defined -%}, "gain":{{brightness | float | multiply(0.3922) | round(0)}},"red":255,"green":255,"blue":255,"white":{{brightness}}{%- endif -%}'
+  command_off_template: '{"turn":"off"}'
+  availability_topic: "shellies/shellyrgbw2-FC9676/online"
+  payload_available: "true"
+  payload_not_available: "false"
+  retain: true
+  qos: 1
+
+- platform: mqtt
+  name: "Living Room Dinning Light"
+  command_topic: "shellies/shellyswitch25-98F4ABF2D2A6/relay/0/command"
+  state_topic: "shellies/shellyswitch25-98F4ABF2D2A6/relay/0"
+  availability_topic: "shellies/shellyswitch25-98F4ABF2D2A6/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Living Room Lounge Light"
+  command_topic: "shellies/shellyswitch25-98F4ABF2D2A6/relay/1/command"
+  state_topic: "shellies/shellyswitch25-98F4ABF2D2A6/relay/1"
+  availability_topic: "shellies/shellyswitch25-B95005/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Downhall Lights"
+  command_topic: "shellies/shelly1-8CAAB505D74C/relay/0/command"
+  state_topic: "shellies/shelly1-8CAAB505D74C/relay/0"
+  availability_topic: "shellies/shelly1-8CAAB505D74C/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Cinema Room Ceiling Light"
+  command_topic: "shellies/shelly1-B9F951/relay/0/command"
+  state_topic: "shellies/shelly1-B9F951/relay/0"
+  availability_topic: "shellies/shelly1-B9F951/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Kitchen spots"
+  command_topic: "shellies/shellyswitch25-B95005/relay/0/command"
+  state_topic: "shellies/shellyswitch25-B95005/relay/0"
+  availability_topic: "shellies/shellyswitch25-B95005/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Kitchen table"
+  command_topic: "shellies/shellyswitch25-B95005/relay/1/command"
+  state_topic: "shellies/shellyswitch25-B95005/relay/1"
+  availability_topic: "shellies/shellyswitch25-B95005/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: template
+  lights:
+    lr_table_lights:
+      friendly_name: "Living Room Table Lights"
+      level_template: "{{20}}"
+      value_template: "{{is_state('light.living_room_dinning_light', 'on') and (is_state('light.lr1', 'on') or is_state('light.lr2', 'on') or is_state('light.lr3', 'on'))}}"
+      temperature_template: >-
+        {% if (state_attr('light.lr1', 'color_temp') | int > 0) %}
+          {{state_attr('light.lr1', 'color_temp') | int}}
+        {% elif (state_attr('light.lr2', 'brightness') | int > 0) %}
+          {{state_attr('light.lr2', 'color_temp') | int}}
+        {% else %}
+          {{state_attr('light.lr3', 'color_temp') | int}}
+        {% endif %}        
+      turn_on:
+        service: light.turn_on
+        entity_id: light.living_room_dinning_light, light.lr1, light.lr2, light.lr3
+      turn_off:
+        service: light.turn_off
+        entity_id: light.living_room_dinning_light
+      set_level:
+        service: light.turn_on
+        data_template:
+          entity_id: light.lr1, light.lr2, light.lr3
+          brightness: "{{ brightness }}"
+      set_temperature:
+        service: light.turn_on
+        data_template:
+          entity_id: light.lr1, light.lr2, light.lr3
+          color_temp: "{{ color_temp }}"
+
+- platform: mqtt
+  name: "Back porch lights"
+  schema: template
+  state_topic: "shellies/shellydimmer2-E8DB84D2F04F/light/0/status"
+  state_template: "{% if value_json.ison %}on{% else %}off{% endif %}"
+  brightness_template: '{{ (value_json.brightness | float * 2.55) | round(0) }}'
+  command_topic: "shellies/shellydimmer2-E8DB84D2F04F/light/0/set"
+  command_on_template: '{"turn": "on"{% if brightness is defined %}, "brightness": {{(brightness | float * 0.3882 + 1) | round(0)}}{% endif %}}'
+  command_off_template: '{"turn": "off"}'  
+  availability_topic: "shellies/shellydimmer2-E8DB84D2F04F/online"
+  payload_available: "true"
+  payload_not_available: "false"
+  retain: true
+  qos: 1

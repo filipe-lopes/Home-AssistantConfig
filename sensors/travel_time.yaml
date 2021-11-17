@@ -1,0 +1,18 @@
+#Google Travel Time
+#- platform: waze_travel_time
+#  name: Patricia to Home
+#  region: EU
+#  origin: person.patricia
+#  destination: zone.home
+
+#- platform: waze_travel_time
+#  name: Filipe to Home
+#  region: EU
+#  origin: person.filipe
+#  destination: zone.home
+
+#- platform: waze_travel_time
+#  name: Margarida to Home
+#  region: EU
+#  origin: person.margarida
+#  destination: zone.home

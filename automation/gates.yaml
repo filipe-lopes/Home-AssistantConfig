@@ -1,0 +1,27 @@
+- alias: 'Gates/SlidingGate/SoundTickWhenOpen'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.sliding_gate_contact_sensor
+      to: "on"
+      for:
+        minutes: 5
+  mode: single
+  condition:
+  action:
+    - repeat:
+        sequence:
+          - service: media_player.play_media
+            data:
+              media_content_id: clock_01
+              media_content_type: sound
+            target:
+              entity_id:
+                - media_player.kitchen_echo
+                - media_player.living_room_echo
+                - media_player.up_hall_echo          
+          - delay:
+              seconds: 15
+        until:
+          - condition: state
+            entity_id: binary_sensor.sliding_gate_contact_sensor
+            state: "off"

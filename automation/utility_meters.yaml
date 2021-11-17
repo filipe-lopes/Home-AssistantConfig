@@ -1,0 +1,63 @@
+- alias: 'UtilityMeters/Peak'
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id: sensor.electricity_rate
+  condition:
+    - condition: state
+      entity_id: sensor.electricity_rate
+      state: 'Peak'
+  action:
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.daily_energy_in
+        tariff: 'peak'
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.daily_energy_out
+        tariff: 'peak'
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.monthly_energy_in
+        tariff: 'peak'
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.daily_solar_energy
+        tariff: 'peak'
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.monthly_solar_energy
+        tariff: 'peak'
+
+- alias: 'UtilityMeters/OffPeak'
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: state
+      entity_id: sensor.electricity_rate
+  condition:
+    - condition: state
+      entity_id: sensor.electricity_rate
+      state: 'Off-peak'
+  action:
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.daily_energy_in
+        tariff: 'offpeak'
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.daily_energy_out
+        tariff: 'offpeak'
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.monthly_energy_in
+        tariff: 'offpeak'
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.daily_solar_energy
+        tariff: 'offpeak'
+    - service: utility_meter.select_tariff
+      data:
+        entity_id: utility_meter.monthly_solar_energy
+        tariff: 'offpeak'

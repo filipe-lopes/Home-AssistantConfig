@@ -1,0 +1,17 @@
+- name: presencesim_lre
+  entities:
+    light.living_room_leds:
+      state: on
+      brightness: 40
+
+- name: presencesim_mbl
+  entities:
+    cover.mary_s_room_shutter:
+      state: open
+      current_position: 80
+
+- name: presencesim_wcb
+  entities:
+    cover.main_room_wc_shutter:
+      state: open
+      current_position: 70

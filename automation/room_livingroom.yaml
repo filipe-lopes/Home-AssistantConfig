@@ -1,0 +1,47 @@
+- alias: 'Lights/LivingRoom/LEDSwitchOff'
+  trigger:
+    - platform: state
+      entity_id: 'sensor.switch_livingroom_leds_1'
+    - platform: state
+      entity_id: 'sensor.switch_livingroom_leds_2'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: 'sensor.switch_livingroom_leds_1'
+        state: '0'
+      - condition: state
+        entity_id: 'sensor.switch_livingroom_leds_2'
+        state: '0'
+  action:
+    service: light.turn_off
+    entity_id: light.living_room_leds
+
+- alias: 'Lights/LivingRoom/LEDSwitchOn'
+  trigger:
+    - platform: state
+      entity_id: 'sensor.switch_livingroom_leds_1'
+    - platform: state
+      entity_id: 'sensor.switch_livingroom_leds_2'
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: 'sensor.switch_livingroom_leds_1'
+        state: '1'
+      - condition: state
+        entity_id: 'sensor.switch_livingroom_leds_2'
+        state: '1'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: light.living_room_leds
+    data_template:
+      brightness_pct: >
+        {%set val1 = states('sensor.switch_livingroom_leds_1')%}
+        {%set val2 = states('sensor.switch_livingroom_leds_2')%}
+        {%if val1=="0" and val2=="0"%}0
+        {%elif val1=="1" and val2=="0"%}10
+        {%elif val1=="0" and val2=="1"%}50
+        {%else%}100 
+        {%endif%}

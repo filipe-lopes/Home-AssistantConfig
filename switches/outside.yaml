@@ -1,0 +1,116 @@
+- platform: mqtt
+  name: "Solar heater backup"
+  command_topic: "shellies/shelly1pm-F306C1/relay/0/command"
+  state_topic: "shellies/shelly1pm-F306C1/relay/0"
+  availability_topic: "shellies/shelly1pm-F306C1/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+
+- platform: mqtt
+  name: "Washing machine"
+  command_topic: "shellies/shelly1pm-8CAAB5060859/relay/0/command"
+  state_topic: "shellies/shelly1pm-8CAAB5060859/relay/0"
+  availability_topic: "shellies/shelly1pm-8CAAB5060859/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Drying machine"
+  command_topic: "shellies/shelly1pm-C4AA7A/relay/0/command"
+  state_topic: "shellies/shelly1pm-C4AA7A/relay/0"
+  availability_topic: "shellies/shelly1pm-C4AA7A/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Front gate"
+  command_topic: "shellies/shelly1-BCDDC276F523/relay/0/command"
+  state_topic: "shellies/shelly1-BCDDC276F523/relay/0"
+  availability_topic: "shellies/shelly1-BCDDC276F523/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Garage Door Control"
+  command_topic: "shellies/shelly1-F4CFA2E5DC2C/relay/0/command"
+  state_topic: "shellies/shelly1-F4CFA2E5DC2C/relay/0"
+  availability_topic: "shellies/shelly1-F4CFA2E5DC2C/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+
+- platform: mqtt
+  name: "Sliding Gate Control"
+  command_topic: "shellies/shelly1pm-F4CFA2E38055/relay/0/command"
+  state_topic: "shellies/shelly1pm-F4CFA2E38055/relay/0"
+  availability_topic: "shellies/shelly1pm-F4CFA2E38055/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Well pump"
+  command_topic: "shellies/shellyplug-s-57717B/relay/0/command"
+  state_topic: "shellies/shellyplug-s-57717B/relay/0"
+  availability_topic: "shellies/shellyplug-s-57717B/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+
+- platform: command_line
+  switches:
+    irrigation_area_1:
+      friendly_name: Irrigation area 1
+      command_on: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve1\"}" http://172.20.1.6:8123/api/services/switch/turn_on'
+      command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve1\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
+      command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.valve1'
+      value_template: '{{ value_json.state == "on" }}'
+    irrigation_area_2:
+      friendly_name: Irrigation area 2
+      command_on: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve2\"}" http://172.20.1.6:8123/api/services/switch/turn_on'
+      command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve2\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
+      command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.valve2'
+      value_template: '{{ value_json.state == "on" }}'
+    irrigation_area_3:
+      friendly_name: Irrigation area 3
+      command_on: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve3\"}" http://172.20.1.6:8123/api/services/switch/turn_on'
+      command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve3\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
+      command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.valve3'
+      value_template: '{{ value_json.state == "on" }}'
+    irrigation_area_4:
+      friendly_name: Irrigation area 4
+      command_on: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve4\"}" http://172.20.1.6:8123/api/services/switch/turn_on'
+      command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve4\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
+      command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.valve4'
+      value_template: '{{ value_json.state == "on" }}'
+    irrigation_area_5:
+      friendly_name: Irrigation area 5
+      command_on: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve5\"}" http://172.20.1.6:8123/api/services/switch/turn_on'
+      command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve5\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
+      command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.valve5'
+      value_template: '{{ value_json.state == "on" }}'
+    irrigation_area_6:
+      friendly_name: Irrigation area 6
+      command_on: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve6\"}" http://172.20.1.6:8123/api/services/switch/turn_on'
+      command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve6\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
+      command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.valve6'
+      value_template: '{{ value_json.state == "on" }}'

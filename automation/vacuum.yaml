@@ -1,0 +1,38 @@
+- alias: 'Vacuum/All/Clean'
+  trigger:
+    platform: time
+    at: '11:00:00'
+  condition:
+  - condition: and
+    conditions:
+    - condition: time
+      weekday:
+      - mon
+      - wed
+      - fri
+    - condition: state
+      entity_id: 'group.family'
+      state: 'not_home'
+  action:
+    - service: vacuum.turn_on
+      data:
+        entity_id: vacuum.dusty
+    - service: vacuum.turn_on
+      data:
+        entity_id: vacuum.rosie
+
+- alias: 'Vacuum/All/StopWhenHome'
+  trigger:
+    platform: state
+    entity_id: 'group.family'
+    from: 'not_home'
+    to: 'home'
+    for:
+      minutes: 1
+  action:
+    - service: vacuum.return_to_base
+      data:
+        entity_id: vacuum.dusty
+    - service: vacuum.return_to_base
+      data:
+        entity_id: vacuum.rosie

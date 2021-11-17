@@ -1,0 +1,34 @@
+- alias: 'Kitchen/FlyFrier/TurnOn'
+  trigger:
+    - platform: state
+      entity_id: 'binary_sensor.family_asleep'
+      to: "on"
+      for: "00:01:00"
+    - platform: state
+      entity_id: sensor.electricity_rate
+      from: "Peak"
+      to: "Off-peak"
+  condition:
+    - condition: state
+      entity_id: sensor.electricity_rate
+      state: 'Off-peak'
+    - condition: state
+      entity_id: binary_sensor.family_asleep
+      state: 'on'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.fly_frier
+
+- alias: 'Kitchen/FlyFrier/TurnOff'
+  trigger:
+    - platform: state
+      entity_id: 'binary_sensor.family_asleep'
+      to: "off"
+      for: "00:15:00"
+    - platform: state
+      entity_id: sensor.electricity_rate
+      from: "Off-peak"
+      to: "Peak"
+  action:
+    - service: switch.turn_off
+      entity_id: switch.fly_frier

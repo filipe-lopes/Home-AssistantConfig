@@ -1,0 +1,82 @@
+- alias: 'Lights/BackPorch/Sunset'
+  id: '2021101700001'
+  mode: queued
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: -6.0
+    - platform: state
+      entity_id: 'cover.kitchen_shutter'
+      from: 'closed'
+      to: 'open'
+    - platform: state
+      entity_id: 'cover.kitchen_door_shutter'
+      from: 'closed'
+      to: 'open'
+  condition:
+    - condition: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: -6.0
+    - condition: state
+      entity_id: 'group.family'
+      state: 'home'
+    - condition: state
+      entity_id: 'light.back_porch_lights'
+      state: 'off'
+    - condition: or
+      conditions: 
+        - condition: state
+          entity_id: 'cover.kitchen_shutter'
+          state: 'open'
+        - condition: state
+          entity_id: 'cover.kitchen_door_shutter'
+          state: 'open'
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.back_porch_lights
+      data:
+        brightness_pct: 10
+
+- alias: 'Lights/BackPorch/TurnOff'
+  id: '2021101700002'
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id: cover.kitchen_shutter
+      from: 'open'
+      to: 'closed'
+    - platform: state
+      entity_id: cover.kitchen_door_shutter
+      from: 'open'
+      to: 'closed'
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: -5.0
+  condition:
+    - condition: state
+      entity_id: 'light.back_porch_lights'
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: -5.0
+      - condition: and
+        conditions: 
+        - condition: state
+          entity_id: 'cover.kitchen_shutter'
+          state: 'closed'
+        - condition: state
+          entity_id: 'cover.kitchen_door_shutter'
+          state: 'closed'
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.back_porch_lights
+
+

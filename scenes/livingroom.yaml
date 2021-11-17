@@ -1,0 +1,47 @@
+- name: 'LR Dinning Simple'
+  entities:
+    light.living_room_lounge_light:
+      state: off
+    light.living_room_dinning_light:
+      state: on
+    light.living_room_leds:
+      state: off
+
+- name: 'LR Dinning Soft'
+  entities:
+    light.living_room_lounge_light:
+      state: off
+    light.living_room_dinning_light:
+      state: on
+    light.living_room_leds:
+      state: on
+      brightness: 100
+
+- name: 'LR Dinning Bright'
+  entities:
+    light.living_room_lounge_light:
+      state: off
+    light.living_room_dinning_light:
+      state: on
+    light.living_room_leds:
+      state: on
+      brightness: 255
+
+- name: 'LR TV'
+  entities:
+    light.living_room_lounge_light:
+      state: off
+    light.living_room_dinning_light:
+      state: off
+    light.living_room_leds:
+      state: on
+      brightness: 20
+
+- name: 'LR Off'
+  entities:
+    light.living_room_lounge_light:
+      state: off
+    light.living_room_dinning_light:
+      state: off
+    light.living_room_leds:
+      state: off

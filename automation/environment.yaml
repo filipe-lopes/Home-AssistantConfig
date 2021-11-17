@@ -1,0 +1,63 @@
+- alias: Environment/Air/Purifier/CinemaRoom/On
+  trigger:
+    - platform: numeric_state
+      entity_id: 'sensor.air_purifier_cinema_room_pm2_5'
+      above: 6
+      for:
+        minutes: 5
+    - platform: state
+      entity_id: 'switch.preference_noisy_automations'
+      to: 'on' 
+  condition:
+    - condition: state
+      entity_id: 'switch.preference_noisy_automations'
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.aqi_cinema_room
+      above: 6
+  action:
+    - service: fan.turn_on
+      entity_id: 'fan.air_purifier_cinema_room'
+
+- alias: Environment/Air/Purifier/CinemaRoom/Off
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.air_purifier_cinema_room_pm2_5
+      below: 5
+      for:
+        minutes: 5
+  action:
+    - service: fan.turn_off
+      entity_id: 'fan.air_purifier_cinema_room'
+
+- alias: Environment/Air/Purifier/Office/On
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.air_purifier_office_pm2_5
+      above: 6
+      for:
+        minutes: 5
+    - platform: state
+      entity_id: 'switch.preference_noisy_automations'
+      to: 'on' 
+  condition:
+    - condition: state
+      entity_id: 'switch.preference_noisy_automations'
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.aqi_office
+      above: 6
+  action:
+    - service: fan.turn_on
+      entity_id: 'fan.air_purifier_office'
+
+- alias: Environment/Air/Purifier/Office/Off
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.air_purifier_office_pm2_5
+      below: 5
+      for:
+        minutes: 5
+  action:
+    - service: fan.turn_off
+      entity_id: 'fan.air_purifier_office'

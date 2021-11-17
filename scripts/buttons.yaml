@@ -1,0 +1,13 @@
+  button4a26_s:
+    sequence:
+      - service: light.toggle
+        entity_id:  light.cinema_room_ceiling_light
+
+  button4a26_long:
+    sequence:
+      - service: switch.toggle
+        entity_id:  switch.mediaroom_main
+
+
+
+

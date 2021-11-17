@@ -5,6 +5,15 @@
 !*.yaml
 !.gitignore
 !*.md
+!automation
+!b_sensors
+!blueprints
+!covers
+!lights
+!scenes
+!scripts
+!sensors
+!switches
 
 # Ignore folders.
 .storage

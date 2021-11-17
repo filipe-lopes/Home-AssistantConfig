@@ -1,0 +1,32 @@
+- platform: mqtt
+  name: "Uphall lights"
+  command_topic: "shellies/shelly1-B9DBC9/relay/0/command"
+  state_topic: "shellies/shelly1-B9DBC9/relay/0"
+  availability_topic: "shellies/shelly1-B9DBC9/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Office lights"
+  command_topic: "shellies/shelly1-98F4ABF25841/relay/0/command"
+  state_topic: "shellies/shelly1-98F4ABF25841/relay/0"
+  availability_topic: "shellies/shelly1-98F4ABF25841/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Main room lights"
+  command_topic: "shellies/shelly1-F4CFA2E5DEC8/relay/0/command"
+  state_topic: "shellies/shelly1-F4CFA2E5DEC8/relay/0"
+  availability_topic: "shellies/shelly1-F4CFA2E5DEC8/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1

@@ -1,0 +1,73 @@
+# Weather Prediction
+- platform: time_date
+  display_options:
+    - 'time'
+    - 'date'
+
+- platform: template
+  sensors:
+    weather_todayforecastcondition:
+      entity_id: weather.loures
+      value_template: "{{state_attr('weather.loures','forecast')[0].condition}}"
+
+#- platform: yweather
+#  woeid: 742823
+#  forecast: 1
+#  name: w_forecast
+#  monitored_conditions:
+#    - weather
+#    - temp_min
+#    - temp_max
+
+- platform: darksky
+  api_key: 9278986952a2041e04b7bc9a33740b0d
+  scan_interval:
+    minutes: 30
+  forecast: 
+    - 0
+    - 1
+  monitored_conditions:
+    - temperature
+    - apparent_temperature
+    - humidity
+    - precip_probability
+    - precip_intensity
+    - precip_type
+    - temperature_min
+    - temperature_max
+    - temperature_high
+    - temperature_low
+    - wind_speed
+    - pressure
+    - wind_bearing
+    - icon
+
+- platform: mqtt
+  name: Outside temperature
+  state_topic: "home/l/raw/rtl_433"
+  value_template: "{{value_json.temperature_C}}"
+  unit_of_measurement: "°C"
+
+- platform: mqtt
+  name: "Outside temperature - Gate"
+  state_topic: "shellies/shellydw2-40F5202E46FF/sensor/temperature"
+  unit_of_measurement: "°C"
+
+- platform: mqtt
+  name: Outside humidity
+  state_topic: "home/l/raw/rtl_433"
+  value_template: "{{value_json.humidity|round}}"
+  unit_of_measurement: "%"
+
+- platform: mqtt
+  name: Outside pressure
+  state_topic: "home/l/raw/rtl_433"
+  value_template: "{{value_json.pressure_hPa|round}}"
+  unit_of_measurement: "hPa"
+
+- platform: mqtt
+  name: Outside sensor battery
+  state_topic: "home/l/raw/rtl_433"
+  value_template: "{{value_json.battery}}"
+
+

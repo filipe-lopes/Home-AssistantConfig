@@ -1,0 +1,40 @@
+- alias: 'Plugs/TowelHeater/Winter/WorkdayNoon'
+  trigger:
+    platform: time
+    at: '12:00:00'
+  condition:
+    - condition: state
+      entity_id: input_select.mode_climate
+      state: 'Winter'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.towel_heater
+    - delay: 1:00:00
+    - service: switch.turn_off
+      data:
+        entity_id: switch.towel_heater
+
+
+- alias: 'Plugs/TowelHeater/Winter/Workday'
+  trigger:
+    platform: time
+    at: '5:00:00'
+  condition:
+    - condition: state
+      entity_id: input_select.mode_climate
+      state: 'Winter'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.towel_heater
+    - delay: 2:00:00
+    - service: switch.turn_off
+      data:
+        entity_id: switch.towel_heater

@@ -1,0 +1,37 @@
+- platform: template
+  sensors:
+    washmachine_state:
+      friendly_name: Washing machine state
+      delay_on:
+          minutes: 1
+      delay_off:
+          minutes: 2
+      value_template: "{{states('sensor.washmachine_power_stats')|float > 5}}"
+
+    drymachine_state:
+      friendly_name: Drying machine state
+      delay_on:
+          minutes: 1
+      delay_off:
+          minutes: 2
+      value_template: "{{state_attr('sensor.drymachine_power_stats', 'median')|float > 50}}"
+
+    dishwasher_state:
+      friendly_name: Dishwasher state
+      delay_on:
+          minutes: 1
+      delay_off:
+          minutes: 2
+      value_template: "{{state_attr('sensor.dishwasher_power_stats', 'median')|float > 5}}"
+
+    waterheating_solar_backup_state:
+      friendly_name: "WaterHeating - Solar Heater Backup State"
+      delay_on:
+          seconds: 15
+      delay_off:
+          seconds: 30
+      value_template: "{{states('sensor.solar_heater_backup_power')|float > 10}}"
+
+    waterheating_needs_sanitization:
+      friendly_name: "WaterHeating - Needs sanitization"
+      value_template: "{{ (as_timestamp(now())-as_timestamp(states.sensor.solar_heater_last_sanitized.state)) > 864000}}"

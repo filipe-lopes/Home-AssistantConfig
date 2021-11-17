@@ -1,0 +1,119 @@
+- platform: template
+  sensors:
+    outside_waterdeposit_level:
+      unit_of_measurement: '%'
+      value_template: "{{ ((states.sensor.outside_waterdeposit_quantity.state | float) / 650 * 100) | round }}"
+
+    outside_waterdeposit_quantity:
+      unit_of_measurement: 'l'
+      value_template: "{{ (((states.sensor.gardenwaterdepositsensor.state) | float * 1.25) - 650) | round }}"
+
+    temp_downstairs_east:
+      unit_of_measurement: '°C'
+      value_template: "{{((states('sensor.f_5im51_102_11')|float*0.66) + (states('sensor.f_5im51_103_11')|float*0.34)) | round(1)}}"
+
+    temp_downstairs_west:
+      unit_of_measurement: '°C'
+      value_template: "{{((states('sensor.f_5im51_102_11')|float*0.55) + (states('sensor.f_5im51_104_11')|float*0.45)) | round(1)}}"
+
+    rosie_simple_state:
+      entity_id: vacuum.rosie
+      value_template: >-
+        {% set rosie_state = state_attr("vacuum.rosie","status")|lower%}
+        {%if (rosie_state=="charging")%}
+          {%if (state_attr("vacuum.rosie","bin_full")==false)%}
+            standby
+          {%else%}
+            bin_full
+          {%endif%}
+        {%elif (rosie_state=="running")%}
+          running
+        {%else%}
+          other
+        {%endif%}
+
+    dusty_simple_state:
+      entity_id: vacuum.dusty
+      value_template: >-
+        {% set dusty_state = state_attr("vacuum.dusty","status")|lower%}
+        {%if (dusty_state=="charging")%}
+          {%if (state_attr("vacuum.dusty","bin_full")==false)%}
+            standby
+          {%else%}
+            bin_full
+          {%endif%}
+        {%elif (dusty_state=="running")%}
+          running
+        {%else%}
+          other
+        {%endif%}
+
+    electricity_rate:
+      friendly_name: "Electricity Rate"
+      entity_id: sensor.time
+      value_template: >-
+        {%if now().isoweekday() == 6%}
+          {%if now().hour - utcnow().hour == 0%}
+            {%if ((now().hour > 9 and now().hour < 13) or (now().hour == 9 and now().minute > 30) or (now().hour > 18 and now().hour < 22) or (now().hour == 18 and now().minute > 30))%}
+              Peak
+            {%else%}
+              Off-peak
+            {%endif%}
+          {%else%}
+            {%if (now().hour >= 9 and now().hour < 14) or (now().hour >= 20 and now().hour < 22)%}
+              Peak
+            {%else%}
+              Off-peak
+            {%endif%} 
+          {%endif%}
+        {%elif now().isoweekday() == 7%}
+          Off-peak
+        {%else%}
+          {%if now().hour <= 6 %}
+            Off-peak
+          {%else%}
+            Peak
+          {%endif%}
+        {%endif%}
+
+    electricity_rate_next_switch:
+      friendly_name: "Electricity Rate Switching"
+      entity_id: sensor.time
+      value_template: >-
+        {%if now().isoweekday() == 6%}
+          {%if now().hour - utcnow().hour == 0%}
+            {%if now().hour < 9 or (now().hour == 9 and now().minute < 30)%}
+              9:30
+            {%elif now().hour < 13%}
+              13:00
+            {%elif now().hour < 18 or (now().hour == 18 and now().minute < 30)%}
+              18:30
+            {%elif now().hour < 22%}
+              22:00
+            {%else%}
+              7:00 (Monday)
+            {%endif%}
+          {%else%}
+            {%if now().hour < 9%}
+              9:00
+            {%elif now().hour < 14%} 
+              14:00
+            {%elif now().hour < 20%}
+              20:00
+            {%elif now().hour < 22%}
+              22:00
+            {%else%}
+              7:00 (Monday)
+            {%endif%} 
+          {%endif%}
+        {%elif now().isoweekday() == 7%}
+          7:00 (Monday)
+        {%else%}
+          {%if now().hour < 7%}
+            7:00
+          {%else%}
+            0:00
+          {%endif%}
+        {%endif%}
+
+

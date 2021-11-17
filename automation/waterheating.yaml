@@ -1,0 +1,149 @@
+- alias: 'Water/ElectricBackup/WorkdayHeater'
+  trigger:
+    platform: time
+    at: '5:00:00'
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.solar_heater_water_temperature
+      below: 1
+      value_template: '{{(states.sensor.solar_heater_water_temperature.state|float) - (states.input_number.waterheating_temp_lt.state | float)}}'
+    - condition: state
+      entity_id:  input_boolean.mode_holidays
+      state: 'off'
+    - condition: state
+      entity_id: input_boolean.pref_waterheating_elec_bck
+      state: 'on'
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.solar_heater_backup
+    - wait_template: "{{((states.sensor.solar_heater_water_temperature.state|float) - (states.input_number.waterheating_temp_ht.state | float)) > 0 }}"
+      timeout: '03:00:00'
+    - service: switch.turn_off
+      data:
+        entity_id: switch.solar_heater_backup
+
+- alias: 'Water/ElectricBackup/Sanitization'
+  trigger:
+    platform: time
+    at: '2:00:00'
+#    - platform: numeric_state
+#      entity_id: sun.sun
+#      value_template: "{{ state.attributes.azimuth }}"
+#      above: 230
+  condition:
+    - condition: time
+      weekday:
+        - sun
+    - condition: state
+      entity_id: binary_sensor.waterheating_needs_sanitization
+      state: 'on'
+    - condition: state
+      entity_id:  input_boolean.mode_holidays
+      state: 'off'
+  action:
+    - service: automation.turn_off
+      data:
+        entity_id: automation.water_electricbackup_off
+    - service: switch.turn_on
+      data:
+        entity_id: switch.solar_heater_backup
+    - wait_template: "{{ is_state('binary_sensor.waterheating_needs_sanitization', 'off') }}"
+      timeout: '06:00:00'
+    - service: switch.turn_off
+      data:
+        entity_id: switch.solar_heater_backup
+    - service: automation.turn_on
+      data:
+        entity_id: automation.water_electricbackup_off
+
+- alias: 'Water/GasBackup/On'
+  trigger:
+    - platform: numeric_state
+      entity_id: 
+        - sensor.solar_heater_water_temperature
+        - input_number.waterheating_temp_lt
+      below: 0
+      value_template: '{{(states.sensor.solar_heater_water_temperature.state|float) - (states.input_number.waterheating_temp_lt.state | float)}}'
+    - platform: state
+      entity_id: switch.status_family_sleeping
+      to: "off"
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.solar_heater_water_temperature
+      below: 0
+      value_template: '{{(states.sensor.solar_heater_water_temperature.state|float) - (states.input_number.waterheating_temp_lt.state | float)}}'
+    - condition: state
+      entity_id: switch.status_family_sleeping
+      state: "off"
+    - condition: state
+      entity_id: switch.waterheating_gas_heater
+      state: "off"
+    - condition: state
+      entity_id:  input_boolean.mode_holidays
+      state: "off"
+    - condition: state
+      entity_id: input_boolean.pref_waterheating_gas_bck
+      state: "on"
+  action:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.waterheating_gas_heater
+
+
+- alias: 'Water/GasBackup/Off'
+  trigger:
+    - platform: numeric_state
+      entity_id: 
+        - sensor.solar_heater_water_temperature
+        - input_number.waterheating_temp_lt
+      above: 0
+      value_template: '{{(states.sensor.solar_heater_water_temperature.state|float) - (states.input_number.waterheating_temp_lt.state | float)}}'
+    - platform: state
+      entity_id: 'switch.status_family_sleeping'
+      to: "on"
+  condition:
+    - condition: or
+      conditions:
+        - condition: numeric_state
+          entity_id: sensor.solar_heater_water_temperature
+          above: 0
+          value_template: '{{(states.sensor.solar_heater_water_temperature.state|float) - (states.input_number.waterheating_temp_lt.state | float)}}'
+        - condition: state
+          entity_id: switch.status_family_sleeping
+          state: "on"
+    - condition: state
+      entity_id:  switch.waterheating_gas_heater
+      state: "on"
+    - condition: state
+      entity_id: input_boolean.pref_waterheating_gas_bck
+      state: "on"
+  action:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.waterheating_gas_heater
+
+- alias: 'Water/Sanitized'
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.solar_heater_water_temperature
+    above: 70
+    for:
+      hours: 1
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "home/l/data/solpanelsanitized"
+        payload_template: "{{ now() }}"
+        retain: "true"
+
+#- alias: 'Water/OptionsUpdated
+#  trigger:
+#    platform: state
+#    entity_id: input_number.waterheating_temp_lt
+
+
+

@@ -1,0 +1,88 @@
+# Temperature
+- platform: min_max
+  type: mean
+  name: "Downstairs Temp"
+  entity_ids:
+    - sensor.f_5im51_101_11
+    - sensor.f_5im51_102_11
+    - sensor.f_5im51_103_11
+    - sensor.f_5im51_104_11
+
+- platform: min_max
+  type: mean
+  name: "Upstairs Temp"
+  entity_ids:
+    - sensor.f_5im51_201_11
+    - sensor.f_5im51_202_11
+    - sensor.f_5im51_203_11
+    - sensor.f_5im51_204_11
+    - sensor.f_5im51_205_11
+
+# Humidity
+- platform: min_max
+  type: mean
+  name: "Downstairs Hum"
+  entity_ids:
+    - sensor.f_5im51_101_12
+    - sensor.f_5im51_102_12
+    - sensor.f_5im51_103_12
+    - sensor.f_5im51_104_12
+
+- platform: min_max
+  type: mean
+  name: "Upstairs Hum"
+  entity_ids:
+    - sensor.f_5im51_201_12
+    - sensor.f_5im51_202_12
+    - sensor.f_5im51_203_12
+    - sensor.f_5im51_204_12
+    - sensor.f_5im51_205_12
+
+# Luminance
+- platform: min_max
+  type: mean
+  name: "Downstairs Lum"
+  entity_ids:
+    - sensor.f_5im51_101_13
+    - sensor.f_5im51_102_13
+    - sensor.f_5im51_103_13
+    - sensor.f_5im51_104_13
+
+- platform: min_max
+  type: mean
+  name: "Upstairs Lum"
+  entity_ids:
+    - sensor.f_5im51_202_13
+    - sensor.f_5im51_203_13
+    - sensor.f_5im51_205_13
+
+# Inside air quality
+
+# Air quality
+- platform: waqi
+  token: !secret waqi_token 
+  locations:
+    - entrecampos
+
+#Mold
+#- platform: mold_indicator
+#  name: "Cinema room mold indicator"
+#  indoor_temp_sensor: sensor.f_5im51_101_11
+#  indoor_humidity_sensor: sensor.f_5im51_101_12
+#  outdoor_temp_sensor: sensor.outside_temperature
+#  calibration_factor: 2.0
+
+#- platform: mold_indicator
+#  name: "Living room mold indicator"
+#  indoor_temp_sensor: sensor.f_5im51_103_11
+#  indoor_humidity_sensor: sensor.f_5im51_103_12
+#  outdoor_temp_sensor: sensor.outside_temperature
+#  calibration_factor: 2.0
+
+#- platform: mold_indicator
+#  name: "Kitchen mold indicator"
+#  indoor_temp_sensor: sensor.f_5im51_104_11
+#  indoor_humidity_sensor: sensor.f_5im51_104_12
+#  outdoor_temp_sensor: sensor.outside_temperature
+#  calibration_factor: 2.0
+

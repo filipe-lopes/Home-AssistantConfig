@@ -1,0 +1,13 @@
+- platform: mqtt
+  name: "Switch/LivingRoom/LEDs/1"
+  state_topic: "shellies/shellyix3-68C63AF9FEF1/input/0"
+  availability_topic: "shellies/shellyix3-68C63AF9FEF1/online"
+  payload_available: "true"
+  payload_not_available: "false"
+
+- platform: mqtt
+  name: "Switch/LivingRoom/LEDs/2"
+  state_topic: "shellies/shellyix3-68C63AF9FEF1/input/1"
+  availability_topic: "shellies/shellyix3-68C63AF9FEF1/online"
+  payload_available: "true"
+  payload_not_available: "false"

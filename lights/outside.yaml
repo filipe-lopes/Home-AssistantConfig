@@ -1,0 +1,5 @@
+- platform: mqtt
+  name: 'Perimeter lights'
+  state_topic: 'home/l/out/garden/l/ch1_s'
+  command_topic: 'home/l/out/garden/l/ch1_c'
+  optimistic: false

@@ -1,0 +1,23 @@
+- alias: Living Room Scenes
+  trigger:
+    platform: state
+    entity_id: input_select.scene_lr
+  action:
+    - service: scene.turn_on
+      data_template:
+        entity_id: >
+          {% if is_state( "input_select.scene_lr", "Dinning Simple" ) %}
+            scene.lr_dinning_simple
+          {%-elif is_state( "input_select.scene_lr", "Dinning Soft" ) %}
+            scene.lr_dinning_soft
+          {%-elif is_state( "input_select.scene_lr", "Dinning Bright" ) %}
+            scene.lr_dinning_bright
+          {%-elif is_state( "input_select.scene_lr", "TV" ) %}
+            scene.lr_tv
+          {%-elif is_state( "input_select.scene_lr", "Off" ) %}
+            scene.lr_off
+          {% endif %}
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.scene_lr
+        option: "-"

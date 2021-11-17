@@ -1,0 +1,4 @@
+- name: Mary's nap
+  entities:
+    cover.mary_s_room_shutter: closed
+    input_boolean.mode_automate_b_whenhome: off

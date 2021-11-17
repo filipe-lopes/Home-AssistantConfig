@@ -1,0 +1,69 @@
+- alias: 'Routine/DisableNoiseAtBedtime'
+  trigger:
+    platform: time
+    at: "21:00:00"
+  action:
+    - service: switch.turn_off
+      entity_id: switch.preference_noisy_automations
+    - service: humidifier.turn_off
+      entity_id: humidifier.upstairs
+    - service: humidifier.turn_off
+      entity_id: humidifier.downstairs
+
+- alias: 'Routine/EnableNoiseAtWakeup'
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id: 'cover.mary_s_room_shutter'
+      from: 'closed'
+      to: 'open'
+    - platform: state
+      entity_id: 'cover.maggie_s_room_shutter'
+      from: 'closed'
+      to: 'open'
+    - platform: state
+      entity_id: 'cover.main_room_shutter'
+      from: 'closed'
+      to: 'open'
+  condition:
+    - condition: state
+      entity_id: 'switch.preference_noisy_automations'
+      state: 'off'
+    - condition: state
+      entity_id: 'cover.mary_s_room_shutter'
+      state: 'open'
+    - condition: state
+      entity_id: 'cover.maggie_s_room_shutter'
+      state: 'open'
+    - condition: state
+      entity_id: 'cover.main_room_shutter'
+      state: 'open'
+  action:
+    - service: switch.turn_on
+      entity_id: switch.preference_noisy_automations
+    - service: humidifier.turn_on
+      entity_id: humidifier.upstairs
+    - service: humidifier.turn_on
+      entity_id: humidifier.downstairs
+
+- alias: 'Temp/DisableBlindsWhenMaryAsleep'
+  trigger:
+    - platform: state
+      entity_id: 'cover.mary_s_room_shutter'
+      from: 'open'
+      to: 'closed'
+  condition:
+    - condition: sun
+      before: sunset
+      before_offset: "-01:00:00"
+    - condition: state
+      entity_id: 'group.family'
+      state: 'home'
+  action:
+    - service: switch.turn_off
+      entity_id: switch.preference_noisy_automations
+    - service: humidifier.turn_off
+      entity_id: humidifier.upstairs
+    - service: humidifier.turn_off
+      entity_id: humidifier.downstairs
+        

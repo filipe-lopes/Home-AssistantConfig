@@ -1,0 +1,26 @@
+- platform: mqtt
+  unique_id: preference_shutersautomation
+  name: "Preference - Shutters automation"
+  command_topic: "home/l/preferences/shutters/automate"
+  state_topic: "home/l/preferences/shutters/automate"
+  icon: mdi:toggle-switch-outline
+  qos: 1
+  retain: true
+
+- platform: mqtt
+  unique_id: preference_noisyautomations
+  name: "Preference - Noisy automations"
+  command_topic: "home/l/preferences/automations/noisy"
+  state_topic: "home/l/preferences/automations/noisy"
+  icon: mdi:toggle-switch-outline
+  qos: 1
+  retain: true
+
+- platform: mqtt
+  unique_id: preference_thermoautomationpeak
+  name: "Preference - Thermostat automation - Peak Offpeak temperature adjustment"
+  command_topic: "home/l/preferences/automations/thermopeak"
+  state_topic: "home/l/preferences/automations/thermopeak"
+  icon: mdi:toggle-switch-outline
+  qos: 1
+  retain: true

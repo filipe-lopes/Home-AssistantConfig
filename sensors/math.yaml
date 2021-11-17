@@ -1,0 +1,27 @@
+- platform: statistics
+  name: Washmachine Power Stats
+  entity_id:  sensor.washing_machine_power
+  max_age:
+    minutes: 2
+
+- platform: statistics
+  name: Drymachine Power Stats
+  entity_id:  sensor.drying_machine_power
+  max_age:
+    minutes: 2
+
+- platform: statistics
+  name: Dishwasher Power Stats
+  entity_id: sensor.dishwasher_power
+  max_age:
+    minutes: 2
+
+- platform: statistics
+  name: Drymachine Power Stats5
+  entity_id:  sensor.drying_machine_power
+  max_age:
+    minutes: 5
+
+- platform: statistics
+  name: CO2 Stats
+  entity_id:  sensor.f_5im51_102_30

@@ -1,0 +1,177 @@
+  shutter_move_group:
+    sequence:
+      - delay: 0
+      - service: cover.set_cover_position
+        data_template:
+          entity_id: >
+            {%-set ns = namespace(comma=false)-%}
+            {%-set am=states("input_select.shutter_automation_mode")-%}
+            {%-if (am=="Normal")-%}{%-set target=normal-%}
+            {%-elif (am=="Bright")-%}{%-set target=bright-%}
+            {%-elif (am=="Safe")-%}{%-set target=safe-%}
+            {%-endif-%}
+            {%-for roller in states[group].attributes.entity_id-%}
+            {%- set current=state_attr(roller,'current_position')-%}
+            {%- if (((current-target) | abs > 3) or (target==100) or (target==0))-%}
+            {%-  if (ns.comma)-%},{%-endif-%}
+            {%-  set ns.comma=true-%}{{ roller }}
+            {%- endif-%}
+            {%-endfor-%}        
+          position: >-
+            {%-set am=states("input_select.shutter_automation_mode")-%}
+            {%-if (am=="Normal")-%}{{normal}}
+            {%-elif (am=="Bright")-%}{{bright}}
+            {%-elif (am=="Safe")-%}{{safe}}
+            {%-endif-%}
+      - delay: 1
+
+  shutter_open_group:
+    mode: queued
+    sequence:
+      - delay: 0
+      - service: cover.set_cover_position
+        data_template:
+          entity_id: >
+            {%-set ns = namespace(comma=false)-%}
+            {%-set am=states("input_select.shutter_automation_mode")-%}
+            {%-if (am=="Normal")-%}{%-set target=normal-%}
+            {%-elif (am=="Bright")-%}{%-set target=bright-%}
+            {%-elif (am=="Safe")-%}{%-set target=safe-%}
+            {%-endif-%}
+            {%-for roller in states[group].attributes.entity_id-%}
+            {%- set current=state_attr(roller,'current_position')-%}
+            {%- if (((target - current) > 3) or (target==100))-%}
+            {%-  if (ns.comma)-%},{%-endif-%}
+            {%-  set ns.comma=true-%}{{ roller }}
+            {%- endif-%}
+            {%-endfor-%}        
+          position: >-
+            {%-set am=states("input_select.shutter_automation_mode")-%}
+            {%-if (am=="Normal")-%}{{normal}}
+            {%-elif (am=="Bright")-%}{{bright}}
+            {%-elif (am=="Safe")-%}{{safe}}
+            {%-endif-%}
+      - delay: 1
+
+  shutter_close_group:
+    mode: queued
+    sequence:
+      - delay: 0
+      - service: cover.set_cover_position
+        data_template:
+          entity_id: >
+            {%-set ns = namespace(comma=false)-%}
+            {%-set am=states("input_select.shutter_automation_mode")-%}
+            {%-if (am=="Normal")-%}{%-set target=normal-%}
+            {%-elif (am=="Bright")-%}{%-set target=bright-%}
+            {%-elif (am=="Safe")-%}{%-set target=safe-%}
+            {%-endif-%}
+            {%-for roller in states[group].attributes.entity_id-%}
+            {%- set current=state_attr(roller,'current_position')-%}
+            {%- if (((current - target) > 3) or (target==0))-%}
+            {%-  if (ns.comma)-%},{%-endif-%}
+            {%-  set ns.comma=true-%}{{ roller }}
+            {%- endif-%}
+            {%-endfor-%}        
+          position: >-
+            {%-set am=states("input_select.shutter_automation_mode")-%}
+            {%-if (am=="Normal")-%}{{normal}}
+            {%-elif (am=="Bright")-%}{{bright}}
+            {%-elif (am=="Safe")-%}{{safe}}
+            {%-endif-%}
+      - delay: 1
+
+       
+
+  shutters_all_close:
+    alias: Close all shutters
+    sequence:
+      - service: cover.close_cover
+        entity_id: group.shutters_all
+
+#  shutters_all_open:
+#    alias: Open all shutters
+#    sequence:
+#      - service: script.turn_on
+#        entity_id: script.shutter_open_group
+#        data:
+#          variables:
+#            group: group.shutters_large
+#            normal: 90
+#            bright: 30
+#            safe: 12
+#      - wait_template: "{{ is_state('script.shutter_open_group', 'off') }}"
+#      - service: script.turn_on
+#        entity_id: script.shutter_open_group
+#        data:
+#          variables:
+#            group: group.shutters_medium
+#            normal: 80
+#            bright: 25
+#            safe: 10
+#      - wait_template: "{{ is_state('script.shutter_open_group', 'off') }}"
+#      - service: script.turn_on
+#        entity_id: script.shutter_open_group
+#        data:
+#          variables:
+#            group: group.shutters_small
+#            normal: 75
+#            bright: 35
+#            safe: 5
+  shutters_all_open:
+    alias: Open all shutters
+    sequence:
+      - choose:
+          - alias: "Blind automation enabled when home"
+            conditions: 
+              - condition: state
+                entity_id: 'input_boolean.mode_automate_b_whenhome'
+                state: 'on'
+            sequence:
+              - service: automation.trigger
+                target:
+                  entity_id:
+                    - automation.blinds_updateposition
+        default:
+          - service: script.turn_on
+            entity_id: script.shutter_open_group
+            data:
+              variables:
+                group: group.shutters_large
+                normal: 90
+                bright: 30
+                safe: 12
+          - wait_template: "{{ is_state('script.shutter_open_group', 'off') }}"
+          - service: script.turn_on
+            entity_id: script.shutter_open_group
+            data:
+              variables:
+                group: group.shutters_medium
+                normal: 80
+                bright: 25
+                safe: 10
+          - wait_template: "{{ is_state('script.shutter_open_group', 'off') }}"
+          - service: script.turn_on
+            entity_id: script.shutter_open_group
+            data:
+              variables:
+                group: group.shutters_small
+                normal: 75
+                bright: 35
+                safe: 5
+
+  shutters_all_safe:
+    alias: Set all shutters to safe position
+    sequence:
+      - service: cover.set_cover_position
+        data:
+          entity_id: group.shutters_large
+          position: 20
+      - service: cover.set_cover_position
+        data:
+          entity_id: group.shutters_medium
+          position: 15
+      - service: cover.set_cover_position
+        data:
+          entity_id: group.shutters_small
+          position: 10

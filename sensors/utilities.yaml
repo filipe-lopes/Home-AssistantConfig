@@ -1,0 +1,82 @@
+- platform: template
+  sensors:
+    home_power_consuption:
+      friendly_name: Total power
+      value_template: "{{((states.sensor.utility_power.state|float)+(states.sensor.solar_power.state|float))|round}}"
+      unit_of_measurement: "W"
+    energy_today:
+      value_template: "{{states.sensor.daily_energy_in_peak.state|int + states.sensor.daily_energy_in_offpeak.state|int}}"
+      unit_of_measurement: "kWh"
+    energy_thismonth:
+      value_template: "{{states.sensor.monthly_energy_in_peak.state|int + states.sensor.monthly_energy_in_offpeak.state|int}}"
+      unit_of_measurement: "kWh"
+    energy_solar_today:
+      value_template: "{{states.sensor.daily_solar_energy_peak.state|int + states.sensor.daily_solar_energy_offpeak.state|int}}"
+      unit_of_measurement: "kWh"
+    energy_solar_thismonth:
+      value_template: "{{states.sensor.monthly_solar_energy_peak.state|int + states.sensor.monthly_solar_energy_offpeak.state|int}}"
+      unit_of_measurement: "kWh"
+    energy_bill_prediction:
+      value_template: "{{((((states('sensor.monthly_energy_in_offpeak') | int)/(now().strftime('%-d')|int)*30*0.0899 +(states('sensor.monthly_energy_in_peak') | int)/(now().strftime('%-d')|int)*30*0.1932)*0.93+11.49)*1.23+3.5) | int}}"
+      unit_of_measurement: "Eur"
+    solararray1_power:
+      value_template: "{{ ((states('sensor.solar_power') | float) - (states('sensor.peimar_inverter_01_ac_power') | float)) | round (1) }}"
+      unit_of_measurement: "W"
+    
+
+- platform: mqtt
+  name: Solar voltage
+  state_topic: "home/l/utilities/power2/v"
+  unit_of_measurement: "V"
+
+- platform: mqtt
+  name: Solar current
+  state_topic: "home/l/utilities/power2/a"
+  unit_of_measurement: "A"
+
+- platform: mqtt
+  name: Solar power
+  state_topic: "home/l/utilities/power2/p"
+  unit_of_measurement: "W"
+
+- platform: mqtt
+  name: Solar energy production
+  state_topic: "home/l/utilities/power2/inwh"
+  value_template: "{{(value | float) / 1000 }}"
+  unit_of_measurement: "kWh"
+
+- platform: mqtt
+  name: Solar energy consuption
+  state_topic: "home/l/utilities/power2/outwh"
+  value_template: "{{(value | float) / 1000 }}"
+  unit_of_measurement: "kWh"
+
+- platform: mqtt
+  name: Utility voltage
+  state_topic: "home/l/utilities/power1/v"
+  unit_of_measurement: "V"
+
+- platform: mqtt
+  name: Utility current
+  state_topic: "home/l/utilities/power1/a"
+  unit_of_measurement: "A"
+
+- platform: mqtt
+  name: Utility power
+  state_topic: "home/l/utilities/power1/p"
+  unit_of_measurement: "W"
+
+- platform: mqtt
+  name: Utility energy in
+  state_topic: "home/l/utilities/power1/inwh"
+  value_template: "{{(value | float) / 1000 }}"
+  unit_of_measurement: "kWh"
+
+- platform: mqtt
+  name: Utility energy out
+  state_topic: "home/l/utilities/power1/outwh"
+  value_template: "{{(value | float) / 1000 }}" 
+  unit_of_measurement: "kWh"
+
+
+
