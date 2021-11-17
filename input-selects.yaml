@@ -1,0 +1,59 @@
+shutter_automation_mode:
+  name: Shutter automation mode
+  options:
+    - "Normal" 
+    - "Safe"
+    - "Bright"
+
+upstairs_clean:
+  name: Upstairs next cleaning action
+  initial: "None"
+  options:
+    - "None"
+    - "Vaccuum"
+
+downstairs_clean:
+  name: Downstairs next cleaning action
+  initial: "None"
+  options:
+    - "None"
+    - "Vaccuum"
+    - "Mop"
+    - "Vaccuum and mop"
+
+scene_lr:
+  name: Living Room Scene
+  icon: mdi:brightness-auto
+  initial: "-"
+  options:
+    - "-"
+    - "Off"
+    - "Dinning Simple"
+    - "Dinning Soft"
+    - "Dinning Bright"
+    - "TV"
+
+mode_climate:
+  name: House climate mode
+  icon: mdi:home-circle
+  initial: "-"
+  options:
+    - "-"
+    - "Summer"
+    - "Winter"
+
+mode_lights_livingroom:
+  name: Living Room lights mode
+  icon: mdi:home-circle
+  options:
+    - "Manual"
+    - "Auto off"
+    - "Auto"
+
+mode_lights_downstairshall:
+  name: Downstairs Hall lights mode
+  icon: mdi:home-circle
+  options:
+    - "Manual"
+    - "Auto off"
+    - "Auto"

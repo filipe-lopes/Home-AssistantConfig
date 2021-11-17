@@ -1,0 +1,96 @@
+  test_group:
+    entities:
+      - light.living_room_leds
+
+  motion_downstairs:
+    entities:
+      - binary_sensor.f_5im51_101_20
+      - binary_sensor.f_5im51_102_20
+      - binary_sensor.f_5im51_103_20
+      - binary_sensor.f_5im51_104_20
+
+  lights_downstairs:
+    entities:
+      - light.cinema_room_ceiling_light
+      - light.downhall_lights
+      - light.kitchen_spots
+      - light.kitchen_table
+      - light.living_room_dinning_light
+      - light.living_room_leds
+      - light.living_room_lounge_light
+
+  shutters_westup:
+    name: West side upstairs rollershutters
+    entities:
+      - cover.main_room_shutter
+      - cover.office_shutter
+
+  shutters_eastup:
+    name: East side upstairs rollershutters
+    entities:
+      - cover.maggie_s_room_shutter
+      - cover.mary_s_room_shutter
+
+  shutters_southup:
+    name: South upstairs rollershutters
+    entities:
+      - cover.main_room_wc_shutter
+      - cover.upstairs_wc_shutter
+
+  shutters_westdown:
+    entities:
+      - cover.cinema_room_shutter
+
+  shutters_eastdown:
+    name: East side downstairs rollershutters
+    entities:
+      - cover.living_room_south_shutter
+      - cover.living_room_north_shutter
+
+  shutters_northdown:
+    name: South upstairs rollershutters
+    entities:
+      - cover.downstairs_wc_shutter
+
+  shutters_upstairs:
+    name: Downstairs rollershutters
+    entities:
+      - cover.main_room_shutter
+      - cover.office_shutter
+      - cover.maggie_s_room_shutter
+      - cover.mary_s_room_shutter
+      - cover.main_room_wc_shutter
+      - cover.upstairs_wc_shutter
+
+  shutters_downstairs:
+    name: Downstairs rollershutters
+    entities:
+      - cover.living_room_south_shutter
+      - cover.living_room_north_shutter
+      - cover.kitchen_shutter
+      - cover.kitchen_door_shutter
+      - cover.downstairs_wc_shutter
+      - cover.cinema_room_shutter
+
+  shutters_kitchen:
+      - cover.kitchen_shutter
+      - cover.kitchen_door_shutter
+
+  shutters_all:
+    name: All rollershutters
+    entities:
+      - cover.main_room_shutter
+      - cover.office_shutter
+      - cover.maggie_s_room_shutter
+      - cover.mary_s_room_shutter
+      - cover.living_room_south_shutter
+      - cover.living_room_north_shutter
+      - cover.downstairs_wc_shutter
+      - cover.cinema_room_shutter
+      - cover.main_room_wc_shutter
+      - cover.upstairs_wc_shutter
+
+  family:
+    entities:
+      - person.filipe
+      - person.patricia

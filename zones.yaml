@@ -1,0 +1,43 @@
+- name: Home
+  latitude: !secret loures_lat
+  longitude: !secret loures_lon
+  radius: 50
+  icon: mdi:home
+
+- name: Tomar
+  latitude: !secret tomar_lat
+  longitude: !secret tomar_lon
+  radius: 200
+  icon: mdi:home
+
+- name: JM
+  latitude: !secret zone_jm_lat
+  longitude: !secret zone_jm_lon
+  radius: 100
+  icon: mdi:briefcase
+
+- name: BPI
+  latitude: !secret zone_bpi_lat
+  longitude: !secret zone_bpi_lon
+  radius: 50
+  icon: mdi:briefcase
+ 
+- name: Pica-Pau
+  latitude: !secret zone_picapau_lat
+  longitude: !secret zone_picapau_lon
+  radius: 100
+  icon: mdi:school
+
+- name: Avo Tita
+  latitude: !secret zone_atita_lat
+  longitude: !secret zone_atita_lon
+  radius: 100
+  icon: mdi:home
+
+- name: Bombarral
+  latitude: !secret zone_cafaripa_lat
+  longitude: !secret zone_cafaripa_lon
+  radius: 150
+  icon: mdi:home
+
+

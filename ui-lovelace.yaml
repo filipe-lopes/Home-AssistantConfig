@@ -1,0 +1,370 @@
+title: Casa Loures
+views:
+  - badges:
+      - person.filipe
+      - person.patricia
+      - sensor.home_power_consuption
+      - sensor.solar_power
+      - sensor.outside_humidity
+      - sensor.f_5im51_102_30
+      - sensor.outside_pressure
+      - sun.sun
+    cards:
+      - entities:
+          - sensor.date
+          - sensor.time
+          - sensor.outside_temperature
+          - sensor.inside_temp
+          - sensor.waqi_entrecampos_lisboa_portugal
+        show_header_toggle: false
+        title: overview
+        type: entities
+      - entities:
+          - sensor.filipe_to_home
+          - sensor.patricia_to_home
+        show_header_toggle: true
+        title: Arriving home in...
+        type: entities
+    path: default_view
+    title: Home
+  - badges: []
+    cards:
+      - entity: weather.loures
+        type: weather-forecast
+      - cards:
+          - columns: 3
+            entities:
+              - entity: person.filipe
+              - entity: person.patricia
+              - entity: person.margarida
+            show_icon: true
+            show_name: true
+            show_state: true
+            type: glance
+          - columns: 3
+            entities:
+              - entity: sensor.filipe_to_home
+              - entity: sensor.patricia_to_home
+              - entity: sensor.patricia_to_home
+            show_icon: false
+            show_name: false
+            type: glance
+        type: vertical-stack
+      - entities:
+          - entity: sensor.outside_temperature
+        theme: Backend-selected
+        type: glance
+    theme: Backend-selected
+    title: Home2
+  - badges: []
+    cards:
+      - entities:
+          - entity: light.uphall_lights
+            name: Up hall
+          - entity: light.tradfri_bulb_4
+            name: Main room bedside right
+          - entity: light.tradfri_bulb_7
+            name: Main room bedside left
+          - entity: light.tradfri_bulb_6
+            name: Maggie's room
+          - entity: light.tradfri_bulb
+            name: Mary's room
+        title: Upstairs
+        type: entities
+      - entities:
+          - entity: light.kitchen_spots
+            name: Kitchen
+          - entity: light.kitchen_table
+            name: Kitchen (table)
+          - entity: light.cinema_room_ceiling_light
+            name: Cinema room (ceiling)
+          - entity: light.downhall_lights
+            name: Down hall
+          - entity: light.living_room_leds
+            name: Living room (leds)
+          - entity: light.living_room_dinning_light
+            name: Living room (table)
+          - entity: light.living_room_lounge_light
+            name: Living room (lounge)
+        title: Downstairs
+        type: entities
+      - entities:
+          - entity: light.perimeter_lights
+        title: Outside
+        type: entities
+    icon: 'mdi:lightbulb'
+    title: Lights
+  - badges: []
+    cards:
+      - entities:
+          - entity: cover.main_room_shutter
+            name: Main room
+          - entity: cover.main_room_wc_shutter
+            name: Main room WC
+          - entity: cover.maggie_s_room_shutter
+            name: Maggie's room
+          - entity: cover.mary_s_room_shutter
+            name: Mary's room
+          - entity: cover.office_shutter
+            name: Office
+          - entity: cover.upstairs_wc_shutter
+            name: Upstairs WC
+        show_header_toggle: false
+        title: Upstairs
+        type: entities
+      - entities:
+          - entity: cover.living_room_north_shutter
+            name: Living room (north)
+          - entity: cover.living_room_south_shutter
+            name: Living room (south)
+          - entity: cover.kitchen_shutter
+            name: Kitchen
+          - entity: cover.kitchen_door_shutter
+            name: Kitchen door
+          - entity: cover.cinema_room_shutter
+            name: Cinema room
+          - entity: cover.downstairs_wc_shutter
+            name: Guest WC
+        show_header_toggle: false
+        title: Downstairs
+        type: entities
+    icon: 'mdi:window-shutter'
+    path: shutters
+    title: Shutters
+  - badges: []
+    cards:
+      - type: vertical-stack
+        cards:
+          - entities:
+              - entity: sensor.solar_heater_water_temperature
+                name: Water temperature
+              - entity: switch.solar_heater_backup
+                name: Electric backup
+              - entity: switch.waterheating_gas_heater
+                name: Gas backup
+              - entity: automation.water_electricbackup_on
+                name: Automatic electric backup
+            show_header_toggle: false
+            title: Water heating
+            type: entities
+          - type: glance
+            entities:
+              - entity: binary_sensor.waterheating_solar_backup_state
+                name: Electric backup
+              - entity: binary_sensor.waterheating_gas_heater_state
+                name: Gas backup
+              - entity: binary_sensor.waterheating_needs_sanitization
+                name: Bacteria prevention
+            show_state: false
+      - entities:
+          - entity: switch.washing_machine
+          - entity: binary_sensor.washmachine_state
+          - entity: switch.drying_machine
+          - entity: binary_sensor.drymachine_state
+        show_header_toggle: false
+        title: Laundry
+        type: entities
+    icon: 'mdi:washing-machine'
+    path: appliances
+    title: Appliances
+  - badges: []
+    cards:
+      - entities:
+          - entity: sensor.home_power_consuption
+            name: Total
+          - entity: sensor.utility_power
+            name: Utility
+          - entity: sensor.solar_power
+            name: Solar
+        show_header_toggle: false
+        title: Power
+        type: entities
+      - entities:
+          - entity: sensor.washing_machine_power
+          - entity: sensor.drying_machine_power
+          - entity: sensor.waterheating_gas_heater_power
+        show_header_toggle: false
+        title: Appliances
+        type: entities
+    icon: 'mdi:flash'
+    path: power
+    title: Power
+  - badges: []
+    cards:
+      - entities:
+          - entity: sensor.outside_temperature
+          - entity: sensor.outside_humidity
+            icon: 'mdi:water-percent'
+          - entity: sensor.outside_pressure
+            icon: 'mdi:weather-windy'
+        show_icon: true
+        show_name: false
+        show_state: true
+        title: Outside
+        type: glance
+      - columns: 5
+        entities:
+          - entity: sensor.f_5im51_205_11
+            name: Main room
+          - entity: sensor.f_5im51_203_11
+            name: Maggie's
+          - entity: sensor.f_5im51_204_11
+            name: Mary's
+          - entity: sensor.f_5im51_201_11
+            name: Office
+          - entity: sensor.f_5im51_202_11
+            name: Up hall
+          - entity: sensor.f_5im51_103_11
+            name: Liv. room
+          - entity: sensor.f_5im51_104_11
+            name: Kitchen
+          - entity: sensor.f_5im51_101_11
+            name: Cinema
+          - entity: sensor.f_5im51_102_11
+            name: Down hall
+        show_icon: true
+        show_state: true
+        title: Temperature
+        type: glance
+      - entities:
+          - entity: switch.dehumidifier
+        show_header_toggle: false
+        title: Humidity
+        type: entities
+    icon: 'mdi:weather-windy'
+    path: environment
+    title: Environment
+  - badges: []
+    cards:
+      - entities:
+          - switch.d_srv01_switch
+        show_header_toggle: true
+        title: Computer devices
+        type: entities
+    icon: 'mdi:lan'
+    path: devices
+    title: Devices
+  - badges: []
+    cards:
+      - entities:
+          - entity: input_boolean.mode_visitors
+          - entity: input_boolean.mode_guests
+          - entity: input_boolean.mode_holidays
+        show_header_toggle: false
+        title: House mode
+        type: entities
+      - entities:
+          - entity: input_boolean.mode_automate_b_whenhome
+          - entity: input_boolean.mode_lock_blinds
+        show_header_toggle: false
+        title: Automation behaviour
+        type: entities
+    icon: 'mdi:head-cog'
+    path: configs
+    title: Config
+  - badges: []
+    cards:
+      - entities:
+          - entity: cover.main_room_shutter
+            name: Windows shutter
+          - entity: binary_sensor.f_5im51_205_20
+            name: Movement
+          - entity: sensor.f_5im51_205_11
+          - entity: sensor.f_5im51_205_12
+          - entity: sensor.f_5im51_205_13
+        show_header_toggle: false
+        title: Main Room
+        type: entities
+      - entities:
+          - entity: cover.main_room_wc_shutter
+        title: Main Room WC
+        type: entities
+      - entities:
+          - cover.office_shutter
+          - binary_sensor.f_5im51_201_20
+          - sensor.f_5im51_201_11
+          - sensor.f_5im51_201_12
+          - sensor.f_5im51_201_13
+        show_header_toggle: true
+        title: Office
+        type: entities
+      - entities:
+          - entity: sensor.f_5im51_202_11
+          - entity: sensor.f_5im51_202_12
+          - entity: sensor.f_5im51_202_13
+        show_header_toggle: true
+        title: Upstairs Hall
+        type: entities
+      - entities:
+          - cover.maggie_s_room_shutter
+          - binary_sensor.f_5im51_203_20
+          - sensor.f_5im51_203_11
+          - sensor.f_5im51_203_12
+          - sensor.f_5im51_203_13
+        show_header_toggle: true
+        title: Maggie's Room
+        type: entities
+      - entities:
+          - cover.mary_s_room_shutter
+          - binary_sensor.f_5im51_204_20
+          - sensor.f_5im51_204_11
+          - sensor.f_5im51_204_12
+          - sensor.f_5im51_204_13
+        show_header_toggle: true
+        title: Mary's Room
+        type: entities
+    path: upstairs
+    title: Upstairs
+  - badges: []
+    cards:
+      - entities:
+          - entity: binary_sensor.f_5im51_103_20
+          - entity: sensor.f_5im51_103_11
+          - entity: sensor.f_5im51_103_12
+          - entity: sensor.f_5im51_103_13
+          - entity: light.living_room_leds
+          - entity: light.living_room_dinning_light
+          - entity: light.living_room_lounge_light
+          - entity: input_select.scene_lr
+          - entity: cover.living_room_north_shutter
+          - entity: cover.living_room_south_shutter
+        show_header_toggle: true
+        title: Living Room
+        type: entities
+      - entities:
+          - entity: binary_sensor.f_5im51_104_20
+          - entity: sensor.f_5im51_104_11
+          - entity: sensor.f_5im51_104_12
+          - entity: sensor.f_5im51_104_13
+          - entity: cover.kitchen_shutter
+          - entity: cover.kitchen_door_shutter
+        show_header_toggle: true
+        title: Kitchen
+        type: entities
+      - entities:
+          - entity: binary_sensor.f_5im51_102_20
+          - entity: sensor.f_5im51_102_11
+          - entity: sensor.f_5im51_102_12
+          - entity: sensor.f_5im51_102_13
+          - entity: light.downhall_lights
+        show_header_toggle: true
+        title: Downstairs Hall
+        type: entities
+      - entities:
+          - entity: binary_sensor.f_5im51_101_20
+          - entity: sensor.f_5im51_101_11
+          - entity: sensor.f_5im51_101_12
+          - entity: sensor.f_5im51_101_13
+          - entity: cover.cinema_room_shutter
+          - entity: light.cinema_room_ceiling_light
+        show_header_toggle: true
+        title: Cinema Room
+        type: entities
+      - entities:
+          - entity: cover.downstairs_wc_shutter
+        show_header_toggle: false
+        title: Downstairs WC
+        type: entities
+    panel: false
+    path: downstairs
+    title: Downstairs

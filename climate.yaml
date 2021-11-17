@@ -1,0 +1,35 @@
+  - platform: generic_thermostat
+    name: Main Room Thermostat
+    heater: switch.main_room_heater
+    target_sensor: sensor.f_5im51_205_11
+    min_temp: 15
+    max_temp: 25
+
+  - platform: generic_thermostat
+    name: Maggie's Room Thermostat
+    heater: switch.maggie_s_room_heater
+    target_sensor: sensor.f_5im51_203_11
+    min_temp: 15
+    max_temp: 25
+
+  - platform: generic_thermostat
+    name: Mary's Room Thermostat
+    heater: switch.mary_s_room_heater
+    target_sensor: sensor.f_5im51_204_11
+    min_temp: 15
+    max_temp: 25
+
+  - platform: generic_thermostat
+    name: Living Room Thermostat
+    heater: switch.living_room_heater
+    target_sensor: sensor.temp_downstairs_east
+    min_temp: 15
+    max_temp: 25
+
+  - platform: generic_thermostat
+    name: Kitchen Thermostat
+    heater: switch.kitchen_heater
+    target_sensor: sensor.temp_downstairs_west
+    min_temp: 15
+    max_temp: 25
+

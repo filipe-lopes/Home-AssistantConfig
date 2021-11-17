@@ -1,0 +1,243 @@
+homeassistant:
+  name: Casa Loures
+  latitude: !secret loures_lat
+  longitude: !secret loures_lon
+  elevation: 31
+  unit_system: metric
+  time_zone: Europe/Lisbon
+  customize: !include customize.yaml
+  auth_providers:
+   - type: homeassistant
+   - type: legacy_api_password
+     api_password: !secret api_pass
+
+#alexa: !include alexa.yaml
+
+automation: !include_dir_merge_list automation/ 
+#automation: !include automations.yaml
+binary_sensor: !include_dir_merge_list b_sensors/
+
+cloud:
+
+cover: !include_dir_merge_list covers/
+
+camera: !include camera.yaml
+
+climate: !include climate.yaml
+
+energy:
+
+generic_hygrostat:
+  - name: Upstairs
+    humidifier: switch.upstairs_dehumidifier
+    target_sensor: sensor.upstairs_hum
+    min_humidity: 50
+    max_humidity: 90
+    target_humidity: 60
+    away_humidity: 40
+    sensor_stale_duration: 01:00:00
+    device_class: dehumidifier
+
+  - name: Downstairs
+    humidifier: switch.downstairs_dehumidifier
+    target_sensor: sensor.downstairs_hum
+    min_humidity: 50
+    max_humidity: 90
+    target_humidity: 60
+    away_humidity: 40
+    sensor_stale_duration: 01:00:00
+    device_class: dehumidifier
+
+
+group: !include groups.yaml
+
+history:
+  include:
+    domains:
+      - device_tracker
+      - group
+      - binary_sensor
+      - sensor
+
+home_connect:
+  client_id: !secret homeconnect_id
+  client_secret: !secret homeconnect_secret
+
+input_select: !include input-selects.yaml
+
+ios:
+  push:
+    categories:
+      - name: WellcomeHome
+        identifier: 'ioswellcomehome'
+        actions:
+          - identifier: 'n_frontgate'
+            title: 'Front Gate'
+            authenticationRequired: false
+          - identifier: 'n_slidinggate'
+            title: 'Sliding Gate'
+            authenticationRequired: false
+          - identifier: 'n_slidinggatewalk'
+            title: 'Walkway'
+            authenticationRequired: false
+
+
+light: !include_dir_merge_list lights/ 
+
+lock: !include lock.yaml
+
+person: !include person.yaml
+
+scene: !include_dir_merge_list scenes/
+
+script: !include_dir_merge_named scripts/
+
+sensor: !include_dir_merge_list sensors/
+
+stream:
+
+switch: !include_dir_merge_list switches/
+
+system_health:
+
+utility_meter:
+  daily_energy_out:
+    source: sensor.utility_energy_out
+    cycle: daily 
+    tariffs:
+      - peak
+      - offpeak
+  daily_energy_in:
+    source: sensor.utility_energy_in
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  monthly_energy_in:
+    source: sensor.utility_energy_in
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+  daily_solar_energy:
+    source: sensor.solar_energy_production
+    cycle: daily
+    tariffs:
+      - peak
+      - offpeak
+  monthly_solar_energy:
+    source: sensor.solar_energy_production
+    cycle: monthly
+    tariffs:
+      - peak
+      - offpeak
+
+zone: !include zones.yaml
+
+
+frontend:
+  themes: !include themes.yaml
+lovelace:
+#  mode: yaml
+config:
+http:
+api:
+
+logger:
+  default: error
+#  default: debug
+#  logs:
+#    homeassistant.components.mqtt: debug
+#    alexa: debug
+#    homeassistant.components.mysensors: debug
+#    mysensors: debug
+
+mobile_app:
+
+recorder:
+  db_url: !secret mysql_url
+  purge_keep_days: 180
+  exclude:
+    entities:
+      - sensor.time
+      - sensor.date
+      - group.comp_devices
+      - group.familyarrive
+      - group.morning_commute
+      - group.overview
+      - group.utils
+      - camera.generic_camera
+      - sensor.tcp_sensor
+
+map:
+
+logbook:
+  exclude:
+    entities:
+      - sensor.time
+      - sensor.date
+      - sensor.tcp_sensor
+
+mqtt:
+  broker: !secret mqtt_ip
+  username: !secret mqtt_user
+  password: !secret mqtt_pass
+  discovery: true
+  discovery_prefix: homeassistant
+
+sun:
+
+input_boolean:
+  mode_holidays:
+    name: Holidays
+  mode_holidayshome:
+    name: Holidays Home
+  mode_visitors:
+    name: Visitors
+  mode_guests:
+    name: Guests
+  mode_automate_b_whenhome:
+    name: Automate shutters when home
+  mode_lock_blinds:
+    name: Lock shutters
+  pref_waterheating_gas_bck:
+    name: Water heating auto gas backup
+  pref_waterheating_elec_bck:
+    name: Water heating auto electric backup
+
+input_number:
+  waterheating_temp_ht:
+    name: Water heating temp high threshold
+    min: 40
+    max: 60
+    step: 1
+
+  waterheating_temp_lt:
+    name: Water heating temp low threshold
+    min: 20
+    max: 40
+    step: 1
+
+life360:
+  accounts:
+    username: !secret life360_user
+    password: !secret life360_pass
+  prefix: life360
+
+notify:
+  - name: all_mobiles
+    platform: group
+    services:
+      - service: mobile_app_iphone_de_patricia
+      - service: mobile_app_sm_a307fn
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api
+    mode: daily
+
+zoneminder:
+  - host: !secret zoneminder_am_ip
+    username: !secret zoneminder_am_user
+    password: !secret zoneminder_am_pass
+

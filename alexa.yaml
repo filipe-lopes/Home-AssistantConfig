@@ -1,0 +1,32 @@
+  smart_home:
+    filter:
+      include_entities:
+        - scene.lr_dinning_bright
+        - sensor.f_5im51_103_11
+        - sensor.f_5im51_203_11
+        - sensor.f_5im51_205_11
+        - sensor.outside_temperature
+      include_domains:
+        - cover
+        - light
+    entity_config:
+      light.downhall_lights:
+        name: Ceiling light
+      light.living_room_dinning_light:
+        name: Table light
+      light.living_room_leds:
+        name: Ceiling light
+      light.living_room_lounge_light:
+        name: Sofa light
+      light.perimeter_lights:
+        name: Perimiter lights
+      light.tradfri_bulb_e27_cws_opal_600lm:
+        name: Ceiling light
+      scene.lr_dinning_bright:
+        name: Bright dinning
+      sensor.f_5im51_103_11:
+        name: Living room temperature
+      sensor.f_5im51_303_11:
+        name: Maggie's room temperature
+      sensor.outside_temperature:
+        name: Outside temperature

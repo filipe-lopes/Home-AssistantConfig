@@ -1,0 +1,112 @@
+NightOwlTransparent:
+  primary-color: '#5d76ab'
+  accent-color: '#22da6e'
+  dark-primary-color: 'var(--accent-color)'
+  light-primary-color: 'var(--accent-color)'
+  primary-text-color: '#f2f2f2'
+  text-primary-color: 'var(--primary-text-color)'
+  secondary-text-color: '#82aaff'
+  disabled-text-color: '#8badc1'
+  label-badge-border-color: '#22da6e'
+  primary-background-color: '#000c1d'
+  secondary-background-color: '#000c1d'
+  divider-color: '#102a44'
+  table-row-background-color: '#001122'
+  table-row-alternative-background-color: '#000c1d'
+  paper-listbox-color: '#82aaff'
+  sidebar-icon-color: 'var(--disabled-text-color)'
+  sidebar-selected-background-color: '#112233'
+  paper-listbox-background-color: '#001122'
+  paper-grey-50: 'var(--primary-text-color)'
+  paper-grey-200: '#575656'
+  paper-card-header-color: 'var(--accent-color)'
+  paper-card-background-color: 'rgba(0,0,0,0.5)'
+  paper-dialog-background-color: '#001122'
+  paper-item-icon-color: 'var(--primary-text-color)'
+  paper-item-icon-active-color: '#ffeb95'
+  paper-item-selected_-_background-color: '#112233'
+  paper-tabs-selection-bar-color: '#22da6e'
+  label-badge-red: 'var(--accent-color)'
+  label-badge-text-color: 'var(--primary-text-color)'
+  label-badge-background-color: '#1d1f23'
+  paper-toggle-button-checked-button-color: 'var(--accent-color)'
+  paper-toggle-button-checked-bar-color: 'var(--accent-color)'
+  paper-toggle-button-checked-ink-color: 'var(--accent-color)'
+  paper-toggle-button-unchecked-button-color: 'var(--disabled-text-color)'
+  paper-toggle-button-unchecked-bar-color: 'var(--disabled-text-color)'
+  paper-toggle-button-unchecked-ink-color: 'var(--disabled-text-color)'
+  paper-slider-knob-color: 'var(--accent-color)'
+  paper-slider-knob-start-color: 'var(--accent-color)'
+  paper-slider-pin-color: 'var(--accent-color)'
+  paper-slider-active-color: 'var(--accent-color)'
+  paper-slider-container-color: 'linear-gradient(var(--primary-background-color), var(--secondary-background-color)) no-repeat'
+  paper-slider-secondary-color: 'var(--secondary-background-color)'
+  paper-slider-disabled-active-color: 'var(--disabled-text-color)'
+  paper-slider-disabled-secondary-color: 'var(--disabled-text-color)'
+  google-red-500: '#ef5350'
+  google-green-500: '#22da6e'
+
+Clear Dark:
+  # Background image
+  lovelace-background: 'center / cover no-repeat url("/local/night.jpg") fixed'
+
+  # Colors
+  text-color: '#DADADB'                                                           # Grey text
+  text-medium-light-color: '#A0A2A8'                                              # Medium-light grey text
+  text-medium-color: '#80828A'                                                    # Medium grey text
+  text-dark-color: '#6A6B74'                                                      # Dark grey text
+  accent-color: '#008bef'                                                         # Blue
+  accent-medium-color: '#2686c1'                                                  # Decent blue
+  background-color: '#3b4049'                                                     # Dark grey background
+  background-color-2: '#484E59'                                                   # Light grey background
+  background-card-color: '#434952'                                                # Grey background
+  border-color: '#383C46'                                                         # Grey border
+
+  # Header
+  app-header-background-color: '#363941'                                          # Background color
+  
+  # Text
+  primary-color: 'var(--text-color)'
+  text-primary-color: 'var(--text-color)'
+  
+  # Left Menu
+  paper-listbox-background-color: 'var(--background-color)'                       # Background
+  sidebar-icon-color: 'var(--text-medium-color)'                                  # icons
+  sidebar-selected-icon-color: 'var(--text-medium-light-color)'                   # Selected row icon and background (15%)
+  sidebar-selected-text-color: 'var(--text-color)'                                # Selected row label
+
+  # UI
+  paper-card-header-color: 'var(--text-color)'                                    # Title in settings
+  primary-background-color: 'var(--background-color)'                             # Background (also title background in left menu)
+  mdc-theme-primary: 'var(--accent-medium-color)'                                 # Action Buttons (save, restart etc.)
+  card-background-color: 'var(--background-card-color)'                           # Entity Registry Background
+  
+  # Card
+  paper-card-background-color: 'var(--background-card-color)'                     # Background
+  dark-primary-color: 'var(--text-color)'
+  primary-text-color: 'var(--text-color)'
+  paper-listbox-color: 'var(--text-color)'
+  light-primary-color: 'var(--text-dark-color)'
+  secondary-text-color: 'var(--text-medium-color)'
+  disabled-text-color: 'var(--text-dark-color)'
+  paper-dialog-button-color: 'var(--text-color)'
+  secondary-background-color: 'var(--background-color-2)'                         # Background more info title
+
+  # Icons
+  paper-item-icon-color: 'var(--text-dark-color)'                                 # Off
+  paper-item-icon-active-color: 'var(--accent-color)'                             # On
+  
+  # Switches
+  switch-checked-button-color: 'var(--text-medium-light-color)'                   # Knob On
+  switch-unchecked-button-color: 'var(--text-medium-light-color)'                 # Knob Off
+  switch-checked-track-color: '#009FFF'                                           # Background On
+  switch-unchecked-track-color: '#767682'                                         # Background Off
+
+  # Slider
+  paper-slider-active-color: 'var(--accent-color)'                                # Line On
+  paper-slider-container-color: 'var(--text-dark-color)'                          # Line Off
+  paper-slider-knob-color: 'var(--text-medium-light-color)'                       # Knob On
+  paper-slider-knob-start-color: 'var(--text-medium-light-color)'                 # Knob Off
+  
+  # Shadows
+  ha-card-box-shadow: 'inset 0px 0px 0px 1px var(--border-color)'

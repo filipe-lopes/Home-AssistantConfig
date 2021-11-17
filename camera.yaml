@@ -1,0 +1,14 @@
+
+- platform: local_file
+  file_path: /home/hass/.homeassistant/photos/frame/current.jpg
+  name: Familia Lopes
+
+- platform: mjpeg
+  name: Office Camera
+  mjpeg_url: http://172.20.3.1:81/videostream.cgi
+  username: hass
+  password: "!$Hass365"
+  authentication: basic
+
+- platform: zoneminder
+  
