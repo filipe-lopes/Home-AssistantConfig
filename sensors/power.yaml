@@ -43,3 +43,34 @@
   payload_not_available: "false"
   force_update: "true"
 
+- platform: mqtt
+  name: Power - Office Datacenter
+  state_topic: "shellies/shellyplug-s-C133B7/relay/0/power"
+  availability_topic: "shellies/shellyplug-s-C133B7/online"
+  unit_of_measurement: "W"
+  payload_available: "true"
+  payload_not_available: "false"
+  force_update: "true"
+
+- platform: mqtt
+  name: Power - Living Room - Smart
+  state_topic: "shellies/shellyplug-s-A415BD/relay/0/power"
+  availability_topic: "shellies/shellyplug-s-A415BD/online"
+  unit_of_measurement: "W"
+  payload_available: "true"
+  payload_not_available: "false"
+  force_update: "true"
+
+- platform: mqtt
+  name: Power - Living Room - Comms
+  state_topic: "shellies/shellyplug-s-C18CAD/relay/0/power"
+  availability_topic: "shellies/shellyplug-s-C18CAD/online"
+  unit_of_measurement: "W"
+  payload_available: "true"
+  payload_not_available: "false"
+  force_update: "true"
+
+
+
+
+

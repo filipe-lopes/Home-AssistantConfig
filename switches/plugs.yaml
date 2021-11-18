@@ -162,6 +162,28 @@
   payload_not_available: "false"
   qos: 1
 
+- platform: mqtt
+  name: "Living Room Media - Comms"
+  command_topic: "shellies/shellyplug-s-C18CAD/relay/0/command"
+  state_topic: "shellies/shellyplug-s-C18CAD/relay/0"
+  availability_topic: "shellies/shellyplug-s-C18CAD/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Office Datacenter"
+  command_topic: "shellies/shellyplug-s-C133B7/relay/0/command"
+  state_topic: "shellies/shellyplug-s-C133B7/relay/0"
+  availability_topic: "shellies/shellyplug-s-C133B7/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
 
 
 

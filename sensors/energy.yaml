@@ -102,6 +102,17 @@
   device_class: energy
 
 - platform: mqtt
+  name: "Energy - Living Room Media - Comms"
+  state_topic: "shellies/shellyplug-s-C18CAD/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-C18CAD/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
   name: "Energy - Refrigerator"
   state_topic: "shellies/shellyplug-s-C18ED0/relay/0/energy"
   availability_topic: "shellies/shellyplug-s-C18ED0/online"
@@ -116,6 +127,17 @@
   name: "Energy - Freezer"
   state_topic: "shellies/shellyplug-s-A32F96/relay/0/energy"
   availability_topic: "shellies/shellyplug-s-A32F96/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Office Datacenter"
+  state_topic: "shellies/shellyplug-s-C133B7/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-C133B7/online"
   unit_of_measurement: "kWh"
   payload_available: "true"
   payload_not_available: "false"
