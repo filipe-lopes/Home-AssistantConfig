@@ -562,7 +562,7 @@
       data:
         target:
           - media_player.everywhere
-        message: "<prosody volume='x-loud'><emphasis>Warning!</emphasis></prosody>Window shutters will be closing in five minutes."
+        message: "<voice name='Ines'><lang xml:lang='pt-PT'><emphasis>Atenção!</emphasis> Os estóres fecham dentro de cinco minutos.</lang></voice>"
         data:
           type: announce
           method: all
@@ -571,7 +571,7 @@
       data:
         target:
           - media_player.everywhere
-        message: "<prosody volume='x-loud'><emphasis>Warning!</emphasis></prosody>Window shutters will be closing in one minute."
+        message: "<voice name='Ines'><lang xml:lang='pt-PT'><emphasis>Atenção!</emphasis> Os estóres fecham dentro de um minuto.</lang></voice>"
         data:
           type: announce
           method: all

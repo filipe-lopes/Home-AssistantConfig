@@ -14,7 +14,7 @@
       data:
         target:
           - media_player.everywhere
-        message: "Hello.  Washing machine has just finished."
+        message: "<voice name='Ines'><lang xml:lang='pt-PT'>Olá! A máquina de lavar terminou.</lang></voice>"
         data:
           type: announce
           method: all
@@ -36,7 +36,7 @@
       data:
         target:
           - media_player.everywhere
-        message: "Hello.  Drying machine has just finished."
+        message: "<voice name='Ines'><lang xml:lang='pt-PT'>Olá! A máquina de secar terminou.</lang></voice>"
         data:
           type: announce
           method: all
