@@ -3,7 +3,7 @@
     garage_door:
       device_class: garage
       friendly_name: "Garage Door"
-      value_template: "{{ states('binary_sensor.sliding_gate_contact_sensor') == 'on'}}"
+      value_template: "{{ states('binary_sensor.garage_door_contact_sensor') == 'on'}}"
       open_cover:
         service: switch.turn_on
         target:
