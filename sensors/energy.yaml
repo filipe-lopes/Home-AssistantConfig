@@ -145,6 +145,74 @@
   state_class: total_increasing 
   device_class: energy
 
+- platform: mqtt
+  name: "Energy - Towel heater"
+  state_topic: "shellies/shellyplug-s-9D8999/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-9D8999/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Maggie's room heater"
+  state_topic: "shellies/shellyplug-s-795A18/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-795A18/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Mary's room heater"
+  state_topic: "shellies/shellyplug-s-7AEF59/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-7AEF59/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Main room heater"
+  state_topic: "shellies/shellyplug-s-041370/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-041370/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Living room heater"
+  state_topic: "shellies/shellyplug-s-9D9C2A/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-9D9C2A/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+- platform: mqtt
+  name: "Energy - Kitchen heater"
+  state_topic: "shellies/shellyplug-s-9D8B57/relay/0/energy"
+  availability_topic: "shellies/shellyplug-s-9D8B57/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
+
+
 ###############
 # Shelly RGBW2
 
