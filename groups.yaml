@@ -19,6 +19,19 @@
       - light.living_room_leds
       - light.living_room_lounge_light
 
+  motion_upstairs:
+    entities:
+      - binary_sensor.f_5im51_201_20
+      - binary_sensor.f_5im51_203_20
+      - binary_sensor.f_5im51_204_20
+      - binary_sensor.f_5im51_205_20
+
+  lights_upstairs:
+    entities:
+      - light.main_room_lights
+      - light.office_lights
+      - light.uphall_lights
+
   shutters_westup:
     name: West side upstairs rollershutters
     entities:

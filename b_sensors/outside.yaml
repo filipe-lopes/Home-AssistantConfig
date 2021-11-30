@@ -24,6 +24,14 @@
           minutes: 2
       value_template: "{{state_attr('sensor.dishwasher_power_stats', 'median')|float > 5}}"
 
+    lroom_media_state:
+      friendly_name: Living room media state
+      delay_on:
+          minutes: 1
+      delay_off:
+          minutes: 2
+      value_template: "{{state_attr('sensor.living_room_media_power_stats', 'median')|float > 5}}"
+
     waterheating_solar_backup_state:
       friendly_name: "WaterHeating - Solar Heater Backup State"
       delay_on:
