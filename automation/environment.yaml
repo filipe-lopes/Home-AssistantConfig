@@ -1,10 +1,11 @@
 - alias: Environment/Air/Purifier/CinemaRoom/On
+  id: '2021120300001'
   trigger:
     - platform: numeric_state
       entity_id: 'sensor.air_purifier_cinema_room_pm2_5'
       above: 6
       for:
-        minutes: 5
+        minutes: 2
     - platform: state
       entity_id: 'switch.preference_noisy_automations'
       to: 'on' 
@@ -13,30 +14,35 @@
       entity_id: 'switch.preference_noisy_automations'
       state: 'on'
     - condition: numeric_state
-      entity_id: sensor.aqi_cinema_room
+      entity_id: sensor.air_purifier_cinema_room_pm2_5
       above: 6
   action:
     - service: fan.turn_on
       entity_id: 'fan.air_purifier_cinema_room'
 
 - alias: Environment/Air/Purifier/CinemaRoom/Off
+  id: '2021120300002'
   trigger:
     - platform: numeric_state
       entity_id: sensor.air_purifier_cinema_room_pm2_5
       below: 5
       for:
         minutes: 5
+    - platform: state
+      entity_id: 'switch.preference_noisy_automations'
+      to: 'off' 
   action:
     - service: fan.turn_off
       entity_id: 'fan.air_purifier_cinema_room'
 
 - alias: Environment/Air/Purifier/Office/On
+  id: '2021120300003'
   trigger:
     - platform: numeric_state
       entity_id: sensor.air_purifier_office_pm2_5
       above: 6
       for:
-        minutes: 5
+        minutes: 2
     - platform: state
       entity_id: 'switch.preference_noisy_automations'
       to: 'on' 
@@ -45,19 +51,23 @@
       entity_id: 'switch.preference_noisy_automations'
       state: 'on'
     - condition: numeric_state
-      entity_id: sensor.aqi_office
+      entity_id: sensor.air_purifier_office_pm2_5
       above: 6
   action:
     - service: fan.turn_on
       entity_id: 'fan.air_purifier_office'
 
 - alias: Environment/Air/Purifier/Office/Off
+  id: '2021120300004'
   trigger:
     - platform: numeric_state
       entity_id: sensor.air_purifier_office_pm2_5
       below: 5
       for:
         minutes: 5
+    - platform: state
+      entity_id: 'switch.preference_noisy_automations'
+      to: 'off' 
   action:
     - service: fan.turn_off
       entity_id: 'fan.air_purifier_office'
