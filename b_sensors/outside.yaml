@@ -21,7 +21,7 @@
       delay_on:
           minutes: 1
       delay_off:
-          minutes: 2
+          minutes: 7
       value_template: "{{state_attr('sensor.dishwasher_power_stats', 'median')|float > 5}}"
 
     lroom_media_state:

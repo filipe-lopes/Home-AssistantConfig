@@ -13,8 +13,9 @@
 - platform: statistics
   name: Dishwasher Power Stats
   entity_id: sensor.dishwasher_power
+  sampling_size: 30
   max_age:
-    minutes: 2
+    minutes: 5
 
 - platform: statistics
   name: Living room media Power Stats
