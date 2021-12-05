@@ -1,4 +1,15 @@
 - platform: mqtt
+  name: "XMas Tree"
+  command_topic: "shellies/shellyplug-s-0D9F5B/relay/0/command"
+  state_topic: "shellies/shellyplug-s-0D9F5B/relay/0"
+  availability_topic: "shellies/shellyplug-s-0D9F5B/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
   name: "MediaRoom main"
   command_topic: "shellies/shellyplug-s-79D245/relay/0/command"
   state_topic: "shellies/shellyplug-s-79D245/relay/0"

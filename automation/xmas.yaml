@@ -1,18 +1,18 @@
-#- alias: 'XMAS/Tree/TurnOn'
-#  trigger:
-#    platform: sun
-#    event: sunset
-#    offset: "-00:30:00"
-#  action:
-#    - service: switch.turn_on
-#      entity_id: switch.xmas_tree
+- alias: 'XMAS/Tree/TurnOn'
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:30:00"
+  action:
+    - service: switch.turn_on
+      entity_id: switch.xmas_tree
 
-#- alias: 'XMAS/Tree/TurnOff'
-#  trigger:
-#    - platform: state
-#      entity_id: 'binary_sensor.family_asleep2'
-#      to: "on"
-#      for: "00:01:00"
-#  action:
-#    - service: switch.turn_off
-#      entity_id: switch.xmas_tree
+- alias: 'XMAS/Tree/TurnOff'
+  trigger:
+    - platform: state
+      entity_id: 'switch.status_family_sleeping'
+      to: "on"
+      for: "00:01:00"
+  action:
+    - service: switch.turn_off
+      entity_id: switch.xmas_tree
