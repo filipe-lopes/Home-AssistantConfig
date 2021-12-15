@@ -1,0 +1,21 @@
+- platform: mqtt
+  name: "Christmas tree"
+  command_topic: "shellies/shellyplug-s-9DC8D0/relay/0/command"
+  state_topic: "shellies/shellyplug-s-9DC8D0/relay/0"
+  availability_topic: "shellies/shellyplug-s-0D9F5B/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1
+
+- platform: mqtt
+  name: "Christmas lights"
+  command_topic: "shellies/shellyplug-s-0D9F5B/relay/0/command"
+  state_topic: "shellies/shellyplug-s-0D9F5B/relay/0"
+  availability_topic: "shellies/shellyplug-s-0D9F5B/online"
+  payload_on: "on"
+  payload_off: "off"
+  payload_available: "true"
+  payload_not_available: "false"
+  qos: 1

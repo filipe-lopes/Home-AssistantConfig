@@ -2,10 +2,10 @@
   trigger:
     platform: sun
     event: sunset
-    offset: "-00:30:00"
+    offset: "-01:00:00"
   action:
-    - service: switch.turn_on
-      entity_id: switch.xmas_tree
+    - service: light.turn_on
+      entity_id: light.christmas_tree
 
 - alias: 'XMAS/Tree/TurnOff'
   trigger:
@@ -14,5 +14,25 @@
       to: "on"
       for: "00:01:00"
   action:
-    - service: switch.turn_off
-      entity_id: switch.xmas_tree
+    - service: light.turn_off
+      entity_id: light.christmas_tree
+
+- alias: 'XMAS/FrontLights/TurnOn'
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: -5.0
+  action:
+    - service: light.turn_on
+      entity_id: light.christmas_lights
+
+- alias: 'XMAS/FrontLights/TurnOff'
+  trigger:
+    - platform: sun
+      event: sunrise
+      offset: "-02:00:00"
+  action:
+    - service: light.turn_off
+      entity_id: light.christmas_lights
+
