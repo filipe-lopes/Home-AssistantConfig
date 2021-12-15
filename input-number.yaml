@@ -1,0 +1,17 @@
+climate_mainroom_target_temp:
+  name: Climate - Main Room target temperature
+  min: 16
+  max: 24
+  step: 0.1  
+
+waterheating_temp_ht:
+  name: Water heating temp high threshold
+  min: 40
+  max: 60
+  step: 1
+
+waterheating_temp_lt:
+  name: Water heating temp low threshold
+  min: 20
+  max: 40
+  step: 1
