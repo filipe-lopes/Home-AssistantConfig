@@ -83,16 +83,25 @@
   lights:
     lr_table_lights:
       friendly_name: "Living Room Table Lights"
-      level_template: "{{20}}"
+      level_template: >-
+        {% if (state_attr('light.lr1', 'brightness') | int > 0) %}
+          {{state_attr('light.lr1', 'brightness') | int}}
+        {% elif (state_attr('light.lr2', 'brightness') | int > 0) %}
+          {{state_attr('light.lr2', 'brightness') | int}}
+        {% else %}
+          {{state_attr('light.lr3', 'brightness') | int}}
+        {% endif %}
       value_template: "{{is_state('light.living_room_dinning_light', 'on') and (is_state('light.lr1', 'on') or is_state('light.lr2', 'on') or is_state('light.lr3', 'on'))}}"
       temperature_template: >-
         {% if (state_attr('light.lr1', 'color_temp') | int > 0) %}
           {{state_attr('light.lr1', 'color_temp') | int}}
-        {% elif (state_attr('light.lr2', 'brightness') | int > 0) %}
+        {% elif (state_attr('light.lr2', 'color_temp') | int > 0) %}
           {{state_attr('light.lr2', 'color_temp') | int}}
         {% else %}
           {{state_attr('light.lr3', 'color_temp') | int}}
-        {% endif %}        
+        {% endif %} 
+      min_mireds_template: "{{state_attr('light.lr2', 'min_mireds') | int}}"
+      max_mireds_template: "{{state_attr('light.lr2', 'max_mireds') | int}}"
       turn_on:
         service: light.turn_on
         entity_id: light.living_room_dinning_light, light.lr1, light.lr2, light.lr3
