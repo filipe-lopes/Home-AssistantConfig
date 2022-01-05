@@ -15,3 +15,10 @@ waterheating_temp_lt:
   min: 20
   max: 40
   step: 1
+
+dehumidifiers_ht:
+  name: Max humidity setpoint
+  min: 50
+  max: 100
+  step: 1
+

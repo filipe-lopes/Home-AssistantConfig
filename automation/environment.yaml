@@ -71,3 +71,26 @@
   action:
     - service: fan.turn_off
       entity_id: 'fan.air_purifier_office'
+
+- alias: Environment/Humidity/DehumidifiersAutoSetting
+  id: '2021122500001'
+  trigger:
+    - platform: state
+      entity_id: 
+        - sensor.maximum_allowed_humidity
+        - input_number.dehumidifiers_ht
+  action:
+    - service: humidifier.set_humidity
+      target:
+        entity_id:
+          - humidifier.downstairs
+          - humidifier.upstairs
+      data:
+        humidity: >-
+          {% if states('sensor.maximum_allowed_humidity') | int > states('input_number.dehumidifiers_ht') | int %}
+            {{states('input_number.dehumidifiers_ht') | int}}
+          {% else %}
+            {{states('sensor.maximum_allowed_humidity') | int}}
+          {% endif %}
+          
+

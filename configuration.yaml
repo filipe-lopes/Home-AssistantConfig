@@ -30,7 +30,7 @@ energy:
 generic_hygrostat:
   - name: Upstairs
     humidifier: switch.upstairs_dehumidifier
-    target_sensor: sensor.upstairs_hum
+    target_sensor: sensor.maximum_upstairs_humidity
     min_humidity: 50
     max_humidity: 90
     target_humidity: 60
@@ -40,7 +40,7 @@ generic_hygrostat:
 
   - name: Downstairs
     humidifier: switch.downstairs_dehumidifier
-    target_sensor: sensor.downstairs_hum
+    target_sensor: sensor.maximum_downstairs_humidity
     min_humidity: 50
     max_humidity: 90
     target_humidity: 60

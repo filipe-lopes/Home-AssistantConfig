@@ -18,6 +18,21 @@
     - sensor.f_5im51_204_11
     - sensor.f_5im51_205_11
 
+- platform: min_max
+  type: max
+  name: "Maximum inside temp"
+  entity_ids:
+    - sensor.f_5im51_101_11
+    - sensor.f_5im51_102_11
+    - sensor.f_5im51_103_11
+    - sensor.f_5im51_104_11
+    - sensor.f_5im51_201_11
+    - sensor.f_5im51_202_11
+    - sensor.f_5im51_203_11
+    - sensor.f_5im51_204_11
+    - sensor.f_5im51_205_11
+
+
 # Humidity
 - platform: min_max
   type: mean
@@ -37,6 +52,26 @@
     - sensor.f_5im51_203_12
     - sensor.f_5im51_204_12
     - sensor.f_5im51_205_12
+
+- platform: min_max
+  type: max
+  name: "Maximum downstairs humidity"
+  entity_ids:
+    - sensor.f_5im51_101_12
+    - sensor.f_5im51_102_12
+    - sensor.f_5im51_103_12
+    - sensor.f_5im51_104_12
+
+- platform: min_max
+  type: max
+  name: "Maximum upstairs humidity"
+  entity_ids:
+    - sensor.f_5im51_201_12
+    - sensor.f_5im51_202_12
+    - sensor.f_5im51_203_12
+    - sensor.f_5im51_204_12
+    - sensor.f_5im51_205_12
+
 
 # Luminance
 - platform: min_max
