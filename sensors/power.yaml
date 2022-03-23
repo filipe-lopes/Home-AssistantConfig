@@ -118,6 +118,18 @@
   payload_available: "true"
   payload_not_available: "false"
 
+- platform: mqtt
+  name: "Power - Car charger"
+  state_topic: "shellies/shellyem-BCFF4DFCE0F5/emeter/0/power"
+  availability_topic: "shellies/shellyem-BCFF4DFCE0F5/online"
+  unit_of_measurement: "W"
+  payload_available: "true"
+  payload_not_available: "false"
+
+
+
+
+
 
 
 

@@ -302,5 +302,16 @@
   state_class: total_increasing 
   device_class: energy
 
+- platform: mqtt
+  name: "Energy - Car charger"
+  state_topic: "shellies/shellyem-BCFF4DFCE0F5/emeter/0/energy"
+  availability_topic: "shellies/shellyem-BCFF4DFCE0F5/online"
+  unit_of_measurement: "kWh"
+  payload_available: "true"
+  payload_not_available: "false"
+  value_template: "{{ (value|float) / 60000 }}"
+  state_class: total_increasing 
+  device_class: energy
+
 
 
