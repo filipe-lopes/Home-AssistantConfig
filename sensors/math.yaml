@@ -7,6 +7,7 @@
 - platform: statistics
   name: Drymachine Power Stats
   entity_id:  sensor.drying_machine_power
+  state_characteristic: median
   max_age:
     minutes: 2
 
@@ -14,6 +15,7 @@
   name: Dishwasher Power Stats
   entity_id: sensor.dishwasher_power
   sampling_size: 30
+  state_characteristic: median
   max_age:
     minutes: 5
 

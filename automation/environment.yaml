@@ -72,6 +72,43 @@
     - service: fan.turn_off
       entity_id: 'fan.air_purifier_office'
 
+- alias: Environment/Air/Purifier/LRoom/On
+  id: '2022020200001'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.air_purifier_living_room_pm2_5
+      above: 6
+      for:
+        minutes: 2
+    - platform: state
+      entity_id: 'switch.preference_noisy_automations'
+      to: 'on' 
+  condition:
+    - condition: state
+      entity_id: 'switch.preference_noisy_automations'
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.air_purifier_living_room_pm2_5
+      above: 6
+  action:
+    - service: fan.turn_on
+      entity_id: 'fan.air_purifier_livingroom'
+
+- alias: Environment/Air/Purifier/LRoom/Off
+  id: '2022020200002'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.air_purifier_living_room_pm2_5
+      below: 5
+      for:
+        minutes: 5
+    - platform: state
+      entity_id: 'switch.preference_noisy_automations'
+      to: 'off' 
+  action:
+    - service: fan.turn_off
+      entity_id: 'fan.air_purifier_livingroom'
+
 - alias: Environment/Humidity/DehumidifiersAutoSetting
   id: '2021122500001'
   trigger:
@@ -115,6 +152,36 @@
           service: fan.set_percentage
           data:
             percentage: "{{ states('sensor.fireplace_secondary_heat_recovery_temp')|int*4.25 - 155 }}"
+          target:
+            entity_id: fan.fireplace_secondary_heat_recovery_fan
+
+      - alias: "FireplaceHeatRecovery2/ON/NoiseOFFHighTemp"
+        conditions:
+        - condition: state
+          entity_id: switch.preference_noisy_automations
+          state: 'off'
+        - condition: numeric_state
+          entity_id: sensor.fireplace_secondary_heat_recovery_temp
+          above: 60
+        sequence:
+          service: fan.set_percentage
+          data:
+            percentage: 70
+          target:
+            entity_id: fan.fireplace_secondary_heat_recovery_fan
+
+      - alias: "FireplaceHeatRecovery2/ON/NoiseONHighTemp"
+        conditions:
+        - condition: state
+          entity_id: switch.preference_noisy_automations
+          state: 'on'
+        - condition: numeric_state
+          entity_id: sensor.fireplace_secondary_heat_recovery_temp
+          above: 60
+        sequence:
+          service: fan.set_percentage
+          data:
+            percentage: 100
           target:
             entity_id: fan.fireplace_secondary_heat_recovery_fan
 
