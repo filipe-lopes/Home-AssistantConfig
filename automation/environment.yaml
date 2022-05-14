@@ -1,113 +1,142 @@
-- alias: Environment/Air/Purifier/CinemaRoom/On
-  id: '2021120300001'
+- alias: Environment/Air/Purifier/NoiseON
+  id: '2022051400004'
   trigger:
-    - platform: numeric_state
-      entity_id: 'sensor.air_purifier_cinema_room_pm2_5'
-      above: 6
-      for:
-        minutes: 2
     - platform: state
       entity_id: 'switch.preference_noisy_automations'
       to: 'on' 
+  action:
+    service: automation.trigger
+    data:
+      skip_condition: false
+    target:
+      entity_id: 
+        - automation.environment_air_purifier_cinemaroom_pm
+        - automation.environment_air_purifier_lroom_pm
+        - automation.environment_air_purifier_office_pm
+
+- alias: Environment/Air/Purifier/NoiseOFF
+  id: '2022051400005'
+  trigger:
+    - platform: state
+      entity_id: 'switch.preference_noisy_automations'
+      to: 'off' 
+  action:
+    - service: fan.turn_off
+      entity_id: 
+        - automation.environment_air_purifier_cinemaroom_pm
+        - automation.environment_air_purifier_lroom_pm
+        - automation.environment_air_purifier_office_pm
+
+- alias: Environment/Air/Purifier/DailySchedule
+  id: '2022051400006'
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: "-00:10:00"
+  action:
+    - service: fan.turn_on
+      entity_id: 
+        - automation.environment_air_purifier_cinemaroom_pm
+        - automation.environment_air_purifier_lroom_pm
+        - automation.environment_air_purifier_office_pm
+    - choose:
+      - conditions:
+        - condition: template
+          value_template: '{{ now().month in [3,4,5,6] }}'
+        sequence:
+          - wait_template: "{{ is_state('switch.preference_noisy_automations', 'off') }}"
+            timeout: "01:00:00"
+      default:
+       - wait_template: "{{ is_state('switch.preference_noisy_automations', 'off') }}"
+         timeout: "00:15:00"
+    - service: fan.turn_off
+      entity_id: 
+        - automation.environment_air_purifier_cinemaroom_pm
+        - automation.environment_air_purifier_lroom_pm
+        - automation.environment_air_purifier_office_pm
+
+- alias: Environment/Air/Purifier/CinemaRoom/PM
+  id: '2022051400001'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.air_purifier_cinema_room_pm2_5
+      above: 6
   condition:
     - condition: state
-      entity_id: 'switch.preference_noisy_automations'
+      entity_id: switch.preference_noisy_automations
       state: 'on'
     - condition: numeric_state
       entity_id: sensor.air_purifier_cinema_room_pm2_5
       above: 6
   action:
     - service: fan.turn_on
-      entity_id: 'fan.air_purifier_cinema_room'
-
-- alias: Environment/Air/Purifier/CinemaRoom/Off
-  id: '2021120300002'
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.air_purifier_cinema_room_pm2_5
-      below: 5
-      for:
-        minutes: 5
-    - platform: state
-      entity_id: 'switch.preference_noisy_automations'
-      to: 'off' 
-  action:
+      entity_id: fan.air_purifier_cinema_room
+    - delay: "00:10:00"
+    - wait_for_trigger:
+      - platform: numeric_state
+        entity_id: sensor.air_purifier_cinema_room_pm2_5
+        below: 2
+        for:
+          minutes: 5
+      timeout: "01:00:00"
     - service: fan.turn_off
-      entity_id: 'fan.air_purifier_cinema_room'
+      entity_id: fan.air_purifier_cinema_room
 
-- alias: Environment/Air/Purifier/Office/On
-  id: '2021120300003'
+- alias: Environment/Air/Purifier/Office/PM
+  id: '2022051400002'
   trigger:
     - platform: numeric_state
       entity_id: sensor.air_purifier_office_pm2_5
       above: 6
-      for:
-        minutes: 2
-    - platform: state
-      entity_id: 'switch.preference_noisy_automations'
-      to: 'on' 
   condition:
     - condition: state
-      entity_id: 'switch.preference_noisy_automations'
+      entity_id: switch.preference_noisy_automations
       state: 'on'
     - condition: numeric_state
       entity_id: sensor.air_purifier_office_pm2_5
       above: 6
   action:
     - service: fan.turn_on
-      entity_id: 'fan.air_purifier_office'
-
-- alias: Environment/Air/Purifier/Office/Off
-  id: '2021120300004'
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.air_purifier_office_pm2_5
-      below: 5
-      for:
-        minutes: 5
-    - platform: state
-      entity_id: 'switch.preference_noisy_automations'
-      to: 'off' 
-  action:
+      entity_id: fan.air_purifier_office
+    - delay: "00:10:00"
+    - wait_for_trigger:
+      - platform: numeric_state
+        entity_id: sensor.air_purifier_office_pm2_5
+        below: 2
+        for:
+          minutes: 5
+      timeout: "01:00:00"
     - service: fan.turn_off
-      entity_id: 'fan.air_purifier_office'
+      entity_id: fan.air_purifier_office
 
-- alias: Environment/Air/Purifier/LRoom/On
-  id: '2022020200001'
+
+- alias: Environment/Air/Purifier/LRoom/PM
+  id: '2022051400003'
   trigger:
     - platform: numeric_state
       entity_id: sensor.air_purifier_living_room_pm2_5
       above: 6
-      for:
-        minutes: 2
-    - platform: state
-      entity_id: 'switch.preference_noisy_automations'
-      to: 'on' 
   condition:
     - condition: state
-      entity_id: 'switch.preference_noisy_automations'
+      entity_id: switch.preference_noisy_automations
       state: 'on'
     - condition: numeric_state
       entity_id: sensor.air_purifier_living_room_pm2_5
       above: 6
   action:
     - service: fan.turn_on
-      entity_id: 'fan.air_purifier_livingroom'
-
-- alias: Environment/Air/Purifier/LRoom/Off
-  id: '2022020200002'
-  trigger:
-    - platform: numeric_state
-      entity_id: sensor.air_purifier_living_room_pm2_5
-      below: 5
-      for:
-        minutes: 5
-    - platform: state
-      entity_id: 'switch.preference_noisy_automations'
-      to: 'off' 
-  action:
+      entity_id: fan.air_purifier_livingroom
+    - delay: "00:10:00"
+    - wait_for_trigger:
+      - platform: numeric_state
+        entity_id: sensor.air_purifier_living_room_pm2_5
+        below: 2
+        for:
+          minutes: 5
+      timeout: "01:00:00"
     - service: fan.turn_off
-      entity_id: 'fan.air_purifier_livingroom'
+      entity_id: fan.air_purifier_livingroom
+
 
 - alias: Environment/Humidity/DehumidifiersAutoSetting
   id: '2021122500001'
