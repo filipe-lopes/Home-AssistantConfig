@@ -65,21 +65,21 @@ home_connect:
 
 input_select: !include input-selects.yaml
 
-ios:
-  push:
-    categories:
-      - name: WellcomeHome
-        identifier: 'ioswellcomehome'
-        actions:
-          - identifier: 'n_frontgate'
-            title: 'Front Gate'
-            authenticationRequired: false
-          - identifier: 'n_slidinggate'
-            title: 'Sliding Gate'
-            authenticationRequired: false
-          - identifier: 'n_slidinggatewalk'
-            title: 'Walkway'
-            authenticationRequired: false
+#ios:
+#  push:
+#    categories:
+#      - name: WellcomeHome
+#        identifier: 'ioswellcomehome'
+#        actions:
+#          - identifier: 'n_frontgate'
+#            title: 'Front Gate'
+#            authenticationRequired: false
+#          - identifier: 'n_slidinggate'
+#            title: 'Sliding Gate'
+#            authenticationRequired: false
+#          - identifier: 'n_slidinggatewalk'
+#            title: 'Walkway'
+#            authenticationRequired: false
 
 
 light: !include_dir_merge_list lights/ 

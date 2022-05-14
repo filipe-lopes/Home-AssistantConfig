@@ -12,7 +12,7 @@
     - platform: numeric_state
       entity_id: sun.sun
       attribute: elevation
-      above: 1
+      above: 10
     - platform: sun
       event: sunset
       offset: "-00:30:00"
@@ -67,7 +67,7 @@
         - condition: numeric_state
           entity_id: sun.sun
           attribute: elevation
-          above: 1
+          above: -3
         - condition: numeric_state
           entity_id: sun.sun
           attribute: azimuth
@@ -76,23 +76,66 @@
           value_template: '{{ (states.sensor.upstairs_temp.state | float) > (states.sensor.outside_temperature.state | float - 1) }}'
         sequence:
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
-                group: group.shutters_eastup
-                normal: 75
-                bright: 85
-                safe: 5
+                group: group.shutters_northdown
+                normal: 5
+                bright: 5
+                safe: 0
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_close_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_southup
+                normal: 5
+                bright: 15
+                safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_eastup
                 normal: 0
-                bright: 10
+                bright: 15
+                safe: 0
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_eastdown
+                normal: 0
+                bright: 5
+                safe: 0
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_westup
+                normal: 75
+                bright: 80
+                safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+               variables:
+                group: group.shutters_westdown
+                normal: 0
+                bright: 5
                 safe: 0
 
-      - alias: "Summer/FamilyNotHome/Noon"
+      - alias: "Summer/Open/FamilyNotHome/Afternoon"
         conditions:
         - condition: state
           entity_id: input_select.mode_climate
@@ -106,26 +149,154 @@
         - condition: numeric_state
           entity_id: sun.sun
           attribute: azimuth
-          above: 150
-        - condition: template
-          value_template: '{{ (states.sensor.upstairs_temp.state | float) > (states.sensor.outside_temperature.state | float - 1) }}'
+          above: 210
         sequence:
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_northdown
+                normal: 5
+                bright: 5
+                safe: 0
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_southup
+                normal: 5
+                bright: 15
+                safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_eastup
                 normal: 75
+                bright: 80
+                safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_eastdown
+                normal: 0
+                bright: 5
+                safe: 0
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_westup
+                normal: 0
+                bright: 15
+                safe: 0
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_westdown
+                normal: 0
+                bright: 5
+                safe: 0
+
+      - alias: "Summer/FamilyHome/BeforeSunrise"
+        conditions:
+        - condition: state
+          entity_id: input_select.mode_climate
+          state: 'Summer'
+        - condition: state
+          entity_id: 'group.family'
+          state: 'home'
+        - condition: state
+          entity_id: 'input_boolean.mode_automate_b_whenhome'
+          state: 'on'
+        - condition: sun
+          before: sunset
+          before_offset: "-01:00:00"
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: azimuth
+          below: 150
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: elevation
+          above: -3
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: elevation
+          below: 10       
+        sequence:
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_northdown
+                normal: 85
                 bright: 85
                 safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_close_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_southup
-                normal: 0
-                bright: 10
-                safe: 0
+                normal: 85
+                bright: 85
+                safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_eastup
+                normal: 85
+                bright: 85
+                safe: 15
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_eastdown
+                normal: 85
+                bright: 85
+                safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_westup
+                normal: 85
+                bright: 85
+                safe: 15
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+               variables:
+                group: group.shutters_westdown
+                normal: 85
+                bright: 85
+                safe: 5
 
       - alias: "Summer/FamilyHome/Morning"
         conditions:
@@ -145,66 +316,72 @@
           entity_id: sun.sun
           attribute: azimuth
           below: 150
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: elevation
+          above: 10
         sequence:
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_northdown
                 normal: 85
-                bright: 90
+                bright: 85
                 safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_southup
-                normal: 85
-                bright: 35
+                normal: 35
+                bright: 85
                 safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_eastup
-                normal: 85
-                bright: 35
-                safe: 5
+                normal: 35
+                bright: 85
+                safe: 15
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_eastdown
-                normal: 85
-                bright: 35
+                normal: 35
+                bright: 85
                 safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_westup
                 normal: 85
-                bright: 90
+                bright: 85
                 safe: 15
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
                variables:
                 group: group.shutters_westdown
                 normal: 85
-                bright: 90
-                safe: 15
-          - service: script.turn_on
-            entity_id: script.shutter_open_group
-            data:
-               variables:
-                group: group.shutters_kitchen
-                normal: 85
-                bright: 90
-                safe: 15
-
+                bright: 85
+                safe: 5
  
-      - alias: "Summer/Open/FamilyHome/Afternoon"
+      - alias: "Summer/Open/FamilyHome/Noon"
         conditions:
         - condition: state
           entity_id: input_select.mode_climate
@@ -222,55 +399,149 @@
           entity_id: sun.sun
           attribute: azimuth
           above: 150
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: azimuth
+          below: 210
         sequence:
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_northdown
                 normal: 85
-                bright: 90
+                bright: 85
                 safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_southup
-                normal: 85
-                bright: 35
+                normal: 35
+                bright: 85
                 safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_eastup
                 normal: 85
-                bright: 90
-                safe: 5
+                bright: 85
+                safe: 15
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_eastdown
                 normal: 85
-                bright: 90
+                bright: 85
                 safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_close_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_westup
                 normal: 85
-                bright: 35
-                safe: 0
+                bright: 85
+                safe: 15
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
           - service: script.turn_on
-            entity_id: script.shutter_close_group
+            target:
+              entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_westdown
                 normal: 85
-                bright: 35
-                safe: 0
+                bright: 85
+                safe: 5
+
+      - alias: "Summer/Open/FamilyHome/Afternoon"
+        conditions:
+        - condition: state
+          entity_id: input_select.mode_climate
+          state: 'Summer'
+        - condition: state
+          entity_id: 'group.family'
+          state: 'home'
+        - condition: state
+          entity_id: 'input_boolean.mode_automate_b_whenhome'
+          state: 'on'
+        - condition: sun
+          before: sunset
+          before_offset: "-00:35:00"
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: azimuth
+          above: 210
+        sequence:
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_northdown
+                normal: 85
+                bright: 85
+                safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_southup
+                normal: 35
+                bright: 85
+                safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_eastup
+                normal: 85
+                bright: 85
+                safe: 15
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_eastdown
+                normal: 85
+                bright: 85
+                safe: 5
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_westup
+                normal: 35
+                bright: 85
+                safe: 15
+          - wait_template: "{{ is_state('script.shutter_move_group', 'off') }}"
+          - service: script.turn_on
+            target:
+              entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_westdown
+                normal: 35
+                bright: 85
+                safe: 15
 
       - alias: "Winter/FamilyNotHome/Morning"
         conditions:
@@ -290,18 +561,18 @@
         - condition: numeric_state
           entity_id: sun.sun
           attribute: azimuth
-          above: 150
+          above: 100
         sequence:
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_westup
                 normal: 75
-                bright: 85
+                bright: 75
                 safe: 5
           - service: script.turn_on
-            entity_id: script.shutter_close_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_southup
@@ -324,20 +595,53 @@
           entity_id: sun.sun
           attribute: azimuth
           above: 150
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: azimuth
+          below: 210
         sequence:
           - service: script.turn_on
-            entity_id: script.shutter_open_group
-            data:
-              variables:
-                group: group.shutters_westup
-                normal: 75
-                bright: 85
-                safe: 5
-          - service: script.turn_on
-            entity_id: script.shutter_close_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_southup
+                normal: 75
+                bright: 75
+                safe: 5
+
+      - alias: "Winter/FamilyNotHome/Afternoon"
+        conditions:
+        - condition: state
+          entity_id: input_select.mode_climate
+          state: 'Winter'
+        - condition: state
+          entity_id: 'group.family'
+          state: 'not_home'
+        - condition: sun
+          before: sunset
+          before_offset: "-00:35:00"
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: elevation
+          above: 1
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: azimuth
+          above: 210
+        sequence:
+          - service: script.turn_on
+            entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_eastup
+                normal: 75
+                bright: 75
+                safe: 5
+          - service: script.turn_on
+            entity_id: script.shutter_move_group
+            data:
+              variables:
+                group: group.shutters_westup
                 normal: 0
                 bright: 10
                 safe: 0
@@ -362,7 +666,7 @@
           below: 150
         sequence:
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_northdown
@@ -370,7 +674,7 @@
                 bright: 90
                 safe: 5
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_southup
@@ -378,7 +682,7 @@
                 bright: 35
                 safe: 5
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_westup
@@ -386,7 +690,7 @@
                 bright: 35
                 safe: 5
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_westdown
@@ -394,7 +698,7 @@
                 bright: 35
                 safe: 5
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_eastup
@@ -402,7 +706,7 @@
                 bright: 90
                 safe: 15
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
                variables:
                 group: group.shutters_eastdown
@@ -410,7 +714,7 @@
                 bright: 90
                 safe: 15
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
                variables:
                 group: group.shutters_kitchen
@@ -418,7 +722,6 @@
                 bright: 100
                 safe: 15
 
- 
       - alias: "Winter/Open/FamilyHome/Afternoon"
         conditions:
         - condition: state
@@ -439,7 +742,7 @@
           above: 150
         sequence:
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_northdown
@@ -447,7 +750,7 @@
                 bright: 90
                 safe: 5
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_southup
@@ -455,7 +758,7 @@
                 bright: 35
                 safe: 5
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_westup
@@ -463,7 +766,7 @@
                 bright: 90
                 safe: 5
           - service: script.turn_on
-            entity_id: script.shutter_open_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_westdown
@@ -471,7 +774,7 @@
                 bright: 90
                 safe: 5
           - service: script.turn_on
-            entity_id: script.shutter_close_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_eastup
@@ -479,7 +782,7 @@
                 bright: 35
                 safe: 0
           - service: script.turn_on
-            entity_id: script.shutter_close_group
+            entity_id: script.shutter_move_group
             data:
               variables:
                 group: group.shutters_eastdown
@@ -518,7 +821,8 @@
 #    service: cover.close_cover
 #    entity_id: group.shutters_all
 
-- alias: 'Blinds/All/HouseEmpty/Close'
+- alias: 'Blinds/FamilyNotHome/CloseAtSunset'
+  id: '2022040300001'
   trigger:
     - platform: sun
       event: sunset
@@ -539,7 +843,8 @@
     service: cover.close_cover
     entity_id: group.shutters_all
 
-- alias: 'Blinds/All/Sunset/Close'
+- alias: 'Blinds/CloseAtSunset'
+  id: '2022040300002'
   trigger:
     - platform: sun
       event: sunset
@@ -581,4 +886,26 @@
 #    - service: cover.close_cover
 #      entity_id: group.shutters_kitchen
 
+
+- alias: 'Blinds/CloseDownstairsAtLeaving'
+  id: '2022040300003'
+  trigger:
+    - platform: state
+      entity_id: group.family
+      from: 'home'
+      to: 'not_home'
+      for:
+        minutes: 5
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: 'group.shutters_downstairs'
+        state: 'open'
+      - condition: state
+        entity_id: 'switch.preference_shutters_automation'
+        state: 'on'
+  action:
+    - service: cover.close_cover
+      entity_id: group.shutters_downstairs
 

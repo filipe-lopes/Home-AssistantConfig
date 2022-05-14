@@ -1,6 +1,6 @@
   shutter_move_group:
+    mode: queued
     sequence:
-      - delay: 0
       - service: cover.set_cover_position
         data_template:
           entity_id: >
@@ -12,7 +12,7 @@
             {%-endif-%}
             {%-for roller in states[group].attributes.entity_id-%}
             {%- set current=state_attr(roller,'current_position')-%}
-            {%- if (((current-target) | abs > 3) or (target==100) or (target==0))-%}
+            {%- if (((current-target) | abs > 5) or (target==100) or (target==0))-%}
             {%-  if (ns.comma)-%},{%-endif-%}
             {%-  set ns.comma=true-%}{{ roller }}
             {%- endif-%}
@@ -28,7 +28,12 @@
   shutter_open_group:
     mode: queued
     sequence:
-      - delay: 0
+      - service: logbook.log
+        data:
+          domain: script
+          name: script.shutter_open_group
+          message: >
+            for {{group}}
       - service: cover.set_cover_position
         data_template:
           entity_id: >
@@ -51,12 +56,10 @@
             {%-elif (am=="Bright")-%}{{bright}}
             {%-elif (am=="Safe")-%}{{safe}}
             {%-endif-%}
-      - delay: 1
 
   shutter_close_group:
     mode: queued
     sequence:
-      - delay: 0
       - service: cover.set_cover_position
         data_template:
           entity_id: >
@@ -78,10 +81,7 @@
             {%-if (am=="Normal")-%}{{normal}}
             {%-elif (am=="Bright")-%}{{bright}}
             {%-elif (am=="Safe")-%}{{safe}}
-            {%-endif-%}
-      - delay: 1
-
-       
+            {%-endif-%}	       
 
   shutters_all_close:
     alias: Close all shutters
@@ -121,6 +121,11 @@
   shutters_all_open:
     alias: Open all shutters
     sequence:
+      - service: cover.set_cover_position
+        data:
+          entity_id: group.shutters_all
+          position: 35
+      - delay: 5
       - choose:
           - alias: "Blind automation enabled when home"
             conditions: 

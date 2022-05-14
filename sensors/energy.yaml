@@ -282,8 +282,8 @@
 
 - platform: mqtt
   name: "Energy - Kitchen spots"
-  state_topic: "shellies/shellyswitch25-B95005/relay/0/energy"
-  availability_topic: "shellies/shellyswitch25-B95005/online"
+  state_topic: "shellies/shellyswitch25-692683/relay/0/energy"
+  availability_topic: "shellies/shellyswitch25-692683/online"
   unit_of_measurement: "kWh"
   payload_available: "true"
   payload_not_available: "false"
@@ -293,8 +293,8 @@
 
 - platform: mqtt
   name: "Energy - Kitchen table"
-  state_topic: "shellies/shellyswitch25-B95005/relay/1/energy"
-  availability_topic: "shellies/shellyswitch25-B95005/online"
+  state_topic: "shellies/shellyswitch25-692683/relay/1/energy"
+  availability_topic: "shellies/shellyswitch25-692683/online"
   unit_of_measurement: "kWh"
   payload_available: "true"
   payload_not_available: "false"
@@ -304,12 +304,12 @@
 
 - platform: mqtt
   name: "Energy - Car charger"
-  state_topic: "shellies/shellyem-BCFF4DFCE0F5/emeter/0/energy"
+  state_topic: "shellies/shellyem-BCFF4DFCE0F5/emeter/0/total"
   availability_topic: "shellies/shellyem-BCFF4DFCE0F5/online"
   unit_of_measurement: "kWh"
   payload_available: "true"
   payload_not_available: "false"
-  value_template: "{{ (value|float) / 60000 }}"
+  value_template: "{{ (value|float) / 1000 }}"
   state_class: total_increasing 
   device_class: energy
 

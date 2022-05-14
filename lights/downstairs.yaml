@@ -28,7 +28,7 @@
   name: "Living Room Lounge Light"
   command_topic: "shellies/shellyswitch25-98F4ABF2D2A6/relay/1/command"
   state_topic: "shellies/shellyswitch25-98F4ABF2D2A6/relay/1"
-  availability_topic: "shellies/shellyswitch25-B95005/online"
+  availability_topic: "shellies/shellyswitch25-692683/online"
   payload_on: "on"
   payload_off: "off"
   payload_available: "true"
@@ -59,9 +59,9 @@
 
 - platform: mqtt
   name: "Kitchen spots"
-  command_topic: "shellies/shellyswitch25-B95005/relay/0/command"
-  state_topic: "shellies/shellyswitch25-B95005/relay/0"
-  availability_topic: "shellies/shellyswitch25-B95005/online"
+  command_topic: "shellies/shellyswitch25-692683/relay/0/command"
+  state_topic: "shellies/shellyswitch25-692683/relay/0"
+  availability_topic: "shellies/shellyswitch25-692683/online"
   payload_on: "on"
   payload_off: "off"
   payload_available: "true"
@@ -70,9 +70,9 @@
 
 - platform: mqtt
   name: "Kitchen table"
-  command_topic: "shellies/shellyswitch25-B95005/relay/1/command"
-  state_topic: "shellies/shellyswitch25-B95005/relay/1"
-  availability_topic: "shellies/shellyswitch25-B95005/online"
+  command_topic: "shellies/shellyswitch25-692683/relay/1/command"
+  state_topic: "shellies/shellyswitch25-692683/relay/1"
+  availability_topic: "shellies/shellyswitch25-692683/online"
   payload_on: "on"
   payload_off: "off"
   payload_available: "true"

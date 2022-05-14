@@ -1,0 +1,59 @@
+'WindowTest':
+  alias: Test Script
+  mode: queued
+  sequence:
+    - service: script.turn_on
+      target:
+        entity_id: script.shutter_open_group
+      data:
+        variables:
+          group: group.shutters_northdown
+          normal: 85
+          bright: 85
+          safe: 5
+    - service: script.turn_on
+      target:
+        entity_id: script.shutter_open_group
+      data:
+        variables:
+        group: group.shutters_southup
+        normal: 85
+        bright: 85
+        safe: 5
+    - service: script.turn_on
+      target:
+        entity_id: script.shutter_open_group
+      data:
+        variables:
+          group: group.shutters_eastup
+          normal: 85
+          bright: 85
+          safe: 15
+    - service: script.turn_on
+      target:
+        entity_id: script.shutter_open_group
+      data:
+        variables:
+          group: group.shutters_eastdown
+          normal: 85
+          bright: 85
+          safe: 5
+    - service: script.turn_on
+      target:
+        entity_id: script.shutter_open_group
+      data:
+        variables:
+          group: group.shutters_westup
+          normal: 85
+          bright: 85
+          safe: 15
+    - service: script.turn_on
+      target:
+        entity_id: script.shutter_open_group
+      data:
+        variables:
+          group: group.shutters_westdown
+          normal: 85
+          bright: 85
+          safe: 5
+ 
