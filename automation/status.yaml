@@ -114,3 +114,47 @@
   action:
     - service: switch.turn_off
       entity_id: switch.status_family_sleeping
+
+- alias: 'Status/FamilyPresence/ArrivingHome'
+  trigger:
+    - platform: state
+      entity_id: group.family
+      from: 'not_home'
+      to: 'home'
+      for:
+        minutes: 1
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "home/l/status/family_presence"
+        payload: "arriving"
+        qos: 2
+        retain: true
+    - wait_template: "{{ states.binary_sensor.front_door_contact_sensor.state == 'on' }}"
+      timeout: '00:05:00'
+    - service: mqtt.publish
+      data:
+        topic: "home/l/status/family_presence"
+        payload: "home"
+        qos: 2
+        retain: true
+
+- alias: 'Status/FamilyPresence/LeavingHome'
+  trigger:
+    - platform: state
+      entity_id: group.family
+      from: 'home'
+      to: 'not_home'
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: "not_home"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "home/l/status/family_presence"
+        payload: "not_home"
+        qos: 2
+        retain: true
+
+

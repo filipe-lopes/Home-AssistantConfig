@@ -10,9 +10,9 @@
       skip_condition: false
     target:
       entity_id: 
-        - automation.environment_air_purifier_cinemaroom_pm
-        - automation.environment_air_purifier_lroom_pm
-        - automation.environment_air_purifier_office_pm
+        - fan.air_purifier_cinema_room
+        - fan.air_purifier_livingroom
+        - fan.air_purifier_office
 
 - alias: Environment/Air/Purifier/NoiseOFF
   id: '2022051400005'
@@ -23,22 +23,61 @@
   action:
     - service: fan.turn_off
       entity_id: 
-        - automation.environment_air_purifier_cinemaroom_pm
-        - automation.environment_air_purifier_lroom_pm
-        - automation.environment_air_purifier_office_pm
+        - fan.air_purifier_cinema_room
+        - fan.air_purifier_livingroom
+        - fan.air_purifier_office
 
-- alias: Environment/Air/Purifier/DailySchedule
+- alias: Environment/Air/Purifier/Noon
   id: '2022051400006'
+  trigger:
+    - platform: time
+      at: "12:30:00"
+  condition:
+    - condition: state
+      entity_id: switch.preference_noisy_automations
+      state: "on"
+    - condition: state
+      entity_id: input_boolean.mode_holidays
+      state: "off"
+  action:
+    - service: fan.turn_on
+      entity_id: 
+        - fan.air_purifier_cinema_room
+        - fan.air_purifier_livingroom
+        - fan.air_purifier_office
+    - choose:
+      - conditions:
+        - condition: template
+          value_template: '{{ now().month in [3,4,5,6] }}'
+        sequence:
+          - wait_template: "{{ is_state('switch.preference_noisy_automations', 'off') }}"
+            timeout: "00:30:00"
+      default:
+       - wait_template: "{{ is_state('switch.preference_noisy_automations', 'off') }}"
+         timeout: "00:15:00"
+    - service: fan.turn_off
+      entity_id: 
+        - fan.air_purifier_cinema_room
+        - fan.air_purifier_livingroom
+        - fan.air_purifier_office
+
+
+- alias: Environment/Air/Purifier/Sunset
+  id: '2022051400007'
   trigger:
     - platform: sun
       event: sunset
       offset: "-00:10:00"
+  condition:
+    - condition: state
+      entity_id: switch.preference_noisy_automations
+      state: "on"
   action:
     - service: fan.turn_on
       entity_id: 
-        - automation.environment_air_purifier_cinemaroom_pm
-        - automation.environment_air_purifier_lroom_pm
-        - automation.environment_air_purifier_office_pm
+        - fan.air_purifier_cinema_room
+        - fan.air_purifier_livingroom
+        - fan.air_purifier_office
     - choose:
       - conditions:
         - condition: template
@@ -51,9 +90,9 @@
          timeout: "00:15:00"
     - service: fan.turn_off
       entity_id: 
-        - automation.environment_air_purifier_cinemaroom_pm
-        - automation.environment_air_purifier_lroom_pm
-        - automation.environment_air_purifier_office_pm
+        - fan.air_purifier_cinema_room
+        - fan.air_purifier_livingroom
+        - fan.air_purifier_office
 
 - alias: Environment/Air/Purifier/CinemaRoom/PM
   id: '2022051400001'
@@ -65,6 +104,9 @@
     - condition: state
       entity_id: switch.preference_noisy_automations
       state: 'on'
+    - condition: state
+      entity_id: input_boolean.mode_holidays
+      state: "off"
     - condition: numeric_state
       entity_id: sensor.air_purifier_cinema_room_pm2_5
       above: 6
@@ -72,13 +114,9 @@
     - service: fan.turn_on
       entity_id: fan.air_purifier_cinema_room
     - delay: "00:10:00"
-    - wait_for_trigger:
-      - platform: numeric_state
-        entity_id: sensor.air_purifier_cinema_room_pm2_5
-        below: 2
-        for:
-          minutes: 5
+    - wait_template: "{{states('sensor.air_purifier_cinema_room_pm2_5') | int <= 1 }}"
       timeout: "01:00:00"
+    - delay: "00:05:00"
     - service: fan.turn_off
       entity_id: fan.air_purifier_cinema_room
 
@@ -92,6 +130,9 @@
     - condition: state
       entity_id: switch.preference_noisy_automations
       state: 'on'
+    - condition: state
+      entity_id: input_boolean.mode_holidays
+      state: "off"
     - condition: numeric_state
       entity_id: sensor.air_purifier_office_pm2_5
       above: 6
@@ -99,13 +140,9 @@
     - service: fan.turn_on
       entity_id: fan.air_purifier_office
     - delay: "00:10:00"
-    - wait_for_trigger:
-      - platform: numeric_state
-        entity_id: sensor.air_purifier_office_pm2_5
-        below: 2
-        for:
-          minutes: 5
+    - wait_template: "{{states('sensor.air_purifier_office_pm2_5') | int <= 1 }}"
       timeout: "01:00:00"
+    - delay: "00:05:00"
     - service: fan.turn_off
       entity_id: fan.air_purifier_office
 
@@ -120,6 +157,9 @@
     - condition: state
       entity_id: switch.preference_noisy_automations
       state: 'on'
+    - condition: state
+      entity_id: input_boolean.mode_holidays
+      state: "off"
     - condition: numeric_state
       entity_id: sensor.air_purifier_living_room_pm2_5
       above: 6
@@ -127,13 +167,9 @@
     - service: fan.turn_on
       entity_id: fan.air_purifier_livingroom
     - delay: "00:10:00"
-    - wait_for_trigger:
-      - platform: numeric_state
-        entity_id: sensor.air_purifier_living_room_pm2_5
-        below: 2
-        for:
-          minutes: 5
+    - wait_template: "{{states('sensor.air_purifier_living_room_pm2_5') | int <= 1 }}"
       timeout: "01:00:00"
+    - delay: "00:05:00"
     - service: fan.turn_off
       entity_id: fan.air_purifier_livingroom
 

@@ -23,17 +23,15 @@
       for:
         seconds: 10 
     - platform: state
-      entity_id: group.family
+      entity_id: sensor.family_presence
       from: 'home'
       to: 'not_home'
       for:
         minutes: 5
     - platform: state
-      entity_id: group.family
-      from: 'not_home'
+      entity_id: sensor.family_presence
+      from: 'arriving'
       to: 'home'
-      for:
-        minutes: 5
     - platform: template
       value_template: '{{(states.sensor.upstairs_temp.state | float) > (states.sensor.outside_temperature.state | float - 2)}}'
     - platform: template
