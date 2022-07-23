@@ -17,9 +17,9 @@
     - condition: state
       entity_id: 'group.family'
       state: 'not_home'
-      - condition: state
-        entity_id: 'switch.preference_noisy_automations'
-        state: 'on'
+    - condition: state
+      entity_id: 'switch.preference_noisy_automations'
+      state: 'on'
   action:
     - service: vacuum.start
       data:
@@ -35,9 +35,19 @@
     from: 'arriving'
     to: 'home'
   action:
-    - service: vacuum.return_to_base
-      data:
-        entity_id: vacuum.dusty
-    - service: vacuum.return_to_base
-      data:
-        entity_id: vacuum.rosie
+    - if:
+        - condition: state
+          entity_id: vacuum.rosie
+          state: 'cleaning'
+      then:
+        - service: vacuum.return_to_base
+          data:
+            entity_id: vacuum.dusty
+    - if:
+        - condition: state
+          entity_id: vacuum.rosie
+          state: 'cleaning'
+      then:
+        - service: vacuum.return_to_base
+          data:
+            entity_id: vacuum.rosie
