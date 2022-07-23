@@ -17,6 +17,9 @@
     - condition: state
       entity_id: 'group.family'
       state: 'not_home'
+      - condition: state
+        entity_id: 'switch.preference_noisy_automations'
+        state: 'on'
   action:
     - service: vacuum.start
       data:
