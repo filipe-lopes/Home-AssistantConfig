@@ -1,7 +1,7 @@
-- platform: generic
-  name: Garage Camera
-  still_image_url: !secret camera_garage_url
-  stream_source: !secret camera_garage_source 
+#- platform: generic
+#  name: Garage Camera
+#  still_image_url: !secret camera_garage_url
+#  stream_source: !secret camera_garage_source 
 
 
 - platform: zoneminder

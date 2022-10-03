@@ -5,7 +5,7 @@
     from: 'not_home'
     to: 'home'
   action:
-    - service: notify.mobile_app_sm_a307fn
+    - service: notify.mobile_app_sm_a326b
       data:
         message: "Wellcome home!"
         data:
@@ -17,57 +17,4 @@
             - action: n_slidinggatewalk 
               title: "Walkway"
 
-- alias: 'Notifications/Notify/WellcomeHomePatriciaiOS'
-  trigger:
-    platform: state
-    entity_id: person.patricia
-    from: 'not_home'
-    to: 'home'
-  action:
-    service: notify.mobile_app_iphone_de_patricia
-    data:
-      title: "Wellcome home!"
-      data:
-        push:
-          category: "ioswellcomehome"
 
-- alias: 'Notifications/Actions/n_frontgate'
-  trigger:
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: n_frontgate
-    - platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: n_frontgate
-  action:
-    - service: switch.turn_on
-      entity_id: switch.front_gate
-
-- alias: 'Notifications/Actions/n_slidinggate'
-  trigger:
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: n_slidinggate
-    - platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: n_slidinggate
-  action:
-    - service: switch.turn_on
-      entity_id: switch.sliding_gate_control
-
-- alias: 'Notifications/Actions/n_slidinggatewalk'
-  trigger:
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: n_slidinggatewalk
-    - platform: event
-      event_type: ios.notification_action_fired
-      event_data:
-        actionName: n_slidinggatewalk
-  action:
-    - service: script.sliding_gate_person

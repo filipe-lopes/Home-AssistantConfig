@@ -31,4 +31,14 @@
     - service: homeassistant.update_entity
       entity_id: sensor.electricity_rate
 
+- alias: "Core/RequestShellyAnnounce"
+  trigger:
+    platform: time_pattern
+    hours: "*"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: shellies/command
+        payload: announce
+
 

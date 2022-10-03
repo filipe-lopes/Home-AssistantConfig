@@ -2,16 +2,19 @@
     id: filipe
 #    user_id: 76a59df73fc64202ba28d3583b41cf48
     device_trackers:
-      - device_tracker.life360_filipe_lopes
+#      - device_tracker.life360_filipe_lopes
+      - device_tracker.sm_a326b
 
   - name: Patricia
     id: patricia
 #    user_id: 938cf310bbc242878264dccbdf4576db
     device_trackers:
-      - device_tracker.life360_patricia_lopes
+#      - device_tracker.life360_patricia_lopes
+      - device_tracker.iphone_de_patricia_2
 
   - name: Margarida
     id: margarida
 #    user_id: 4d00ac78425d4204bbdba8663732091d
     device_trackers:
-      - device_tracker.life360_margarida_lopes
+#      - device_tracker.life360_margarida_lopes
+      - device_tracker.iphone_margarida
