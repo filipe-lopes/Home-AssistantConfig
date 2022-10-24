@@ -9,26 +9,31 @@
       entity_id: sensor.electricity_rate
       state: 'Peak'
   action:
-    - service: utility_meter.select_tariff
+    - service: select.select_option
+      target:
+        entity_id: select.daily_energy_in
       data:
-        entity_id: utility_meter.daily_energy_in
-        tariff: 'peak'
+        option: "peak"
     - service: utility_meter.select_tariff
+      target:
+        entity_id: select.daily_energy_out
       data:
-        entity_id: utility_meter.daily_energy_out
-        tariff: 'peak'
+        option: "peak"
     - service: utility_meter.select_tariff
+      target:
+        entity_id: select.monthly_energy_in
       data:
-        entity_id: utility_meter.monthly_energy_in
-        tariff: 'peak'
+        option: "peak"
     - service: utility_meter.select_tariff
+      target:
+        entity_id: select.daily_solar_energy
       data:
-        entity_id: utility_meter.daily_solar_energy
-        tariff: 'peak'
+        option: "peak"
     - service: utility_meter.select_tariff
+      target:
+        entity_id: select.monthly_solar_energy
       data:
-        entity_id: utility_meter.monthly_solar_energy
-        tariff: 'peak'
+        option: "peak"
 
 - alias: 'UtilityMeters/OffPeak'
   trigger:
@@ -41,23 +46,28 @@
       entity_id: sensor.electricity_rate
       state: 'Off-peak'
   action:
-    - service: utility_meter.select_tariff
+    - service: select.select_option
+      target:
+        entity_id: select.daily_energy_in
       data:
-        entity_id: utility_meter.daily_energy_in
-        tariff: 'offpeak'
+        option: "offpeak"
     - service: utility_meter.select_tariff
+      target:
+        entity_id: select.daily_energy_out
       data:
-        entity_id: utility_meter.daily_energy_out
-        tariff: 'offpeak'
+        option: "offpeak"
     - service: utility_meter.select_tariff
+      target:
+        entity_id: select.monthly_energy_in
       data:
-        entity_id: utility_meter.monthly_energy_in
-        tariff: 'offpeak'
+        option: "offpeak"
     - service: utility_meter.select_tariff
+      target:
+        entity_id: select.daily_solar_energy
       data:
-        entity_id: utility_meter.daily_solar_energy
-        tariff: 'offpeak'
+        option: "offpeak"
     - service: utility_meter.select_tariff
+      target:
+        entity_id: select.monthly_solar_energy
       data:
-        entity_id: utility_meter.monthly_solar_energy
-        tariff: 'offpeak'
+        option: "offpeak"

@@ -1,0 +1,29 @@
+- alias: Security_Frigate_Notifications
+  description: ""
+  trigger:
+    - platform: mqtt
+      topic: frigate/events
+      payload: new
+      value_template: "{{ value_json.type }}"
+  condition:
+    - condition: state
+      entity_id: 'group.family'
+      state: 'not_home'
+  action:
+    - service: notify.mobile_app_sm_a326b
+      data_template:
+        message: 'A {{trigger.payload_json["after"]["label"]}} was detected.'
+        data:
+          image: 'https://rz1pb9683xyvi2pv5m4v5b9ntmdlzqlr.ui.nabu.casa/api/frigate/notifications/{{trigger.payload_json["after"]["id"]}}/thumbnail.jpg?format=android'
+          tag: '{{trigger.payload_json["after"]["id"]}}'
+          when: '{{trigger.payload_json["after"]["start_time"]|int}}'
+    - service: notify.mobile_app_iphone_de_patricia
+      data:
+        message: 'A {{trigger.payload_json["after"]["label"]}} was detected.'
+        data:
+          image: >-
+            https://rz1pb9683xyvi2pv5m4v5b9ntmdlzqlr.ui.nabu.casa/api/frigate/notifications/{{trigger.payload_json["after"]["id"]}}/thumbnail.jpg
+          tag: '{{trigger.payload_json["after"]["id"]}}'
+          when: '{{trigger.payload_json["after"]["start_time"]|int}}'
+          entity_id: camera.{{trigger.payload_json["after"]["camera"]}}
+  mode: single
