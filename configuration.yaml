@@ -178,7 +178,7 @@ logbook:
       - sensor.date
       - sensor.tcp_sensor
 
-mqtt: !include_dir_merge_list /mqtt
+mqtt: !include_dir_merge_named mqtt/
 
 sun:
 

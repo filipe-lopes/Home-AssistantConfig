@@ -1,7 +1,7 @@
 - platform: mqtt
   name: Washing machine power
-  state_topic: "shellies/shelly1pm-8CAAB5060859/relay/0/power"
-  availability_topic: "shellies/shelly1pm-8CAAB5060859/online"
+  state_topic: "shellies/shelly1pm-84CCA8A852D5/relay/0/power"
+  availability_topic: "shellies/shelly1pm-84CCA8A852D5/online"
   payload_available: "true"
   payload_not_available: "false"
   unit_of_measurement: "W"

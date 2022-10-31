@@ -245,8 +245,8 @@
 
 - platform: mqtt
   name: "Energy - Washing machine"
-  state_topic: "shellies/shelly1pm-8CAAB5060859/relay/0/energy"
-  availability_topic: "shellies/shelly1pm-8CAAB5060859/online"
+  state_topic: "shellies/shelly1pm-84CCA8A852D5/relay/0/energy"
+  availability_topic: "shellies/shelly1pm-84CCA8A852D5/online"
   unit_of_measurement: "kWh"
   payload_available: "true"
   payload_not_available: "false"
