@@ -1,0 +1,159 @@
+  cover: 
+    - name: "Maggie's Room Shutter"
+      command_topic: "shellies/shellyswitch25-E62EC7/roller/0/command"
+      position_topic: "shellies/shellyswitch25-E62EC7/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-E62EC7/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-E62EC7/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+
+    - name: "Mary's Room Shutter"
+      command_topic: "shellies/shellyswitch25-E4E684/roller/0/command"
+      position_topic: "shellies/shellyswitch25-E4E684/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-E4E684/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-E4E684/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+
+    - name: "Office Shutter"
+      command_topic: "shellies/shellyswitch25-00CA6C/roller/0/command"
+      position_topic: "shellies/shellyswitch25-00CA6C/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-00CA6C/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-00CA6C/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+
+    - name: "Living Room South Shutter"
+      command_topic: "shellies/shellyswitch25-00CC6E/roller/0/command"
+      position_topic: "shellies/shellyswitch25-00CC6E/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-00CC6E/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-00CC6E/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+
+    - name: "Living Room North Shutter"
+      command_topic: "shellies/shellyswitch25-68D9CE/roller/0/command"
+      position_topic: "shellies/shellyswitch25-68D9CE/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-68D9CE/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-68D9CE/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+
+    - name: "Cinema Room Shutter"
+      command_topic: "shellies/shellyswitch25-E61AB9/roller/0/command"
+      position_topic: "shellies/shellyswitch25-E61AB9/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-E61AB9/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-E61AB9/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+  
+    - name: "Kitchen Shutter"
+      command_topic: "shellies/shellyswitch25-B8A137/roller/0/command"
+      position_topic: "shellies/shellyswitch25-B8A137/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-B8A137/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-B8A137/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      device_class: shutter
+      qos: 2
+
+    - name: "Kitchen Door Shutter"
+      command_topic: "shellies/shellyswitch25-E6697C/roller/0/command"
+      position_topic: "shellies/shellyswitch25-E6697C/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-E6697C/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-E6697C/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+
+    - name: "Downstairs WC Shutter"
+      command_topic: "shellies/shellyswitch25-E628CA/roller/0/command"
+      position_topic: "shellies/shellyswitch25-E628CA/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-E628CA/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-E628CA/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+    
+    - name: "Upstairs WC Shutter"
+      command_topic: "shellies/shellyswitch25-B9549A/roller/0/command"
+      position_topic: "shellies/shellyswitch25-B9549A/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-B9549A/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-B9549A/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+    
+
+    - name: "Main Room WC Shutter"
+      command_topic: "shellies/shellyswitch25-687FE5/roller/0/command"
+      position_topic: "shellies/shellyswitch25-687FE5/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-687FE5/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-687FE5/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 1
+      device_class: shutter
+
+    - name: "Main Room Shutter"
+      command_topic: "shellies/shellyswitch25-98F4ABF2EB43/roller/0/command"
+      position_topic: "shellies/shellyswitch25-98F4ABF2EB43/roller/0/pos"
+      set_position_topic: "shellies/shellyswitch25-98F4ABF2EB43/roller/0/command/pos"
+      availability_topic: "shellies/shellyswitch25-98F4ABF2EB43/online"
+      payload_open: "open"
+      payload_close: "close"
+      payload_stop: "stop"
+      payload_available: "true"
+      payload_not_available: "false"
+      qos: 2
+      device_class: shutter
+
+
