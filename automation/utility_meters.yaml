@@ -14,22 +14,22 @@
         entity_id: select.daily_energy_in
       data:
         option: "peak"
-    - service: utility_meter.select_tariff
+    - service: select.select_option
       target:
         entity_id: select.daily_energy_out
       data:
         option: "peak"
-    - service: utility_meter.select_tariff
+    - service: select.select_option
       target:
         entity_id: select.monthly_energy_in
       data:
         option: "peak"
-    - service: utility_meter.select_tariff
+    - service: select.select_option
       target:
         entity_id: select.daily_solar_energy
       data:
         option: "peak"
-    - service: utility_meter.select_tariff
+    - service: select.select_option
       target:
         entity_id: select.monthly_solar_energy
       data:
@@ -51,22 +51,22 @@
         entity_id: select.daily_energy_in
       data:
         option: "offpeak"
-    - service: utility_meter.select_tariff
+    - service: select.select_option
       target:
         entity_id: select.daily_energy_out
       data:
         option: "offpeak"
-    - service: utility_meter.select_tariff
+    - service: select.select_option
       target:
         entity_id: select.monthly_energy_in
       data:
         option: "offpeak"
-    - service: utility_meter.select_tariff
+    - service: select.select_option
       target:
         entity_id: select.daily_solar_energy
       data:
         option: "offpeak"
-    - service: utility_meter.select_tariff
+    - service: select.select_option
       target:
         entity_id: select.monthly_solar_energy
       data:
