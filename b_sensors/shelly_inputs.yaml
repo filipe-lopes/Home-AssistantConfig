@@ -1,5 +1,0 @@
-- platform: mqtt
-  name: "ShellyInput/BackPorchDimmer/0"
-  state_topic: "shellies/shellydimmer2-E8DB84D2F04F/input/0"
-  payload_on: "1"
-  payload_off: "0"

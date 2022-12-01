@@ -19,7 +19,3 @@
   value_template: "{{value | round}}"
   unit_of_measurement: "°C"
 
-- platform: mqtt
-  unique_id: status_familypresence
-  name: Family presence
-  state_topic: "home/l/status/family_presence"

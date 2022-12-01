@@ -179,8 +179,13 @@ logbook:
       - sensor.date
       - sensor.tcp_sensor
 
-mqtt: !include_dir_merge_named mqtt/
-system_health:
+mqtt:
+  binary_sensor: !include_dir_merge_list mqtt/b_sensor/
+  cover: !include_dir_merge_list mqtt/cover/
+  light: !include_dir_merge_list mqtt/light/
+  sensor: !include_dir_merge_list mqtt/sensor/
+  switch: !include_dir_merge_list mqtt/switch/
+
 sun:
 
 input_boolean:

@@ -23,26 +23,6 @@
 #      prob_given_false: 0.66
 #      to_state: 'home'
 
-- platform: mqtt
-  name: "Front Door Contact Sensor"
-  state_topic: "shellies/shellydw2-A4CF12F42F72/sensor/state"
-  payload_on: "open"
-  payload_off: "close"
-  device_class: door
-
-- platform: mqtt
-  name: "Sliding Gate Contact Sensor"
-  state_topic: "shellies/shellydw2-40F5202E46FF/sensor/state"
-  payload_on: "open"
-  payload_off: "close"
-  device_class: door
-
-- platform: mqtt
-  name: "Garage Door Contact Sensor"
-  state_topic: "shellies/shellydw2-40F5202E104F/sensor/state"
-  payload_on: "open"
-  payload_off: "close"
-  device_class: garage_door
 
 
 

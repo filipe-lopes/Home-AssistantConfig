@@ -1,0 +1,35 @@
+- alias: 'Eco/Lights/Kitchen/Main/Off'
+  id: '2022110100001'
+  trigger: 
+    - platform: state
+      entity_id: "binary_sensor.f_5im51_104_20"
+      to: "off"
+      for:
+        minutes: 5
+  condition:
+    - condition: state
+      entity_id: light.kitchen_spots
+      state: "on"
+  action:
+    - service: light.turn_off
+      entity_id: light.kitchen_spots
+    - service: switch.turn_on
+      entity_id: switch.standby_kitchen_main
+
+- alias: 'Eco/Lights/Kitchen/Main/On'
+  id: '2022110100002'
+  trigger: 
+    - platform: state
+      entity_id: "binary_sensor.f_5im51_104_20"
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: switch.standby_kitchen_main
+      state: "on"
+  action:
+    - service: light.turn_on
+      entity_id: light.kitchen_spots
+    - service: switch.turn_off
+      entity_id: switch.standby_kitchen_main
+
+
