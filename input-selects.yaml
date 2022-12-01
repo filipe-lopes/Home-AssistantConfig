@@ -1,3 +1,10 @@
+climate_heater_currentphase:
+  options:
+    - "night"
+    - "morning"
+    - "day"
+    - "evening"
+
 shutter_automation_mode:
   name: Shutter automation mode
   options:

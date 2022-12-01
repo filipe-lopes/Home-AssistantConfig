@@ -1,27 +1,49 @@
-- alias: 'Climate/Thermostats/Rooms/IncreaseBeforeBed'
+- alias: 'Climate/Thermostats/Evening'
   trigger:
-    - platform: time
-      at: "20:00:00"
+    - platform: sun
+      event: sunset
+  condition:
+    - condition: state
+      entity_id: input_select.climate_heater_currentphase
+      state: "day"
   action:
     - service: climate.set_temperature
       entity_id: climate.maggie_s_room_thermostat
       data_template:
-        temperature: "{{state_attr('climate.maggie_s_room_thermostat','temperature') | float + 0.5}}"
+        temperature: "{{state_attr('climate.maggie_s_room_thermostat','temperature') | float + 2}}"
     - service: climate.set_temperature
       entity_id: climate.mary_s_room_thermostat
       data_template:
-        temperature: "{{state_attr('climate.mary_s_room_thermostat','temperature') | float + 0.5}}"
+        temperature: "{{state_attr('climate.mary_s_room_thermostat','temperature') | float + 2}}"
     - service: climate.set_temperature
       entity_id: climate.main_room_thermostat
       data_template:
-        temperature: "{{state_attr('climate.main_room_thermostat','temperature') | float + 0.5}}"
+        temperature: "{{state_attr('climate.main_room_thermostat','temperature') | float + 2}}"
+    - service: climate.set_temperature
+      entity_id: climate.living_room_thermostat
+      data_template:
+        temperature: "{{state_attr('climate.living_room_thermostat','temperature') | float + 1}}"
+    - service: climate.set_temperature
+      entity_id: climate.kitchen_thermostat
+      data_template:
+        temperature: "{{state_attr('climate.kitchen_thermostat','temperature') | float + 1}}"
+    - service: input_select.select_option
+      data:
+        option: evening
+      target:
+        entity_id: input_select.climate_heater_currentphase
 
-- alias: 'Climate/Thermostats/Rooms/DecreaseAfterSleep'
+
+- alias: 'Climate/Thermostats/Night'
   trigger:
     - platform: state
       entity_id: 'switch.status_family_sleeping'
       to: "on"
       for: "01:00:00"
+  condition:
+    - condition: state
+      entity_id: input_select.climate_heater_currentphase
+      state: "evening"
   action:
     - service: climate.set_temperature
       entity_id: climate.maggie_s_room_thermostat
@@ -35,52 +57,31 @@
       entity_id: climate.main_room_thermostat
       data_template:
         temperature: "{{state_attr('climate.main_room_thermostat','temperature') | float - 1}}"
+    - service: climate.set_temperature
+      entity_id: climate.living_room_thermostat
+      data_template:
+        temperature: "{{state_attr('climate.living_room_thermostat','temperature') | float - 2}}"
+    - service: climate.set_temperature
+      entity_id: climate.kitchen_thermostat
+      data_template:
+        temperature: "{{state_attr('climate.kitchen_thermostat','temperature') | float - 2}}"
+    - service: input_select.select_option
+      data:
+        option: night
+      target:
+        entity_id: input_select.climate_heater_currentphase
 
-- alias: 'Climate/Thermostats/Rooms/IncreaseBeforeWakeup'
+- alias: 'Climate/Thermostats/Morning'
   trigger:
+    - platform: numeric_state
+      entity_id: sensor.minutes_next_mainroom_alarm
+      below: 120
     - platform: time
-      at: "05:00:00"
-  action:
-    - service: climate.set_temperature
-      entity_id: climate.maggie_s_room_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.maggie_s_room_thermostat','temperature') | float + 0.5}}"
-    - service: climate.set_temperature
-      entity_id: climate.mary_s_room_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.mary_s_room_thermostat','temperature') | float + 0.5}}"
-    - service: climate.set_temperature
-      entity_id: climate.main_room_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.main_room_thermostat','temperature') | float + 0.5}}"
-
-
-- alias: 'Climate/Thermostats/Rooms/DecreaseAfterWakeup'
-  trigger:
-    - platform: state
-      entity_id: 'switch.status_family_sleeping'
-      to: "off"
-      for: "00:30:00"
-  action:
-    - service: climate.set_temperature
-      entity_id: climate.maggie_s_room_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.maggie_s_room_thermostat','temperature') | float - 1}}"
-    - service: climate.set_temperature
-      entity_id: climate.mary_s_room_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.mary_s_room_thermostat','temperature') | float - 1}}"
-    - service: climate.set_temperature
-      entity_id: climate.main_room_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.main_room_thermostat','temperature') | float - 1}}"
-
-
-- alias: 'Climate/Thermostats/Rooms/IncreaseAtSunset'
-  trigger:
-    platform: sun
-    event: sunset
-    offset: "00:30:00"
+      at: "06:00:00"
+  condition:
+    - condition: state
+      entity_id: input_select.climate_heater_currentphase
+      state: "night"
   action:
     - service: climate.set_temperature
       entity_id: climate.maggie_s_room_thermostat
@@ -94,81 +95,59 @@
       entity_id: climate.main_room_thermostat
       data_template:
         temperature: "{{state_attr('climate.main_room_thermostat','temperature') | float + 1}}"
+    - service: climate.set_temperature
+      entity_id: climate.living_room_thermostat
+      data_template:
+        temperature: "{{state_attr('climate.living_room_thermostat','temperature') | float + 1}}"
+    - service: climate.set_temperature
+      entity_id: climate.kitchen_thermostat
+      data_template:
+        temperature: "{{state_attr('climate.kitchen_thermostat','temperature') | float + 1}}"
+    - service: input_select.select_option
+      data:
+        option: morning
+      target:
+        entity_id: input_select.climate_heater_currentphase
 
 
-- alias: 'Climate/Thermostats/LivingAreas/IncreaseAfterWakeup'
+- alias: 'Climate/Thermostats/Day'
   trigger:
+    - platform: state
+      entity_id: sensor.electricity_rate
+      to: "Peak"
     - platform: state
       entity_id: 'switch.status_family_sleeping'
       to: "off"
+  condition:
+    - condition: state
+      entity_id: input_select.climate_heater_currentphase
+      state: "morning"
   action:
+    - service: climate.set_temperature
+      entity_id: climate.maggie_s_room_thermostat
+      data_template:
+        temperature: "{{state_attr('climate.maggie_s_room_thermostat','temperature') | float - 2}}"
+    - service: climate.set_temperature
+      entity_id: climate.mary_s_room_thermostat
+      data_template:
+        temperature: "{{state_attr('climate.mary_s_room_thermostat','temperature') | float - 2}}"
+    - service: climate.set_temperature
+      entity_id: climate.main_room_thermostat
+      data_template:
+        temperature: "{{state_attr('climate.main_room_thermostat','temperature') | float - 2}}"
     - service: climate.set_temperature
       entity_id: climate.living_room_thermostat
       data_template:
-        temperature: "{{state_attr('climate.living_room_thermostat','temperature') | float + 0.5}}"
+        temperature: "{{state_attr('climate.living_room_thermostat','temperature') | float + 1}}"
     - service: climate.set_temperature
       entity_id: climate.kitchen_thermostat
       data_template:
-        temperature: "{{state_attr('climate.kitchen_thermostat','temperature') | float + 0.5}}"
-
-- alias: 'Climate/Thermostats/LivingAreas/IncreaseAtSunset'
-  trigger:
-    platform: sun
-    event: sunset
-    offset: "-00:30:00"
-  action:
-    - service: climate.set_temperature
-      entity_id: climate.living_room_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.living_room_thermostat','temperature') | float + 0.5}}"
-    - service: climate.set_temperature
-      entity_id: climate.kitchen_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.kitchen_thermostat','temperature') | float + 0.5}}"
-
-- alias: 'Climate/Thermostats/LivingAreas/DecreaseAfterSleep'
-  trigger:
-    - platform: state
-      entity_id: 'switch.status_family_sleeping'
-      to: "on"
-  action:
-    - service: climate.set_temperature
-      entity_id: climate.living_room_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.living_room_thermostat','temperature') | float - 1}}"
-    - service: climate.set_temperature
-      entity_id: climate.kitchen_thermostat
-      data_template:
-        temperature: "{{state_attr('climate.kitchen_thermostat','temperature') | float - 1}}"
-
-
-
-
-
-
-#- alias: 'Climate/Thermostats/IncreaseOnOffpeak'
-#  trigger:
-#    - platform: state
-#      entity_id: sensor.electricity_rate
-#      from: "Peak"
-#      to: "Off-peak"
-#  action:
-#    - service: climate.set_temperature
-#      entity_id: climate.living_room_thermostat
-#      data_template:
-#        temperature: "{{state_attr('climate.living_room_thermostat','temperature') | float + 0.5}}"
-#    - service: climate.set_temperature
-#      entity_id: climate.maggie_s_room_thermostat
-#      data_template:
-#        temperature: "{{state_attr('climate.maggie_s_room_thermostat','temperature') | float + 0.5}}"
-#    - service: climate.set_temperature
-#      entity_id: climate.mary_s_room_thermostat
-#      data_template:
-#        temperature: "{{state_attr('climate.mary_s_room_thermostat','temperature') | float + 0.5}}"
-#    - service: climate.set_temperature
-#      entity_id: climate.main_room_thermostat
-#      data_template:
-#        temperature: "{{state_attr('climate.main_room_thermostat','temperature') | float + 0.5}}"
+        temperature: "{{state_attr('climate.kitchen_thermostat','temperature') | float + 1}}"
+    - service: input_select.select_option
+      data:
+        option: day
+      target:
+        entity_id: input_select.climate_heater_currentphase
 
 
 - alias: 'Climate/ClimateMode/Summer'

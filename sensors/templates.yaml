@@ -1,5 +1,15 @@
 - platform: template
   sensors:
+    minutes_next_mainroom_alarm:
+        friendly_name: "Minutes until next main room alarm"
+        unit_of_measurement: 'm'
+        value_template: >-
+          {% set dummy = states("sensor.time") %}
+          {{((states('sensor.main_room_echo_next_alarm')|as_timestamp|int - now()|as_timestamp|int)/60)|int}}
+        availability_template: "{{ not is_state('sensor.main_room_echo_next_alarm','unavailable') }}"
+        attribute_templates:
+          time: "{{ state_attr('sensor.main_room_echo_next_alarm','Local Time') }}"
+    
     maximum_allowed_humidity:
       unit_of_measurement: '%'
       value_template: "{{ (100.0 * ( e ** ((17.625*(states('sensor.outside_temperature')|float|round(0)))/(243.04+(states('sensor.outside_temperature')|float|round(0)))) ) / ( e ** ((17.625*(states('sensor.maximum_inside_temp')|float|round(0)))/(243.04+(states('sensor.maximum_inside_temp')|float|round(0)))))) | round(0) }}"
