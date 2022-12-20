@@ -33,3 +33,36 @@
       entity_id: switch.standby_kitchen_main
 
 
+- alias: 'Eco/Lights/M1Room/Ceiling/Off'
+  id: '2022121800004'
+  trigger: 
+    - platform: state
+      entity_id: "binary_sensor.f_5im51_203_20"
+      to: "off"
+      for:
+        minutes: 5
+  condition:
+    - condition: state
+      entity_id: light.kitchen_spots
+      state: "on"
+  action:
+    - service: light.turn_off
+      entity_id: light.light_maggies_room_ceiling
+    - service: switch.turn_on
+      entity_id: switch.standby_maggies_room_ceiling
+
+- alias: 'Eco/Lights/M1Room/Ceiling/On'
+  id: '2022121800005'
+  trigger: 
+    - platform: state
+      entity_id: "binary_sensor.f_5im51_203_20"
+      to: "on"
+  condition:
+    - condition: state
+      entity_id: switch.standby_maggies_room_ceiling
+      state: "on"
+  action:
+    - service: light.turn_on
+      entity_id: light.light_maggies_room_ceiling
+    - service: switch.turn_off
+      entity_id: switch.standby_maggies_room_ceiling

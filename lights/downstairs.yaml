@@ -38,3 +38,18 @@
           entity_id: light.lr1, light.lr2, light.lr3
           color_temp: "{{ color_temp }}"
 
+    light_maggies_room_ceiling:
+      friendly_name: "Maggie's Room"
+      value_template: "{{is_state('switch.switch_lights_maggiesroomceiling', 'on') and is_state('light.tradfri_light_7e214152044000d0_65580', 'on')}}"
+      turn_on:
+        - service: switch.turn_on
+          target:
+            entity_id: switch.switch_lights_maggiesroomceiling
+        - service: light.turn_on
+          target:
+            entity_id: light.tradfri_light_7e214152044000d0_65580
+      turn_off:
+        - service: switch.turn_off
+          target:          
+            entity_id: switch.switch_lights_maggiesroomceiling
+

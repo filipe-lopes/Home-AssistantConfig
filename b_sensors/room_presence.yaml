@@ -16,17 +16,3 @@
           minutes: 5
       value_template: "{{is_state('binary_sensor.f5im51_104_20','on')}}"
   
-- platform: 'bayesian'
-  name: presence_livingroom
-  prior: 0.3
-  probability_threshold: 0.85
-  observations:
-    - entity_id: 'binary_sensor.f5im51_103_20'
-      prob_given_true: 1
-      prob_given_false: 0.6
-      platform: 'state'
-      to_state: 'on'
-    - entity_id: 'media_player.mediaroom_63695bc76aab4be58a83d136536b3d23'
-      prob_given_true: 0.9
-      platform: 'state'
-      to_state: 'playing'

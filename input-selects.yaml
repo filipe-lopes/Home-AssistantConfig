@@ -4,6 +4,7 @@ climate_heater_currentphase:
     - "morning"
     - "day"
     - "evening"
+    - "bedtime"
 
 shutter_automation_mode:
   name: Shutter automation mode

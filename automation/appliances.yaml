@@ -2,6 +2,7 @@
   trigger:
     platform: state
     entity_id: binary_sensor.washmachine_state
+    from: 'on'
     to: 'off'
   action:
     - service: notify.all_mobiles
@@ -24,6 +25,7 @@
   trigger:
     platform: state
     entity_id: binary_sensor.drymachine_state
+    from: 'on'
     to: 'off'
   action:
     - service: notify.all_mobiles

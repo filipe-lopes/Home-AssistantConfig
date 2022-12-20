@@ -1,4 +1,5 @@
 - alias: 'Status/FamilyAsleep/On'
+  id: '2022120200001'
   trigger:
     - platform: state
       entity_id: group.lights_downstairs
@@ -64,9 +65,9 @@
     - condition: state
       entity_id: group.motion_upstairs
       state: "off"
-    - condition: state
-      entity_id: binary_sensor.lroom_media_state
-      state: "off"
+#    - condition: state
+#      entity_id: binary_sensor.lroom_media_state
+#      state: "off"
     - condition: state
       entity_id: 'cover.mary_s_room_shutter'
       state: 'closed'
@@ -82,6 +83,7 @@
 
 
 - alias: 'Status/FamilyAsleep/Off'
+  id: '2022120200002'
   trigger:
     - platform: state
       entity_id: 'cover.mary_s_room_shutter'

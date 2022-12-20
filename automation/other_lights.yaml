@@ -79,4 +79,121 @@
       target:
         entity_id: light.back_porch_lights
 
+- alias: 'Lights/GuestBathRoomMirror/TurnOn'
+  id: '2022121800001'
+  mode: queued
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      below: -6.0
+    - platform: state
+      entity_id: cover.downstairs_wc_shutter
+      to: 'closed'
+    - platform: state
+      entity_id: input_boolean.mode_guests
+      to: 'on'
+    - platform: state
+      entity_id: input_boolean.mode_visitors
+      to: 'on'
+    - platform: state
+      entity_id: binary_sensor.guest_bathroom_movement
+      to: 'off'
+  condition:
+    - condition: or
+      conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        below: -5.0
+      - condition: state
+        entity_id: 'cover.downstairs_wc_shutter'
+        state: 'closed'
+#    - condition: or
+#      conditions:
+#      - condition: state
+#        entity_id: 'input_boolean.mode_guests'
+#        state: 'on'
+#      - condition: state
+#        entity_id: 'input_boolean.mode_visitors'
+#        state: 'on'
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.guest_bathroom_mirror
+      data:
+        rgbw_color:
+          - 255
+          - 0
+          - 0
+          - 0
+        brightness: 50
+
+
+- alias: 'Lights/GuestBathRoomMirror/TurnOff'
+  id: '2022121800002'
+  mode: queued
+  trigger:
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: -5.0
+    - platform: state
+      entity_id: cover.downstairs_wc_shutter
+      to: 'open'
+#    - platform: state
+#      entity_id: input_boolean.mode_guests
+#      to: 'off'
+#    - platform: state
+#      entity_id: input_boolean.mode_visitors
+#      to: 'off'
+  condition:
+    - condition: state
+      entity_id: 'light.guest_bathroom_mirror'
+      state: 'on'
+    - condition: or
+      conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: -6.0
+      - condition: state
+        entity_id: 'cover.downstairs_wc_shutter'
+        state: 'open'
+#      - condition: state
+#        entity_id: 'input_boolean.mode_guests'
+#        state: 'off'
+#      - condition: state
+#        entity_id: 'input_boolean.mode_visitors'
+#        state: 'off'
+  action:
+    - service: light.turn_off
+      target:
+        entity_id: light.guest_bathroom_mirror
+
+
+- alias: 'Lights/GuestBathRoomMirror/Movement'
+  id: '2022121800003'
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.guest_bathroom_movement
+      to: 'on'
+  condition:
+    - condition: state
+      entity_id: 'light.guest_bathroom_mirror'
+      state: 'on'
+  action:
+    - service: light.turn_on
+      target:
+        entity_id: light.guest_bathroom_mirror
+      data:
+        rgbw_color:
+          - 255
+          - 255
+          - 255
+          - 255
+        brightness: 255
+
+
 
