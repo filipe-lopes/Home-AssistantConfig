@@ -124,7 +124,7 @@
       data:
         rgbw_color:
           - 255
-          - 0
+          - 255
           - 0
           - 0
         brightness: 50
@@ -189,11 +189,11 @@
         entity_id: light.guest_bathroom_mirror
       data:
         rgbw_color:
+          - 0
+          - 0
+          - 0
           - 255
-          - 255
-          - 255
-          - 255
-        brightness: 255
+        brightness: 1
 
 
 

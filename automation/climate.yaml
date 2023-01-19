@@ -20,6 +20,7 @@
           - climate.mary_s_room_thermostat
           - climate.living_room_thermostat
           - climate.kitchen_thermostat
+          - climate.living_room_ac
 
 
 - alias: 'Climate/Thermostats/FamilyHome'
@@ -65,7 +66,9 @@
       data_template:
         temperature: "{{state_attr('climate.main_room_thermostat','temperature') | float + 1}}"
     - service: climate.set_temperature
-      entity_id: climate.living_room_thermostat
+      entity_id: 
+        - climate.living_room_thermostat
+        - climate.living_room_ac
       data_template:
         temperature: "{{state_attr('climate.living_room_thermostat','temperature') | float + 2}}"
     - service: climate.set_temperature
@@ -139,6 +142,10 @@
       entity_id: climate.kitchen_thermostat
       data_template:
         temperature: "{{state_attr('climate.kitchen_thermostat','temperature') | float - 3}}"
+    - service: climate.turn_off
+      target:
+        entity_id:
+          - climate.living_room_ac
     - service: input_select.select_option
       data:
         option: night

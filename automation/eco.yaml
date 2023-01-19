@@ -43,7 +43,7 @@
         minutes: 5
   condition:
     - condition: state
-      entity_id: light.kitchen_spots
+      entity_id: light.light_maggies_room_ceiling
       state: "on"
   action:
     - service: light.turn_off

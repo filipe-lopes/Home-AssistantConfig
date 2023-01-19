@@ -147,11 +147,11 @@ api:
 logger:
   default: error
 #  default: debug
-#  logs:
+  logs:
 #    homeassistant.components.mqtt: debug
 #    alexa: debug
 #    homeassistant.components.mysensors: debug
-#    mysensors: debug
+    mysensors: debug
 
 mobile_app:
 
@@ -207,12 +207,6 @@ input_boolean:
     name: Water heating auto electric backup
 
 input_number: !include input-number.yaml
-
-life360:
-  accounts:
-    username: !secret life360_user
-    password: !secret life360_pass
-  prefix: life360
 
 notify:
   - name: all_mobiles

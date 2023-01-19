@@ -1,21 +1,21 @@
-- platform: mqtt
-  name: Maggie's Room Shutter Temp
-  state_topic: "shellies/shellyswitch25-E62EC7/temperature"
-  device_class: temperature
-  value_template: "{{value | round}}"
-  unit_of_measurement: "°C"
+#- platform: mqtt
+#  name: Maggie's Room Shutter Temp
+#  state_topic: "shellies/shellyswitch25-E62EC7/temperature"
+#  device_class: temperature
+#  value_template: "{{value | round}}"
+#  unit_of_measurement: "°C"
 
-- platform: mqtt
-  name: Mary's Room Shutter Temp
-  state_topic: "shellies/shellyswitch25-E4E684/temperature"
-  device_class: temperature
-  value_template: "{{value | round}}"
-  unit_of_measurement: "°C"
+#- platform: mqtt
+#  name: Mary's Room Shutter Temp
+#  state_topic: "shellies/shellyswitch25-E4E684/temperature"
+#  device_class: temperature
+#  value_template: "{{value | round}}"
+#  unit_of_measurement: "°C"
 
-- platform: mqtt
-  name: Office Shutter Temp
-  state_topic: "shellies/shellyswitch25-00CA6C/temperature"
-  device_class: temperature
-  value_template: "{{value | round}}"
-  unit_of_measurement: "°C"
+#- platform: mqtt
+#  name: Office Shutter Temp
+#  state_topic: "shellies/shellyswitch25-00CA6C/temperature"
+#  device_class: temperature
+#  value_template: "{{value | round}}"
+#  unit_of_measurement: "°C"
 

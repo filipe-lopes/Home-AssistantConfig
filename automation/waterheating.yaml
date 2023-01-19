@@ -61,6 +61,7 @@
         entity_id: automation.water_electricbackup_off
 
 - alias: 'Water/GasBackup/On'
+  id: '2023010600001'
   trigger:
     - platform: numeric_state
       entity_id: 
@@ -68,17 +69,25 @@
         - input_number.waterheating_temp_lt
       below: 0
       value_template: '{{(states.sensor.solar_heater_water_temperature.state|float) - (states.input_number.waterheating_temp_lt.state | float)}}'
+    - platform: numeric_state
+      entity_id: sensor.minutes_next_mainroom_alarm
+      below: 30
     - platform: state
       entity_id: switch.status_family_sleeping
       to: "off"
   condition:
+    - condition: or
+      conditions:
+      - condition: numeric_state
+        entity_id: sensor.minutes_next_mainroom_alarm
+        below: 30
+      - condition: state
+        entity_id: switch.status_family_sleeping
+        state: "off"
     - condition: numeric_state
       entity_id: sensor.solar_heater_water_temperature
       below: 0
       value_template: '{{(states.sensor.solar_heater_water_temperature.state|float) - (states.input_number.waterheating_temp_lt.state | float)}}'
-    - condition: state
-      entity_id: switch.status_family_sleeping
-      state: "off"
     - condition: state
       entity_id: switch.waterheating_gas_heater
       state: "off"

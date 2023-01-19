@@ -1,4 +1,5 @@
 - alias: 'Routine/DisableNoiseAtBedtime'
+  id: '2022122700111'
   trigger:
     platform: time
     at: "21:00:00"
@@ -17,6 +18,7 @@
       entity_id: humidifier.downstairs
 
 - alias: 'Routine/EnableNoiseAtWakeup'
+  id: '2022122700011'
   mode: queued
   trigger:
     - platform: state
