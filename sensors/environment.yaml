@@ -94,10 +94,10 @@
 # Inside air quality
 
 # Air quality
-- platform: waqi
-  token: !secret waqi_token 
-  locations:
-    - entrecampos
+#- platform: waqi
+#  token: !secret waqi_token 
+#  locations:
+#    - entrecampos
 
 #Mold
 #- platform: mold_indicator

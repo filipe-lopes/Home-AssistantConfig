@@ -1,6 +1,11 @@
   test_group:
     entities:
       - light.living_room_leds
+  
+  perimeter_lights:
+    entities:
+      - light.perimeter_lights_east
+      - switch.perimeter_lights_deck
 
   motion_downstairs:
     entities:

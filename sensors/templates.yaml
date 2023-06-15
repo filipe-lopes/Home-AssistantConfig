@@ -16,7 +16,7 @@
 
     outside_waterdeposit_level:
       unit_of_measurement: '%'
-      value_template: "{{ ((states.sensor.outside_waterdeposit_quantity.state | float) / 650 * 100) | round }}"
+      value_template: "{{ ((states.sensor.outside_waterdeposit_quantity.state | float) / 575 * 100) | round }}"
 
     outside_waterdeposit_quantity:
       unit_of_measurement: 'l'

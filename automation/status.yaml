@@ -1,5 +1,7 @@
 - alias: 'Status/FamilyAsleep/On'
   id: '2022120200001'
+  trace:
+      stored_traces: 15
   trigger:
     - platform: state
       entity_id: group.lights_downstairs
@@ -84,6 +86,8 @@
 
 - alias: 'Status/FamilyAsleep/Off'
   id: '2022120200002'
+  trace:
+      stored_traces: 15
   trigger:
     - platform: state
       entity_id: 'cover.mary_s_room_shutter'

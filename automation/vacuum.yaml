@@ -1,3 +1,107 @@
+- alias: 'Vacuum/Kitchen/CleanAfterDinnerWeekdays'
+  trigger: 
+    - platform: state
+      entity_id: "binary_sensor.f_5im51_104_20"
+      to: "off"
+      for:
+        minutes: 15
+    - platform: state
+      entity_id: light.kitchen_spots
+      to: "off"
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+    - condition: state
+      entity_id: light.kitchen_spots
+      state: "off"
+    - condition: state
+      entity_id: light.kitchen_table
+      state: "off"
+    - condition: state
+      entity_id: switch.status_vacuum_kitchen_hasruntoday
+      state: "off"
+    - condition: state
+      entity_id: binary_sensor.f_5im51_104_20
+      state: "off"
+      for:
+        minutes: 15
+    - condition: time
+      after: "19:30:00"
+      before: "21:15:00"
+  action:
+    - service: vacuum.send_command
+      data:
+        entity_id: vacuum.rosie
+        command: start
+        params:
+          pmap_id: 6zrzysUwTwqmEx4a0a5W0Q
+          ordered: 1
+          regions:
+            - region_id: '4'
+              type: rid           
+          user_pmapv_id: 230324T191013
+    - service: switch.turn_on
+      entity_id: switch.status_vacuum_kitchen_hasruntoday
+    - delay: "04:00"     
+    - service: switch.turn_off
+      entity_id: switch.status_vacuum_kitchen_hasruntoday
+
+- alias: 'Vacuum/Kitchen/CleanAfterDinnerWeekend'
+  trigger: 
+    - platform: state
+      entity_id: "binary_sensor.f_5im51_104_20"
+      to: "off"
+      for:
+        minutes: 15
+    - platform: state
+      entity_id: light.kitchen_spots
+      to: "off"
+  condition:
+    - condition: time
+      weekday:
+        - fri
+        - sat
+        - sun
+    - condition: state
+      entity_id: light.kitchen_spots
+      state: "off"
+    - condition: state
+      entity_id: light.kitchen_table
+      state: "off"
+    - condition: state
+      entity_id: binary_sensor.f_5im51_104_20
+      state: "off"
+    - condition: state
+      entity_id: switch.status_vacuum_kitchen_hasruntoday
+      state: "off"
+      for:
+        minutes: 15
+    - condition: time
+      after: "19:30:00"
+      before: "21:45:00"
+  action:
+    - service: vacuum.send_command
+      data:
+        entity_id: vacuum.rosie
+        command: start
+        params:
+          pmap_id: 6zrzysUwTwqmEx4a0a5W0Q
+          ordered: 1
+          regions:
+            - region_id: '4'
+              type: rid           
+          user_pmapv_id: 230324T191013
+    - service: switch.turn_on
+      entity_id: switch.status_vacuum_kitchen_hasruntoday
+    - delay: "04:00"     
+    - service: switch.turn_off
+      entity_id: switch.status_vacuum_kitchen_hasruntoday
+
+
 - alias: 'Vacuum/All/Clean'
   trigger:
     - platform: state
@@ -9,11 +113,11 @@
   condition:
   - condition: and
     conditions:
-    - condition: time
-      weekday:
-      - mon
-      - wed
-      - fri
+ #   - condition: time
+ #     weekday:
+ #     - mon
+ #     - wed
+ #     - fri
     - condition: state
       entity_id: 'group.family'
       state: 'not_home'

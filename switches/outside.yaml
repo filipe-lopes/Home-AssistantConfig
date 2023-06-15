@@ -37,3 +37,24 @@
       command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.valve6\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
       command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.valve6'
       value_template: '{{ value_json.state == "on" }}'
+    garden_main_valve:
+      friendly_name: Garden irrigation main valve
+      command_on: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.mainvalve\"}" http://172.20.1.6:8123/api/services/switch/turn_on'
+      command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.mainvalve\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
+      command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.mainvalve'
+      value_template: '{{ value_json.state == "on" }}'
+    garden_preference_deposit:
+      friendly_name: Garden irrigation from deposit
+      command_on: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.pref_deposit\"}" http://172.20.1.6:8123/api/services/switch/turn_on'
+      command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.pref_deposit\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
+      command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.pref_deposit'
+      value_template: '{{ value_json.state == "on" }}'
+    garden_preference_network:
+      friendly_name: Garden irrigation from network
+      command_on: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.pref_network\"}" http://172.20.1.6:8123/api/services/switch/turn_on'
+      command_off: 'curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" -d "{\"entity_id\": \"switch.pref_network\"}" http://172.20.1.6:8123/api/services/switch/turn_off'
+      command_state: 'curl -X GET -H "Content-Type: application/json" -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI4MmExYTUxZDBjNDA0OTkwYTFlNWM0YmFjODY1Y2FjYyIsImlhdCI6MTYxNTc2MDc3NiwiZXhwIjoxOTMxMTIwNzc2fQ.uCcA2Uj5LYIjTQQKuX2Ys4Y9eVweZ08XSdL8ZNaj5sY" http://172.20.1.6:8123/api/states/switch.pref_network'
+      value_template: '{{ value_json.state == "on" }}'
+
+
+

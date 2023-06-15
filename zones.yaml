@@ -15,12 +15,6 @@
   longitude: !secret zone_jm_lon
   radius: 100
   icon: mdi:briefcase
-
-- name: BPI
-  latitude: !secret zone_bpi_lat
-  longitude: !secret zone_bpi_lon
-  radius: 50
-  icon: mdi:briefcase
  
 - name: Pica-Pau
   latitude: !secret zone_picapau_lat

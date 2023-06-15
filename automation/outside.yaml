@@ -14,8 +14,8 @@
         - condition: sun
           after: sunset
   action:
-    service: light.turn_on
-    entity_id: light.perimeter_lights
+    service: homeassistant.turn_on
+    entity_id: group.perimeter_lights
 
 - alias: 'Turn perimeter lights off'
   trigger:
@@ -25,48 +25,6 @@
       event: sunrise
       offset: "-00:30:00"
   action:
-    service: light.turn_off
-    entity_id: light.perimeter_lights
+    service: homeassistant.turn_off
+    entity_id: group.perimeter_lights
 
-- alias: 'Outside/Garder/WaterDepositRefill'
-  id: '1617198475391'
-  trigger:
-    - platform: time
-      at: '3:00:00'
-    - platform: numeric_state
-      entity_id: sensor.utility_power
-      below: -300
-      for:
-        minutes: 5
-  condition:
-    - condition: numeric_state
-      entity_id: sensor.outside_waterdeposit_level
-      below: 95
-  action:
-    - choose:
-      - alias: "Outside/Garder/WaterDepositRefill/SolarPower"
-        conditions:
-        - condition: numeric_state
-          entity_id: sensor.utility_power
-          below: -300
-        sequence:
-          - service: switch.turn_on
-            entity_id: switch.well_pump 
-          - wait_template: "{{ (states.sensor.outside_waterdeposit_level.state|int) > 98 }}"
-            timeout: '00:05:00'
-          - wait_template: "{{ ((states.sensor.outside_waterdeposit_level.state|int) > 98) or (states.sensor.utility_power.state | int > -10) }}"
-          - service: switch.turn_off
-            entity_id: switch.well_pump
-
-      - alias: "Outside/Garder/WaterDepositRefill/NightTarif"
-        conditions:
-        - condition: numeric_state
-          entity_id: sensor.outside_waterdeposit_level
-          below: 40
-        sequence:
-          - service: switch.turn_on
-            entity_id: switch.well_pump
-          - wait_template: "{{ (states.sensor.outside_waterdeposit_level.state|int) > 90}}"
-            timeout: '00:20:00'
-          - service: switch.turn_off
-            entity_id: switch.well_pump
