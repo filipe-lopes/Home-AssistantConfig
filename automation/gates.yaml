@@ -25,3 +25,4 @@
           - condition: state
             entity_id: binary_sensor.sliding_gate_contact_sensor
             state: "off"
+

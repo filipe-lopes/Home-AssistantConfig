@@ -104,7 +104,7 @@
   condition:
     - condition: sun
       after: sunrise
-      after_offset: "-02:00:00"
+      after_offset: "-03:00:00"
     - condition: state
       entity_id: switch.status_family_sleeping
       state: "on"

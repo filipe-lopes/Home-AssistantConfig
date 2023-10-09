@@ -3,10 +3,10 @@
   name: devices_srv01_wol
   host: !secret wol_srv1_ip
 
-- platform: command_line
-  switches:
-    devices_srv01_poweroff:
-      command_off: !secret srv1_shutdown
+#- platform: command_line
+#  switches:
+#    devices_srv01_poweroff:
+#      command_off: !secret srv1_shutdown
 
 - platform: template
   switches:

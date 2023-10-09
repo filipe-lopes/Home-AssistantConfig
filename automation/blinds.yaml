@@ -1,5 +1,7 @@
 - alias: 'Blinds/UpdatePosition'
   id: '2021110700001'
+  trace:
+    stored_traces: 10
   trigger:
     - platform: numeric_state
       entity_id: sun.sun
@@ -13,6 +15,10 @@
       entity_id: sun.sun
       attribute: elevation
       above: 10
+    - platform: numeric_state
+      entity_id: sun.sun
+      attribute: elevation
+      above: -3
     - platform: sun
       event: sunset
       offset: "-00:30:00"

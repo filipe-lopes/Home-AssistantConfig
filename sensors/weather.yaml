@@ -19,28 +19,6 @@
 #    - temp_min
 #    - temp_max
 
-- platform: darksky
-  api_key: 9278986952a2041e04b7bc9a33740b0d
-  scan_interval:
-    minutes: 30
-  forecast: 
-    - 0
-    - 1
-  monitored_conditions:
-    - temperature
-    - apparent_temperature
-    - humidity
-    - precip_probability
-    - precip_intensity
-    - precip_type
-    - temperature_min
-    - temperature_max
-    - temperature_high
-    - temperature_low
-    - wind_speed
-    - pressure
-    - wind_bearing
-    - icon
 
 
 

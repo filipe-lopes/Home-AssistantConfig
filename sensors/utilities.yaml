@@ -2,7 +2,15 @@
   sensors:
     home_power_consuption:
       friendly_name: Total power
-      value_template: "{{((states.sensor.utility_power.state|float)+(states.sensor.solar_power.state|float))|round}}"
+      value_template: "{{((-1)*(states.sensor.power_meter_active_power.state|float)+(states.sensor.inverter_active_power.state|float))|round}}"
+      unit_of_measurement: "W"
+    utility_power:
+      friendly_name: Utility power
+      value_template: "{{(-1)*(states.sensor.power_meter_active_power.state|float|round)}}"
+      unit_of_measurement: "W"
+    solar_power:
+      friendly_name: Solar power
+      value_template: "{{states.sensor.inverter_active_power.state|round}}"
       unit_of_measurement: "W"
     energy_today:
       value_template: "{{states.sensor.daily_energy_in_peak.state|int + states.sensor.daily_energy_in_offpeak.state|int}}"

@@ -23,6 +23,8 @@ cloud:
 
 cover: !include_dir_merge_list covers/
 
+command_line: !include command_line.yaml
+
 camera: !include camera.yaml
 
 climate: !include climate.yaml
@@ -215,11 +217,6 @@ notify:
     services:
       - service: mobile_app_iphone_de_patricia
       - service: mobile_app_sm_a307fn
-
-weather:
-  - platform: darksky
-    api_key: !secret darksky_api
-    mode: daily
 
 zoneminder:
   - host: !secret zoneminder_am_ip

@@ -22,6 +22,7 @@
   trigger:
     platform: webhook
     webhook_id: a53b8ea0-41b1-4063-a3a3-1f32b046d5f6
+    local_only: true
   action:
     - service: switch.toggle
       data:
@@ -31,6 +32,7 @@
   trigger:
     platform: webhook
     webhook_id: 767460cf-56df-47e4-bab8-627193c615b5
+    local_only: true
   action:
     - service: light.toggle
       data:
