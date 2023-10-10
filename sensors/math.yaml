@@ -1,3 +1,8 @@
+- platform: integration
+  source: sensor.huawei_pv_power
+  name: huawei_pv_energy
+  round: 3
+
 - platform: statistics
   name: Washmachine Power Stats
   entity_id:  sensor.washing_machine_power

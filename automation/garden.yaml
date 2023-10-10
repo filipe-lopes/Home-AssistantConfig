@@ -1,0 +1,214 @@
+- alias: 'Outside/Garden/WaterDepositSafetyOff'
+  id: '2023061800001'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.outside_waterdeposit_level
+      above: 98
+      for:
+        minutes: 10
+    - platform: numeric_state
+      entity_id: sensor.outside_waterdeposit_level
+      above: 99
+
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outside_waterdeposit_level
+      below: 100
+  action:
+    - service: switch.turn_off
+      entity_id: switch.well_pump
+
+- alias: 'Outside/Garden/WaterDepositRefill'
+  id: '1617198475391'
+  trigger:
+    - platform: time
+      at: '3:00:00'
+    - platform: numeric_state
+      entity_id: sensor.utility_power
+      below: -300
+      for:
+        minutes: 5
+    - platform: numeric_state
+      entity_id: sensor.outside_waterdeposit_level
+      below: 30
+
+  condition:
+    - condition: numeric_state
+      entity_id: sensor.outside_waterdeposit_level
+      below: 100
+  action:
+    - choose:
+      - alias: "Outside/Garder/WaterDepositRefill/LowLevel"
+        conditions:
+        - condition: numeric_state
+          entity_id: sensor.outside_waterdeposit_level
+          below: 30
+        sequence:
+          - service: switch.turn_on
+            entity_id: switch.well_pump 
+          - wait_template: "{{ (states.sensor.outside_waterdeposit_level.state|int) > 50 }}"
+            timeout: '00:05:00'
+          - wait_template: "{{ ((states.sensor.outside_waterdeposit_level.state|int) > 50) }}"
+            timeout: '01:30:00'
+          - service: switch.turn_off
+            entity_id: switch.well_pump
+     
+      - alias: "Outside/Garder/WaterDepositRefill/SolarPower"
+        conditions:
+        - condition: numeric_state
+          entity_id: sensor.utility_power
+          below: -300
+        sequence:
+          - service: switch.turn_on
+            entity_id: switch.well_pump 
+          - wait_template: "{{ (states.sensor.outside_waterdeposit_level.state|int) > 98 }}"
+            timeout: '00:05:00'
+          - wait_template: "{{ ((states.sensor.outside_waterdeposit_level.state|int) > 98) or (states.sensor.utility_power.state | int > -10) }}"
+            timeout: '01:30:00'
+          - service: switch.turn_off
+            entity_id: switch.well_pump
+
+      - alias: "Outside/Garder/WaterDepositRefill/NightTarif"
+        conditions:
+        - condition: state
+          entity_id: sensor.electricity_rate
+          state: "Off-peak"
+        sequence:
+          - service: switch.turn_on
+            entity_id: switch.well_pump
+          - wait_template: "{{ (states.sensor.outside_waterdeposit_level.state|int) > 98 }}"
+            timeout: '00:05:00'
+          - wait_template: "{{ (states.sensor.outside_waterdeposit_level.state|int) > 98 or is_state('sensor.electricity_rate','Peak') }}"
+            timeout: '01:30:00'
+          - service: switch.turn_off
+            entity_id: switch.well_pump
+
+
+- alias: 'Outside/Garden/IrrigationEastLawn'
+  id: '2023061700001'
+  mode: single
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: '-1:00:00'
+    - platform: sun
+      event: sunrise
+      offset: '3:00:00'
+    - platform: sun
+      event: sunrise
+    - platform: time
+      at: '02:00:00'
+  condition:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: weather.loures
+          state: rainy
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: switch.garden_irrigation_from_deposit
+              state: 'on'
+          sequence:
+            - service: switch.turn_on
+              target:
+                entity_id: switch.garden_irrigation_from_network
+            - service: switch.turn_on
+              target:
+                entity_id:
+                  - switch.garden_irrigation_main_valve
+                  - switch.irrigation_area_1
+            - delay:
+                hours: 0
+                minutes: 0
+                seconds: 5
+                milliseconds: 0
+            - service: switch.turn_on
+              target:
+                entity_id: switch.garden_irrigation_from_deposit
+      default:
+        - service: switch.turn_on
+          target:
+            entity_id:
+              - switch.switch.garden_irrigation_main_valve
+              - switch.irrigation_area_1
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
+    - service: switch.turn_off
+      target:
+        entity_id:
+          - switch.irrigation_area_1
+          - switch.garden_irrigation_main_valve
+
+
+- alias: 'Outside/Garden/WestLawn'
+  id: '2023061700002'
+  mode: single
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: '02:15:00'
+    - platform: sun
+      event: sunrise
+      offset: '-1:15:00'
+    - platform: time
+      at: '02:15:00'
+  condition:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: weather.loures
+          state: rainy
+  action:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: switch.garden_irrigation_from_deposit
+              state: 'on'
+          sequence:
+            - service: switch.turn_on
+              target:
+                entity_id: switch.garden_irrigation_from_network
+            - service: switch.turn_on
+              target:
+                entity_id:
+                  - switch.garden_irrigation_main_valve
+                  - switch.irrigation_area_4
+                  - switch.irrigation_area_5
+            - delay:
+                hours: 0
+                minutes: 0
+                seconds: 5
+                milliseconds: 0
+            - service: switch.turn_on
+              target:
+                entity_id: switch.garden_irrigation_from_deposit
+      default:
+        - service: switch.turn_on
+          target:
+            entity_id:
+              - switch.garden_irrigation_main_valve
+              - switch.irrigation_area_4
+              - switch.irrigation_area_5
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
+    - service: switch.turn_off
+      target:
+        entity_id:
+          - switch.irrigation_area_4
+          - switch.irrigation_area_5
+          - switch.garden_irrigation_main_valve
+
+
+
+
+
+
+

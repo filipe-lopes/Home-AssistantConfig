@@ -1,0 +1,45 @@
+- alias: 'Cars/Fiat500/DeepRefreshNormal'
+  trigger:
+    platform: time_pattern
+    hours: "/2"
+  condition:
+    - condition: state
+      entity_id: sensor.car_evinfo_battery_pluginstatus
+      state: "False"
+    - condition: state
+      entity_id:  sensor.car_evinfo_battery_chargingstatus
+      state: 'NOT_CHARGING'
+  action:
+    - service: button.press
+      data:
+        entity_id: button.deeprefresh
+
+- alias: 'Cars/Fiat500/DeepRefreshConnected'
+  trigger:
+    platform: time_pattern
+    hours: "/1"
+  condition:
+    - condition: state
+      entity_id: sensor.car_evinfo_battery_pluginstatus
+      state: "True"
+    - condition: state
+      entity_id:  sensor.car_evinfo_battery_chargingstatus
+      state: 'NOT_CHARGING'
+  action:
+    - service: button.press
+      data:
+        entity_id: button.deeprefresh
+
+- alias: 'Cars/Fiat500/DeepRefreshCharging'
+  trigger:
+    platform: time_pattern
+    minutes: "/30"
+  condition:
+    - condition: state
+      entity_id:  sensor.car_evinfo_battery_chargingstatus
+      state: 'CHARGING'
+  action:
+    - service: button.press
+      data:
+        entity_id: button.deeprefresh
+
