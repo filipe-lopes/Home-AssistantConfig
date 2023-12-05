@@ -1,3 +1,19 @@
+- alias: 'Garden/UpdateLastRained'
+  id: '2023102900001'
+  trigger:
+    - platform: state
+      entity_id: weather.loures
+      to: "rainy"
+    - platform: state
+      entity_id: weather.loures
+      from: "rainy"
+  action:
+    - service: mqtt.publish
+      data:
+        topic: "home/l/data/lastrained"
+        payload_template: "{{ now() }}"
+        retain: "true"
+
 - alias: 'Outside/Garden/WaterDepositSafetyOff'
   id: '2023061800001'
   trigger:
@@ -99,11 +115,8 @@
     - platform: time
       at: '02:00:00'
   condition:
-    - condition: not
-      conditions:
-        - condition: state
-          entity_id: weather.loures
-          state: rainy
+    - condition: template
+      value_template: "{{(as_timestamp(now())-as_timestamp(states.sensor.last_rained.state)) > 172800}}"
   action:
     - choose:
         - conditions:
@@ -158,11 +171,8 @@
     - platform: time
       at: '02:15:00'
   condition:
-    - condition: not
-      conditions:
-        - condition: state
-          entity_id: weather.loures
-          state: rainy
+    - condition: template
+      value_template: "{{(as_timestamp(now())-as_timestamp(states.sensor.last_rained.state)) > 172800}}"
   action:
     - choose:
         - conditions:

@@ -63,9 +63,9 @@ history:
       - binary_sensor
       - sensor
 
-home_connect:
-  client_id: !secret homeconnect_id
-  client_secret: !secret homeconnect_secret
+#home_connect:
+#  client_id: !secret homeconnect_id
+#  client_secret: !secret homeconnect_secret
 
 input_select: !include input-selects.yaml
 
@@ -106,19 +106,19 @@ system_health:
 
 utility_meter:
   daily_energy_out:
-    source: sensor.utility_energy_out
+    source: sensor.power_meter_exported
     cycle: daily 
     tariffs:
       - peak
       - offpeak
   daily_energy_in:
-    source: sensor.utility_energy_in
+    source: sensor.power_meter_consumption
     cycle: daily
     tariffs:
       - peak
       - offpeak
   monthly_energy_in:
-    source: sensor.utility_energy_in
+    source: sensor.power_meter_consumption
     cycle: monthly
     tariffs:
       - peak

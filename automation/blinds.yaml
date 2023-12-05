@@ -682,8 +682,8 @@
             data:
               variables:
                 group: group.shutters_southup
-                normal: 85
-                bright: 35
+                normal: 95
+                bright: 100
                 safe: 5
           - service: script.turn_on
             entity_id: script.shutter_move_group
@@ -691,7 +691,7 @@
               variables:
                 group: group.shutters_westup
                 normal: 85
-                bright: 35
+                bright: 95
                 safe: 5
           - service: script.turn_on
             entity_id: script.shutter_move_group
@@ -699,7 +699,7 @@
               variables:
                 group: group.shutters_westdown
                 normal: 85
-                bright: 35
+                bright: 95
                 safe: 5
           - service: script.turn_on
             entity_id: script.shutter_move_group
@@ -707,7 +707,7 @@
               variables:
                 group: group.shutters_eastup
                 normal: 85
-                bright: 90
+                bright: 95
                 safe: 15
           - service: script.turn_on
             entity_id: script.shutter_move_group
@@ -715,7 +715,7 @@
                variables:
                 group: group.shutters_eastdown
                 normal: 85
-                bright: 90
+                bright: 95
                 safe: 15
           - service: script.turn_on
             entity_id: script.shutter_move_group
@@ -759,7 +759,7 @@
               variables:
                 group: group.shutters_southup
                 normal: 85
-                bright: 35
+                bright: 100
                 safe: 5
           - service: script.turn_on
             entity_id: script.shutter_move_group
@@ -767,7 +767,7 @@
               variables:
                 group: group.shutters_westup
                 normal: 85
-                bright: 90
+                bright: 95
                 safe: 5
           - service: script.turn_on
             entity_id: script.shutter_move_group
@@ -775,7 +775,7 @@
               variables:
                 group: group.shutters_westdown
                 normal: 85
-                bright: 90
+                bright: 95
                 safe: 5
           - service: script.turn_on
             entity_id: script.shutter_move_group
@@ -783,7 +783,7 @@
               variables:
                 group: group.shutters_eastup
                 normal: 85
-                bright: 35
+                bright: 95
                 safe: 0
           - service: script.turn_on
             entity_id: script.shutter_move_group
@@ -791,7 +791,7 @@
               variables:
                 group: group.shutters_eastdown
                 normal: 85
-                bright: 35
+                bright: 95
                 safe: 0
 
 

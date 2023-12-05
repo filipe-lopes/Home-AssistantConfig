@@ -16,14 +16,6 @@
           minutes: 2
       value_template: "{{states('sensor.drymachine_power_stats')|float > 50}}"
 
-    dishwasher_state:
-      friendly_name: Dishwasher state
-      delay_on:
-          minutes: 1
-      delay_off:
-          minutes: 7
-      value_template: "{{states('sensor.dishwasher_power_stats')|float > 5}}"
-
     lroom_media_state:
       friendly_name: Living room media state
       delay_on:

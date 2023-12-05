@@ -257,7 +257,7 @@
   trigger:
     - platform: numeric_state
       entity_id: sensor.upstairs_temp
-      below: 21
+      below: 22
       for:
         hours: 48
     - platform: numeric_state

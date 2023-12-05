@@ -1,22 +1,22 @@
-- sensor:
-    name: Peimar Inverter 01 AC Power
-    command: "curl http://172.20.2.7/status/status.php"
-    unit_of_measurement: "W"
-    value_template: " {{ value.split(',')[23] | int }} "
-    scan_interval: 30
-
-- sensor:
-    name: Peimar Inverter 01 DC Power
-    command: "curl http://172.20.2.7/status/status.php"
-    unit_of_measurement: "W"
-    value_template: " {{ ((value.split(',')[5] | float) / 10 * (value.split(',')[6] | float) / 100) | round(2) }} "
-    scan_interval: 30
-
-- sensor:
-    name: Peimar Inverter 01 Efficiency
-    command: "curl http://172.20.2.7/status/status.php"
-    unit_of_measurement: "%"
-    value_template: " {{ ((value.split(',')[23] | int)/ ((value.split(',')[5] | float) / 10 * (value.split(',')[6] | float) / 100)*100) | round(1) }} "
+#- sensor:
+#    name: Peimar Inverter 01 AC Power
+#    command: "curl http://172.20.2.7/status/status.php"
+#    unit_of_measurement: "W"
+#    value_template: " {{ value.split(',')[23] | int }} "
+#    scan_interval: 30
+#
+#- sensor:
+#    name: Peimar Inverter 01 DC Power
+#    command: "curl http://172.20.2.7/status/status.php"
+#    unit_of_measurement: "W"
+#    value_template: " {{ ((value.split(',')[5] | float) / 10 * (value.split(',')[6] | float) / 100) | round(2) }} "
+#    scan_interval: 30
+#
+#- sensor:
+#    name: Peimar Inverter 01 Efficiency
+#    command: "curl http://172.20.2.7/status/status.php"
+#    unit_of_measurement: "%"
+#    value_template: " {{ ((value.split(',')[23] | int)/ ((value.split(',')[5] | float) / 10 * (value.split(',')[6] | float) / 100)*100) | round(1) }} "
 
 - switch:
     name: Irrigation area 1

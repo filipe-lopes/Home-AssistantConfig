@@ -58,6 +58,7 @@
   shutters_westdown:
     entities:
       - cover.cinema_room_shutter
+      - cover.garage_shutter
 
   shutters_eastdown:
     name: East side downstairs rollershutters
@@ -89,6 +90,7 @@
       - cover.kitchen_door_shutter
       - cover.downstairs_wc_shutter
       - cover.cinema_room_shutter
+      - cover.garage_shutter
 
   shutters_kitchen:
       - cover.kitchen_shutter
@@ -107,6 +109,7 @@
       - cover.cinema_room_shutter
       - cover.main_room_wc_shutter
       - cover.upstairs_wc_shutter
+      - cover.garage_shutter
 
   family:
     entities:
