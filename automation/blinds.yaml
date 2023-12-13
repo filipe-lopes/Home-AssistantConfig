@@ -49,12 +49,6 @@
       - condition: state
         entity_id: 'switch.preference_noisy_automations'
         state: 'on'
-      - condition: state
-        entity_id: 'input_boolean.mode_visitors'
-        state: 'off'
-      - condition: state
-        entity_id: 'input_boolean.mode_guests'
-        state: 'off'
   action:
     - choose:
       - alias: "Summer/FamilyNotHome/Morning"
@@ -65,6 +59,9 @@
         - condition: state
           entity_id: 'group.family'
           state: 'not_home'
+        - condition: state
+          entity_id: 'input_boolean.mode_guests'
+          state: 'off'
         - condition: sun
           before: sunset
           before_offset: "-00:35:00"
@@ -147,6 +144,9 @@
         - condition: state
           entity_id: 'group.family'
           state: 'not_home'
+        - condition: state
+          entity_id: 'input_boolean.mode_guests'
+          state: 'off'
         - condition: sun
           before: sunset
           before_offset: "-00:35:00"
@@ -220,9 +220,14 @@
         - condition: state
           entity_id: input_select.mode_climate
           state: 'Summer'
-        - condition: state
-          entity_id: 'group.family'
-          state: 'home'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: 'group.family'
+              state: 'home'
+            - condition: state
+              entity_id: 'input_boolean.mode_guests'
+              state: 'on'
         - condition: state
           entity_id: 'input_boolean.mode_automate_b_whenhome'
           state: 'on'
@@ -307,9 +312,14 @@
         - condition: state
           entity_id: input_select.mode_climate
           state: 'Summer'
-        - condition: state
-          entity_id: 'group.family'
-          state: 'home'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: 'group.family'
+              state: 'home'
+            - condition: state
+              entity_id: 'input_boolean.mode_guests'
+              state: 'on'
         - condition: state
           entity_id: 'input_boolean.mode_automate_b_whenhome'
           state: 'on'
@@ -390,9 +400,14 @@
         - condition: state
           entity_id: input_select.mode_climate
           state: 'Summer'
-        - condition: state
-          entity_id: 'group.family'
-          state: 'home'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: 'group.family'
+              state: 'home'
+            - condition: state
+              entity_id: 'input_boolean.mode_guests'
+              state: 'on'
         - condition: state
           entity_id: 'input_boolean.mode_automate_b_whenhome'
           state: 'on'
@@ -473,9 +488,14 @@
         - condition: state
           entity_id: input_select.mode_climate
           state: 'Summer'
-        - condition: state
-          entity_id: 'group.family'
-          state: 'home'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: 'group.family'
+              state: 'home'
+            - condition: state
+              entity_id: 'input_boolean.mode_guests'
+              state: 'on'
         - condition: state
           entity_id: 'input_boolean.mode_automate_b_whenhome'
           state: 'on'
@@ -555,6 +575,9 @@
         - condition: state
           entity_id: 'group.family'
           state: 'not_home'
+        - condition: state
+          entity_id: 'input_boolean.mode_guests'
+          state: 'off'
         - condition: sun
           before: sunset
           before_offset: "-00:35:00"
@@ -592,6 +615,9 @@
         - condition: state
           entity_id: 'group.family'
           state: 'not_home'
+        - condition: state
+          entity_id: 'input_boolean.mode_guests'
+          state: 'off'
         - condition: sun
           before: sunset
           before_offset: "-00:35:00"
@@ -655,9 +681,14 @@
         - condition: state
           entity_id: input_select.mode_climate
           state: 'Winter'
-        - condition: state
-          entity_id: 'group.family'
-          state: 'home'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: 'group.family'
+              state: 'home'
+            - condition: state
+              entity_id: 'input_boolean.mode_guests'
+              state: 'on'
         - condition: state
           entity_id: 'input_boolean.mode_automate_b_whenhome'
           state: 'on'
@@ -731,9 +762,14 @@
         - condition: state
           entity_id: input_select.mode_climate
           state: 'Winter'
-        - condition: state
-          entity_id: 'group.family'
-          state: 'home'
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: 'group.family'
+              state: 'home'
+            - condition: state
+              entity_id: 'input_boolean.mode_guests'
+              state: 'on'
         - condition: state
           entity_id: 'input_boolean.mode_automate_b_whenhome'
           state: 'on'
@@ -901,14 +937,15 @@
       for:
         minutes: 5
   condition:
-    condition: and
-    conditions:
-      - condition: state
-        entity_id: 'group.shutters_downstairs'
-        state: 'open'
-      - condition: state
-        entity_id: 'switch.preference_shutters_automation'
-        state: 'on'
+    - condition: state
+      entity_id: 'group.shutters_downstairs'
+      state: 'open'
+    - condition: state
+      entity_id: 'input_boolean.mode_guests'
+      state: 'off'
+    - condition: state
+      entity_id: 'switch.preference_shutters_automation'
+      state: 'on'
   action:
     - service: cover.close_cover
       entity_id: group.shutters_downstairs

@@ -1,4 +1,5 @@
 - alias: 'Vacuum/Kitchen/CleanAfterDinnerWeekdays'
+  id: '2023121300001'
   trigger: 
     - platform: state
       entity_id: "binary_sensor.f_5im51_104_20"
@@ -51,6 +52,7 @@
       entity_id: switch.status_vacuum_kitchen_hasruntoday
 
 - alias: 'Vacuum/Kitchen/CleanAfterDinnerWeekend'
+  id: '2023121300002'
   trigger: 
     - platform: state
       entity_id: "binary_sensor.f_5im51_104_20"
@@ -103,6 +105,7 @@
 
 
 - alias: 'Vacuum/All/Clean'
+  id: '2023121300003'
   trigger:
     - platform: state
       entity_id: sensor.family_presence
@@ -133,6 +136,7 @@
         entity_id: vacuum.rosie
 
 - alias: 'Vacuum/All/StopWhenHome'
+  id: '2023121300004'
   trigger:
     platform: state
     entity_id: sensor.family_presence
