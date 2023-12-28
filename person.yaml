@@ -17,5 +17,5 @@
     id: margarida
 #    user_id: 4d00ac78425d4204bbdba8663732091d
     device_trackers:
-      - device_tracker.life360_margarida_lopes
-      - device_tracker.iphone_margarida
+#      - device_tracker.life360_margarida_lopes
+      - device_tracker.iphone_de_margarida

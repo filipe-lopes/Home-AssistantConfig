@@ -4,9 +4,18 @@
   round: 3
 
 - platform: statistics
+  name: Freezer Power Stats
+  entity_id: sensor.freezer_power
+  max_age:
+      minutes: 90
+  state_characteristic: mean
+
+- platform: statistics
   name: Washmachine Power Stats
   entity_id:  sensor.washing_machine_power
   sampling_size: 20
+  max_age:
+      minutes: 15
   state_characteristic: mean
 
 - platform: statistics
