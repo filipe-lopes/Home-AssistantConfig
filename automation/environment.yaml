@@ -154,11 +154,7 @@
           - humidifier.upstairs
       data:
         humidity: >-
-          {% if states('sensor.maximum_allowed_humidity') | int > states('input_number.dehumidifiers_ht') | int %}
-            {{states('input_number.dehumidifiers_ht') | int}}
-          {% else %}
-            {{states('sensor.maximum_allowed_humidity') | int}}
-          {% endif %}
+          {{[[states.sensor.maximum_allowed_humidity.state,states.input_number.dehumidifiers_ht.state] | min | int, states.sensor.outside_humidity.state | int - 5] | max}}
           
 - alias: Environment/FireplaceHeatRecovery2
   id: '2022010700001'

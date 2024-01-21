@@ -9,8 +9,6 @@ homeassistant:
   customize: !include customize.yaml
   auth_providers:
    - type: homeassistant
-   - type: legacy_api_password
-     api_password: !secret api_pass
 
 #alexa: !include alexa.yaml
 
