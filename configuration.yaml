@@ -32,22 +32,22 @@ energy:
 generic_hygrostat:
   - name: Upstairs
     humidifier: switch.upstairs_dehumidifier
-    target_sensor: sensor.maximum_upstairs_humidity
+    target_sensor: sensor.upstairs_hum
     min_humidity: 50
-    max_humidity: 90
+    max_humidity: 100
     target_humidity: 60
     away_humidity: 40
-    sensor_stale_duration: 01:00:00
+    sensor_stale_duration: 03:00:00
     device_class: dehumidifier
 
   - name: Downstairs
     humidifier: switch.downstairs_dehumidifier
-    target_sensor: sensor.maximum_downstairs_humidity
+    target_sensor: sensor.downstairs_hum
     min_humidity: 50
-    max_humidity: 90
+    max_humidity: 100
     target_humidity: 60
     away_humidity: 40
-    sensor_stale_duration: 01:00:00
+    sensor_stale_duration: 03:00:00
     device_class: dehumidifier
 
 
@@ -61,47 +61,16 @@ history:
       - binary_sensor
       - sensor
 
-#home_connect:
-#  client_id: !secret homeconnect_id
-#  client_secret: !secret homeconnect_secret
-
 input_select: !include input-selects.yaml
-
-#ios:
-#  push:
-#    categories:
-#      - name: WellcomeHome
-#        identifier: 'ioswellcomehome'
-#        actions:
-#          - identifier: 'n_frontgate'
-#            title: 'Front Gate'
-#            authenticationRequired: false
-#          - identifier: 'n_slidinggate'
-#            title: 'Sliding Gate'
-#            authenticationRequired: false
-#          - identifier: 'n_slidinggatewalk'
-#            title: 'Walkway'
-#            authenticationRequired: false
-
-
 light: !include_dir_merge_list lights/ 
-
 lock: !include lock.yaml
-
 person: !include person.yaml
-
 scene: !include_dir_merge_list scenes/
-
 script: !include_dir_merge_named scripts/
-
 sensor: !include_dir_merge_list sensors/
-
 stream:
-
 switch: !include_dir_merge_list switches/
-
 system_health:
-
 utility_meter:
   daily_energy_out:
     source: sensor.power_meter_exported
@@ -149,10 +118,11 @@ logger:
   default: error
 #  default: debug
   logs:
+    homeassistant.components.generic_hygrostat: debug
 #    homeassistant.components.mqtt: debug
 #    alexa: debug
 #    homeassistant.components.mysensors: debug
-    mysensors: debug
+#    mysensors: debug
 
 mobile_app:
 

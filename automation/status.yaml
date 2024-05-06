@@ -91,15 +91,12 @@
   trigger:
     - platform: state
       entity_id: 'cover.mary_s_room_shutter'
-      from: 'closed'
       to: 'open'
     - platform: state
       entity_id: 'cover.maggie_s_room_shutter'
-      from: 'closed'
       to: 'open'
     - platform: state
       entity_id: 'cover.main_room_shutter'
-      from: 'closed'
       to: 'open'
   condition:
     - condition: sun

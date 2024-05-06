@@ -144,7 +144,7 @@
         - service: switch.turn_on
           target:
             entity_id:
-              - switch.switch.garden_irrigation_main_valve
+              - switch.garden_irrigation_main_valve
               - switch.irrigation_area_1
     - delay:
         hours: 0
@@ -216,6 +216,39 @@
           - switch.irrigation_area_5
           - switch.garden_irrigation_main_valve
 
+- alias: 'Outside/Garden/IrrigationPots'
+  id: '2024020300001'
+  mode: single
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: '-0:00:00'
+    - platform: sun
+      event: sunrise
+      offset: '1:00:00'
+    - platform: sun
+      event: sunrise
+    - platform: time
+      at: '03:00:00'
+  condition:
+    - condition: template
+      value_template: "{{(as_timestamp(now())-as_timestamp(states.sensor.last_rained.state)) > 172800}}"
+  action:
+    - service: switch.turn_on
+      target:
+        entity_id:
+          - switch.garden_irrigation_main_valve
+          - switch.irrigation_area_2
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
+    - service: switch.turn_off
+      target:
+        entity_id:
+          - switch.irrigation_area_2
+          - switch.garden_irrigation_main_valve
 
 
 

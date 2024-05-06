@@ -48,7 +48,7 @@
   name: "Upstairs Hum"
   entity_ids:
     - sensor.f_5im51_201_12
-    - sensor.f_5im51_202_12
+#    - sensor.f_5im51_202_12
     - sensor.f_5im51_203_12
     - sensor.f_5im51_204_12
     - sensor.f_5im51_205_12

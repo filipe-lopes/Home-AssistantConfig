@@ -42,3 +42,15 @@
         payload: announce
 
 
+- alias: 'Core/ServiceReload/AlexaMedia'
+  id: '2024013000001'
+  trigger:
+    - platform: numeric_state
+      entity_id: sensor.minutes_next_mainroom_alarm
+      below: -60
+  action:
+    - service: homeassistant.reload_config_entry
+      data:
+        entry_id: 4f37d08d60e5e1f37f74c0f5e75a232f
+      target:
+        device_id: c4a912a2c8a04a68b9ff59c414a74e49
