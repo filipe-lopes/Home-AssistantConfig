@@ -18,14 +18,13 @@
         - tue
         - wed
         - thu
+    - condition: template
+      value_template: "{{(as_timestamp(now())-as_timestamp(states.sensor.last_kitchen_autovacuum.state)) > 43200}}"
     - condition: state
       entity_id: light.kitchen_spots
       state: "off"
     - condition: state
       entity_id: light.kitchen_table
-      state: "off"
-    - condition: state
-      entity_id: switch.status_vacuum_kitchen_hasruntoday
       state: "off"
     - condition: state
       entity_id: binary_sensor.f_5im51_104_20
@@ -46,12 +45,12 @@
           regions:
             - region_id: '4'
               type: rid           
-          user_pmapv_id: 230324T191013
-    - service: switch.turn_on
-      entity_id: switch.status_vacuum_kitchen_hasruntoday
-    - delay: "04:00"     
-    - service: switch.turn_off
-      entity_id: switch.status_vacuum_kitchen_hasruntoday
+          user_pmapv_id: 240310T122731
+    - service: mqtt.publish
+      data:
+        topic: "home/l/data/kitchenautocleanlastrun"
+        payload_template: "{{ now() }}"
+        retain: "true"
 
 - alias: 'Vacuum/Kitchen/CleanAfterDinnerWeekend'
   id: '2023121300002'
@@ -72,6 +71,8 @@
         - fri
         - sat
         - sun
+    - condition: template
+      value_template: "{{(as_timestamp(now())-as_timestamp(states.sensor.last_kitchen_autovacuum.state)) > 43200}}"
     - condition: state
       entity_id: light.kitchen_spots
       state: "off"
@@ -81,11 +82,6 @@
     - condition: state
       entity_id: binary_sensor.f_5im51_104_20
       state: "off"
-    - condition: state
-      entity_id: switch.status_vacuum_kitchen_hasruntoday
-      state: "off"
-      for:
-        minutes: 15
     - condition: time
       after: "19:30:00"
       before: "21:45:00"
@@ -100,12 +96,12 @@
           regions:
             - region_id: '4'
               type: rid           
-          user_pmapv_id: 230324T191013
-    - service: switch.turn_on
-      entity_id: switch.status_vacuum_kitchen_hasruntoday
-    - delay: "04:00"     
-    - service: switch.turn_off
-      entity_id: switch.status_vacuum_kitchen_hasruntoday
+          user_pmapv_id: 240310T122731
+    - service: mqtt.publish
+      data:
+        topic: "home/l/data/kitchenautocleanlastrun"
+        payload_template: "{{ now() }}"
+        retain: "true"
 
 
 - alias: 'Vacuum/All/Clean'
